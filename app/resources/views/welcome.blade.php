@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <!-- <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" /> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,49 +20,319 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-white flex min-h-screen flex-col">
-        <header class="w-full border-b-2 dark:border-green-400/20 dark:bg-[#0e0e0e]">
-            <div class="max-w-6xl min-h-20 grid grid-cols-3 items-center mx-auto">
-                <a href="#!" class="justify-self-start transition-all hover:opacity-80">
-                    <img src="/img/logo.svg" alt="" class="w-[200px]">
-                </a>
-                <nav class="justify-self-center">
+    <body class="bg-[#FDFDFC] dark:bg-gradient-to-r dark:from-[#0a0a0a] dark:to-[#1f1f1f] text-white flex min-h-screen flex-col relative">
+        <header class="w-full border-b-2 dark:border-green-400/20 dark:bg-gradient-to-t dark:from-[#111111] dark:to-[#0a0a0a]">
+            <div class="min-h-28 grid grid-cols-2 items-center px-10">
+                <div class="justify-self-start flex items-center gap-8">
+                    <!-- лого -->
+                    <a href="#!" class="transition-all hover:opacity-80">
+                        <img src="/img/logo.svg" alt="" class="w-[250px]">
+                    </a>
+                    <span class="h-[52px] w-1 border-r border-white"></span>
+                    <!-- поисковая строка -->
+                    <div class="relative w-[400px] flex items-center">
+                        <!-- кнопка для отображения поисковой строки -->
+                        <button onclick="openSearchInput()" class="p-3 rounded-full hover:dark:bg-white/10 transition-all absolute left-0 top-1/2 -translate-y-1/2 searchBtn">
+                            <svg class="w-7 h-7 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
+                        <!-- поисковая строка (для поиска нажать enter) -->
+                        <input type="text" class="opacity-0 pointer-events-none searchInput transition-all h-[52px] max-w-[400px] w-[52px] bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12" placeholder="Поиск...">
+                        <!-- кнопка для закрытия посиковой строки -->
+                        <button onclick="closeSearchInput()" class="absolute right-4 top-1/2 -translate-y-1/2 searchCloseBtn opacity-0 pointer-events-none">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <nav class="justify-self-end">
                     <ul class="flex items-center gap-5">
                         <li>
                             <a href="#!">
-                                <button class="px-4 py-2 transition-all dark:hover:ring-green-500/50 hover:ring-2 rounded-md">
+                                <button class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
                                     Магазин
                                 </button>
                             </a>
                         </li>
                         <li>
                             <a href="#!">
-                                <button class="px-4 py-2 transition-all dark:hover:ring-green-500/50 hover:ring-2 rounded-md">
+                                <button class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
                                     О нас
                                 </button>
                             </a>
                         </li>
                         <li>
                             <a href="#!">
-                                <button class="px-4 py-2 transition-all dark:hover:ring-green-500/50 hover:ring-2 rounded-md">
+                                <button class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
                                     FaQ
                                 </button>
                             </a>
                         </li>
+                        <li>
+                            <!-- триггер для модалки авторизации и регистрации -->
+                            <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal" class="transition-all px-4 py-2 dark:text-black rounded-md hover:opacity-80             font-semibold bg-green-500">
+                                Войти
+                            </button>
+                        </li>
                     </ul>
                 </nav>
-                <ul class="justify-self-end">
-                    <li>
-                        <button class="transition-all hover:opacity-80">
-                            Войти
-                        </button>
-                    </li>
-                </ul>
+            </div>
+            <!-- модалка авторизиции и регистрации -->
+            <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden bg-black/50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-screen max-h-full">
+                <div class="relative p-4 w-full max-w-2xl max-h-full">
+                    <!-- контент -->
+                    <div class="relative bg-white rounded-lg shadow-sm dark:bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1f1f1f] border-2 border-dashed border-white/50 space-y-8 p-4">
+                        <!-- форма авторизации -->
+                        <div class="login">
+                            <div class="w-full text-center py-4">
+                                <h2 class="text-2xl font-black">Авторизация</h2>
+                            </div>
+                            <form class="w-[55%] mx-auto space-y-8">
+                                <div class="space-y-2">
+                                    <label for="" class="font-semibold dark:text-white/80">Электронная почта</label>
+                                    <input type="text" class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="" class="font-semibold dark:text-white/80">Пароль</label>
+                                    <input type="password" class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                                </div>
+                                <button type="submit" class="w-full py-4 font-semibold bg-green-500 transition-all hover:dark:bg-green-400 rounded-xl dark:text-black">
+                                    Войти
+                                </button>
+                                <div class="text-center">
+                                    <button type="button" onclick="getRegister()" class="font-semibold transition-all hover:text-green-500">
+                                        Регистрация
+                                    </button>
+                                </div>
+                                <div class="relative w-full text-center">
+                                    <div class="w-full border-b border-white absolute top-1/2 -translate-y-1/2 z-10"></div>
+                                    <span class="bg-[#1a1a1a] z-20 relative px-4">или</span>
+                                </div>
+                                <div class="mx-auto flex justify-center">
+                                    <button class="font-semibold transition-all hover:text-green-500 flex items-center justify-center gap-2 hover:gap-1">
+                                        <img src="/img/icons/vk-logo.svg" alt="" class="w-8">
+                                        Вход по VK ID
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- форма регистрации -->
+                        <div class="register hidden">
+                            <div class="w-full text-center py-4">
+                                <h2 class="text-2xl font-black">Регистрация</h2>
+                            </div>
+                            <form class="w-[55%] mx-auto space-y-8">
+                                <div class="space-y-2">
+                                    <label for="" class="font-semibold dark:text-white/80">Логин</label>
+                                    <input type="text" class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="" class="font-semibold dark:text-white/80">Электронная почта</label>
+                                    <input type="text" class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="" class="font-semibold dark:text-white/80">Пароль</label>
+                                    <input type="password" class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="" class="font-semibold dark:text-white/80">Повторите пароль</label>
+                                    <input type="password" class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                                </div>
+                                <button type="submit" class="w-full py-4 font-semibold bg-green-500 transition-all hover:dark:bg-green-400 rounded-xl dark:text-black">
+                                    Зарегистрироваться
+                                </button>
+                                <div class="text-center goLoginBtn hidden">
+                                    <button onclick="getLogin()" class="font-semibold transition-all hover:text-green-500">
+                                        У меня уже есть аккаунт
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- футер модалки -->
+                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button data-modal-hide="default-modal" type="button" class="mx-auto font-semibold transition-all hover:dark:text-green-500">Отмена</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
 
         <main class="py-20 px-5">
-            <div class="max-w-6xl mx-auto"></div>
+            <div class="space-y-20">
+                <section class="w-1/3 mx-auto text-center space-y-8">
+                    <img src="/img/logo.svg" alt="" class="inline w-80">
+                    <p class="text-xl">Место, где вы можете быстро приобрести лучший ПК для любых задач по самым справедливым ценам.</p>
+                </section>
+                <!-- почему выбирают нас -->
+                <section class="max-w-6xl w-full space-y-10 mx-auto">
+                    <h2 class="text-center text-2xl font-semibold">Почему выбирают нас?</h2>
+                    <ul class="grid grid-cols-3 gap-10">
+                        <li>
+                            <div class="w-full p-5 h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
+                                <div class="flex items-center gap-5 justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+                                    <h3 class="text-xl font-semibold">Надёжность</h3>
+                                </div>
+                                <p class="text-center">Каждый ПК доезжает до адресата вовремя и в лучшем виде!</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="w-full p-5 h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
+                                <div class="flex items-center gap-5 justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-dollar-sign"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+                                    <h3 class="text-xl font-semibold">Стоимость</h3>
+                                </div>
+                                <p class="text-center">Минимальные наценки на ПК, скидки и акции для всех покупателей!</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="w-full p-5 h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
+                                <div class="flex items-center gap-5 justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-help"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                                    <h3 class="text-xl font-semibold">Открытость</h3>
+                                </div>
+                                <p class="text-center">Вы заранее узнаете обо всех тонкостях создания и доставки ПК!</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <!-- кнопка прокрутки -->
+                <section class="max-w-6xl mx-auto w-full">
+                    <a href="#second-main-section">
+                        <button class="w-full text-center py-4 bg-white/5 rounded-md transition-all hover:bg-white/10">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
+                            </svg>
+                        </button>
+                    </a>
+                </section>
+                <!-- инфо блок -->
+                <section class="w-full max-w-6xl mx-auto" id="second-main-section">
+                    <div class="flex w-full gap-10">
+                        <div class="p-4 border border-white w-1/2">
+                            <img src="/img/zxczxxc.jpg" alt="" class="rounded-md">
+                        </div>
+                        <div class="w-1/2 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <h2 class="font-black text-2xl">Самые современные сборки ПК</h2>
+                                <p class="font-semibold">
+                                    Мы используем самые актуальные и проверенные комплектующие, чтобы ваш ПК не отставал от требований всех современные игр и программ
+                                </p>
+                            </div>
+                            <div class="space-y-4">
+                                <h2 class="font-black text-2xl">Контроль качества</h2>
+                                <p class="font-semibold">
+                                    Все наши продукты проходят проверку качества, так что не бойтесь получить бракованный товар. Всё, что вы закажите, определённо порадует вас
+                                </p>
+                            </div>
+                            <div class="space-y-4">
+                                <h2 class="font-black text-2xl">Всё-таки ПК работает некорректно?</h2>
+                                <p class="font-semibold">
+                                    При покупке ПК вы получаете гарантию от 3-х лет. Просто расскажите нам о проблеме, мы всегда готовы вам помочь или вернуть деньги
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="max-w-6xl w-full mx-auto">
+                    <div class="w-full border-b border-white"></div>
+                </section>
+                <!-- авторизация на главной странице -->
+                <section class="max-w-6xl w-full mx-auto space-y-12">
+                    <h2 class="text-center text-2xl font-black">Авторизируйтесь, чтобы заказать ПК своей мечты</h2>
+                    <form class="w-[55%] mx-auto space-y-8">
+                        <div class="space-y-2">
+                            <label for="" class="font-semibold dark:text-white/80">Электронная почта</label>
+                            <input type="text" class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="" class="font-semibold dark:text-white/80">Пароль</label>
+                            <input type="password" class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                        </div>
+                        <button type="submit" class="w-full py-4 font-semibold bg-green-500 transition-all hover:dark:bg-green-400 rounded-xl dark:text-black">
+                            Войти
+                        </button>
+                        <div class="text-center">
+                            <a href="#!" class="font-semibold transition-all hover:text-green-500">
+                                Регистрация
+                            </a>
+                        </div>
+                    </form>
+                </section>
+            </div>
         </main>
+
+        <footer class="w-full min-h-20 py-4 bg-gradient-to-l dark:from-[#0a0a0a] dark:to-[#1f1f1f] border-t-2 dark:border-green-500/50 flex items-center justify-between px-10">
+            <a href="#!">
+                <img src="/img/logo.svg" alt="" class="w-[200px]">
+            </a>
+            <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal" class="transition-all px-4 py-2 dark:text-black rounded-md hover:opacity-80             font-semibold bg-green-500">
+                Войти
+            </button>
+        </footer>
     </body>
+
+    <script>
+        // переменные для строки поиска в шапке
+        const searchInput = document.querySelector('.searchInput');
+        const searchBtn = document.querySelector('.searchBtn');
+        const searchCloseBtn = document.querySelector('.searchCloseBtn');
+
+        // переменные для форм авторизации и регистрации
+        const register = document.querySelector('.register');
+        const login = document.querySelector('.login');
+        const goLoginBtn = document.querySelector('.goLoginBtn')
+
+        // вывести форму регистрации
+        const getRegister = () => {
+            register.classList.remove('hidden');
+            goLoginBtn.classList.remove('hidden');
+            login.classList.add('hidden');
+        }
+
+        // вывести форму авторизации
+        const getLogin = () => {
+            register.classList.add('hidden');
+            goLoginBtn.classList.add('hidden');
+            login.classList.remove('hidden');
+        }
+
+        // открыть поисковую строку
+        const openSearchInput = () => {
+            console.log('asdasd');
+
+            searchInput.classList.add('!opacity-100', '!w-full');
+            searchInput.classList.remove('pointer-events-none');
+            searchBtn.classList.add('hidden');
+
+            searchCloseBtn.classList.add('!opacity-100');
+            searchCloseBtn.classList.remove('pointer-events-none');
+        }
+
+        // закрыть поисковую строку
+        const closeSearchInput = () => {
+            console.log('123123');
+
+            searchInput.classList.remove('!opacity-100', '!w-full');
+            searchInput.classList.add('pointer-events-none');
+            searchBtn.classList.remove('hidden');
+
+            searchCloseBtn.classList.remove('!opacity-100');
+            searchCloseBtn.classList.add('pointer-events-none');
+        }
+
+        // плавная прокрутка на главной странцие
+        document.querySelector('a[href="#second-main-section"]').addEventListener('click', (e) => {
+            e.preventDefault(); // Отменяем стандартное поведение ссылки
+            document.getElementById('second-main-section').scrollIntoView({
+                behavior: 'smooth', // Плавная прокрутка
+                block: 'start'     // Выравнивание по верху (можно 'center' или 'end')
+            });
+        });
+    </script>
+
+    <!-- сдн флоубайта -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </html>
