@@ -3,3 +3,11 @@
 @tailwind utilities;
 /* @import "flowbite/src/themes/default"; */
 @plugin "flowbite/plugin";
+
+.element::-webkit-scrollbar {
+    width: 0;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}

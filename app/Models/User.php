@@ -13,9 +13,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Атрибуты, которые можно массово назначить
      *
-     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -24,9 +23,8 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Атрибуты, которые необходимо скрыть
      *
-     * @var list<string>
      */
     protected $hidden = [
         'password',
@@ -34,14 +32,12 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Приведение атрибутов к нужному виду
      *
-     * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
