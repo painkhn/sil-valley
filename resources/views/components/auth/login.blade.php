@@ -3,15 +3,17 @@
     <div class="w-full text-center py-4">
         <h2 class="text-2xl font-black">Авторизация</h2>
     </div>
-    <form class="w-[55%] mx-auto space-y-8">
+    <form class="w-[55%] mx-auto space-y-8" method="POST" action="{{ route('login') }}">
+        @csrf
+
         <div class="space-y-2">
             <label for="" class="font-semibold dark:text-white/80">Электронная почта</label>
-            <input type="text"
+            <input type="email" name="email" :value="old('email')" required autofocus autocomplete="username"
                 class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
         </div>
         <div class="space-y-2">
             <label for="" class="font-semibold dark:text-white/80">Пароль</label>
-            <input type="password"
+            <input type="password" name="password" required autocomplete="current-password"
                 class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
         </div>
         <button type="submit"

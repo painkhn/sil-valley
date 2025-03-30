@@ -61,11 +61,17 @@
                     </a>
                 </li>
                 <li>
-                    <!-- триггер для модалки авторизации и регистрации -->
-                    <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
-                        class="transition-all px-4 py-2 dark:text-black rounded-md hover:opacity-80             font-semibold bg-green-500">
-                        Войти
-                    </button>
+                    @auth
+                        <a href="{{ route('profile.index') }}"
+                            class="transition-all px-4 py-2 dark:text-black rounded-md hover:opacity-80 font-semibold bg-green-500">
+                            Профиль
+                        </a>
+                    @else
+                        <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
+                            class="transition-all px-4 py-2 dark:text-black rounded-md hover:opacity-80 font-semibold bg-green-500">
+                            Войти
+                        </button>
+                    @endauth
                 </li>
             </ul>
         </nav>
@@ -78,25 +84,6 @@
     const searchInput = document.querySelector('.searchInput');
     const searchBtn = document.querySelector('.searchBtn');
     const searchCloseBtn = document.querySelector('.searchCloseBtn');
-
-    // переменные для форм авторизации и регистрации
-    const register = document.querySelector('.register');
-    const login = document.querySelector('.login');
-    const goLoginBtn = document.querySelector('.goLoginBtn')
-
-    // вывести форму регистрации
-    const getRegister = () => {
-        register.classList.remove('hidden');
-        goLoginBtn.classList.remove('hidden');
-        login.classList.add('hidden');
-    }
-
-    // вывести форму авторизации
-    const getLogin = () => {
-        register.classList.add('hidden');
-        goLoginBtn.classList.add('hidden');
-        login.classList.remove('hidden');
-    }
 
     // открыть поисковую строку
     const openSearchInput = () => {

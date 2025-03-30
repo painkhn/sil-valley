@@ -15,3 +15,23 @@
         </div>
     </div>
 </div>
+<script>
+    // переменные для форм авторизации и регистрации
+    const register = document.querySelector('.register');
+    const login = document.querySelector('.login');
+    const goLoginBtn = document.querySelector('.goLoginBtn')
+
+    // вывести форму регистрации
+    const getRegister = () => {
+        register.classList.remove('hidden');
+        goLoginBtn.classList.remove('hidden');
+        login.classList.add('hidden');
+    }
+
+    // вывести форму авторизации
+    const getLogin = () => {
+        register.classList.add('hidden');
+        goLoginBtn.classList.add('hidden');
+        login.classList.remove('hidden');
+    }
+</script>
