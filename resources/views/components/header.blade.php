@@ -2,7 +2,7 @@
     <div class="min-h-28 grid grid-cols-2 items-center px-10">
         <div class="justify-self-start flex items-center gap-8">
             <!-- лого -->
-            <a href="#!" class="transition-all hover:opacity-80">
+            <a href={{ route('index') }} class="transition-all hover:opacity-80">
                 <img src="/img/logo.svg" alt="" class="w-[250px]">
             </a>
             <span class="h-[52px] w-1 border-r border-white"></span>
@@ -37,7 +37,7 @@
         <nav class="justify-self-end">
             <ul class="flex items-center gap-5">
                 <li>
-                    <a href="#!">
+                    <a href={{ route('shop.index') }}>
                         <button
                             class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
                             Магазин
@@ -60,12 +60,53 @@
                         </button>
                     </a>
                 </li>
+                @auth
+                    <li>
+                        <a href="#!">
+                            <button
+                                class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                                Корзина
+                            </button>
+                        </a>
+                    </li>
+                @else
+                    {{ null }}
+                @endauth
                 <li>
                     @auth
-                        <a href="{{ route('profile.index') }}"
-                            class="transition-all px-4 py-2 dark:text-black rounded-md hover:opacity-80 font-semibold bg-green-500">
-                            Профиль
-                        </a>
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="px-4 py-2 capitalize transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold block">{{ auth()->user()->name }}</button>
+                        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gradient-to-l dark:from-[#111111] dark:to-[#0a0a0a] border-2 border-dashed border-white/50">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-white/80 space-y-2" aria-labelledby="dropdownDefaultButton">
+                                <li>
+                                    <a href={{ route('profile.index') }} class="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                        </svg>
+                                        Профиль
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white">
+                                        <svg class="w-6 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z"/>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                        </svg>
+                                        Настройки
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white">
+                                        <svg class="w-6 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
+                                        </svg>
+                                        Выход
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     @else
                         <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
                             class="transition-all px-4 py-2 dark:text-black rounded-md hover:opacity-80 font-semibold bg-green-500">

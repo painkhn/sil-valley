@@ -1,5 +1,5 @@
 @if (session('success'))
-    <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+    <div class="flex absolute top-32 right-10 items-center p-4 mb-4 text-sm text-green-800 border shadow-[0_2px_15px_rgba(74,222,128,.3)] border-green-300 rounded-lg bg-green-50 dark:bg-gradient-to-t dark:from-[#111111] dark:to-[#181818] dark:text-green-400 dark:border-green-800 max-w-xl w-full mx-auto"
         role="alert">
         <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 20">
@@ -13,7 +13,7 @@
 @endif
 
 @if (session('error'))
-    <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+    <div class="flex absolute top-32 right-10 items-center p-4 mb-4 text-sm text-red-800 border shadow-[0_2px_15px_rgba(239,68,68,.3)] border-red-300 rounded-lg bg-red-50 bg-gradient-to-t dark:from-[#111111] dark:to-[#181818] dark:text-red-400 dark:border-red-800 max-w-xl w-full mx-auto"
         role="alert">
         <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             fill="currentColor" viewBox="0 0 20 20">

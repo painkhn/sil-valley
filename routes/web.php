@@ -19,4 +19,8 @@ Route::controller(ProfileController::class)->middleware('auth')->group(function 
     Route::patch('/profile/edit', 'update')->name('profile.update');
 });
 
+Route::get('shop', function() {
+    return view('shop.index');
+})->name('shop.index');
+
 require __DIR__.'/auth.php';

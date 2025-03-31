@@ -1,7 +1,7 @@
 <footer
     class="w-full min-h-20 py-4 bg-gradient-to-l dark:from-[#0a0a0a] dark:to-[#1f1f1f] border-t-2 dark:border-green-500/50 flex items-center justify-between px-10">
-    <a href="#!">
-        <img src="{{ route('index') }}" alt="Logo" class="w-[200px]">
+    <a href="{{ route('index') }}">
+        <img src="/img/logo.svg" alt="Logo" class="w-[200px]">
     </a>
     @auth
         <a href="{{ route('profile.index') }}"

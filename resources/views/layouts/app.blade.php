@@ -21,7 +21,7 @@
     <!-- хедер -->
     <x-header />
 
-    <main class="py-20 px-5">
+    <main class="py-20 px-5 min-h-[calc(100vh-205px)]">
         <x-notifications />
         <div class="space-y-20">
             @yield('content')
