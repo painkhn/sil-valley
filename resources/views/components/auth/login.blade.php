@@ -30,11 +30,11 @@
             <span class="bg-[#1a1a1a] z-20 relative px-4">или</span>
         </div>
         <div class="mx-auto flex justify-center">
-            <button
+            <a href="{{ route('login.github') }}"
                 class="font-semibold transition-all hover:text-green-500 flex items-center justify-center gap-2 hover:gap-1">
-                <img src="/img/icons/vk-logo.svg" alt="" class="w-8">
-                Вход по VK ID
-            </button>
+                <img src="/img/icons/github-logo.svg" alt="" class="w-8">
+                GitHub
+            </a>
         </div>
     </form>
 </div>

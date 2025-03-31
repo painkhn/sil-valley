@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('provider', ['email', 'vk'])->default('email');
+            $table->enum('provider', ['email', 'github'])->default('email');
             $table->enum('role', ['user', 'admin', 'manager'])->default('user');
             $table->string('password');
             $table->rememberToken();

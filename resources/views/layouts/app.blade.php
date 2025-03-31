@@ -22,6 +22,7 @@
     <x-header />
 
     <main class="py-20 px-5">
+        <x-notifications />
         <div class="space-y-20">
             @yield('content')
         </div>

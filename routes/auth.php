@@ -6,15 +6,13 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    // Route::get('register', [RegisteredUserController::class, 'create'])
-        // ->name('register');
-//
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
-    // Route::get('login', [AuthenticatedSessionController::class, 'create'])
-    //     ->name('login');
-
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::controller(AuthenticatedSessionController::class)->group(function () {
+        Route::post('login', 'store')->name('login');
+        Route::get('/login/github', 'RedirectGithub')->name('login.github');
+        Route::get('/login/github/callback', 'CallbackGithub')->name('login.github.call');
+    });
 });
 
 Route::middleware('auth')->group(function () {
