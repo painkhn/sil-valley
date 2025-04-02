@@ -56,6 +56,14 @@
                     <a href="#!">
                         <button
                             class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                            Контакты
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <button
+                            class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
                             FaQ
                         </button>
                     </a>
@@ -83,6 +91,15 @@
                                             <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                         </svg>
                                         Профиль
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white">
+                                        <svg class="w-6 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12.013 6.175 7.006 9.369l5.007 3.194-5.007 3.193L2 12.545l5.006-3.193L2 6.175l5.006-3.194 5.007 3.194ZM6.981 17.806l5.006-3.193 5.006 3.193L11.987 21l-5.006-3.194Z"/>
+                                            <path d="m12.013 12.545 5.006-3.194-5.006-3.176 4.98-3.194L22 6.175l-5.007 3.194L22 12.562l-5.007 3.194-4.98-3.211Z"/>
+                                        </svg>
+                                        Заказы
                                     </a>
                                 </li>
                                 <li>

@@ -21,7 +21,7 @@
     <!-- хедер -->
     <x-header />
 
-    <main class="py-20 px-5 min-h-[calc(100vh-205px)]">
+    <main class="py-10 px-5 min-h-[calc(100vh-205px)]">
         <x-notifications />
         <div class="space-y-20">
             @yield('content')
@@ -31,6 +31,24 @@
     <!-- футер -->
     <x-footer />
 </body>
+
+<script>
+    const value = document.querySelector("#shopMinPriceValue");
+    const input = document.querySelector("#shopMinPriceInput");
+
+    const valueMax = document.querySelector("#shopMaxPriceValue");
+    const inputMax = document.querySelector("#shopMaxPriceInput");
+
+    value.textContent = input.value;
+    valueMax.textContent = inputMax.value;
+
+    input.addEventListener("input", (event) => {
+        value.textContent = event.target.value;
+    });
+    inputMax.addEventListener("input", (event) => {
+        valueMax.textContent = event.target.value;
+    });
+</script>
 
 <!-- сдн флоубайта -->
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>

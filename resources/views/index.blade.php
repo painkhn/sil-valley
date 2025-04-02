@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="w-1/3 mx-auto text-center space-y-8">
+    <section class="w-1/3 mx-auto text-center space-y-8 pt-10">
         <img src="/img/logo.svg" alt="" class="inline w-80">
         <p class="text-xl">Место, где вы можете быстро приобрести лучший ПК для любых задач по самым
             справедливым ценам.</p>
@@ -106,12 +106,12 @@
         <div class="w-full border-b border-white"></div>
     </section>
     @auth
-        <section class="max-w-6xl w-full mx-auto text-center">
+        <section class="max-w-6xl w-full mx-auto text-center pb-10">
             <a href={{ route('shop.index') }} class="inline text-center text-2xl font-black transition-all hover:text-green-500">Чего вы ждёте? Переходите в магазин и выбирайте ПК своей мечты!</a>
         </section>
     @else
         <!-- авторизация на главной странице -->
-        <section class="max-w-6xl w-full mx-auto space-y-12">
+        <section class="max-w-6xl w-full mx-auto space-y-12 pb-10">
             <h2 class="text-center text-2xl font-black">Авторизируйтесь, чтобы заказать ПК своей мечты</h2>
             <form class="w-[55%] mx-auto space-y-8">
                 <div class="space-y-2">
