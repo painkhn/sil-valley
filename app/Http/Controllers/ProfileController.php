@@ -15,7 +15,8 @@ class ProfileController extends Controller
      * Отображение страницы профиля
      */
     public function index() {
-        dd("Профиль");
+        return view('profile.index');
+        // dd("Профиль");
     }
 
     /**
