@@ -15,7 +15,13 @@ class ProfileController extends Controller
      * Отображение страницы профиля
      */
     public function index() {
-        return view('profile.index');
+        $pc_list = [
+            ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+            ['title' => 'zxc', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+            ['title' => '123', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+            ['title' => 'asd', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ];
+        return view('profile.index', compact('pc_list'));
         // dd("Профиль");
     }
 
