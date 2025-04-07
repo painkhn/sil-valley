@@ -34,6 +34,33 @@ class User extends Authenticatable
     ];
 
     /**
+     * Получить все избранные товары пользователя
+     *
+     */
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    /**
+     * Получить корзину пользователя
+     *
+     */
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
+
+    /**
+     * Получить все сравнения пользователя
+     *
+     */
+    public function comparisons()
+    {
+        return $this->hasMany(Comparison::class);
+    }
+
+    /**
      * Приведение атрибутов к нужному виду
      *
      */
