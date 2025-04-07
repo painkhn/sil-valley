@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\{
+    ComputerController,
     ProfileController,
     MainController
 };
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(MainController::class)->group(function () {
@@ -50,5 +52,12 @@ Route::get('shop', function() {
     ];
     return view('shop.index', compact('videocards', 'cpus', 'ram', 'pc_list'));
 })->name('shop.index');
+
+Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(function () {
+    Route::controller(ComputerController::class)->group(function () {
+        Route::get('/computer/create', 'create')->name('computer.create');
+        Route::post('/computer/store', 'store')->name('computer.store');
+    });
+});
 
 require __DIR__.'/auth.php';

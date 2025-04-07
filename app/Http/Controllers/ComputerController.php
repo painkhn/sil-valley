@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Computer;
-use App\Http\Requests\StoreComputerRequest;
-use App\Http\Requests\UpdateComputerRequest;
+use App\Models\{
+    ParameterValue,
+    Computer,
+    Component,
+    Parameter,
+    ComponentParameter
+};
+use App\Http\Requests\Computer\{
+    UpdateComputerRequest,
+    StoreComputerRequest
+};
 
 class ComputerController extends Controller
 {
@@ -21,7 +29,7 @@ class ComputerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.computer.create');
     }
 
     /**
@@ -29,8 +37,43 @@ class ComputerController extends Controller
      */
     public function store(StoreComputerRequest $request)
     {
-        //
+        $computer = Computer::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $request->file('image') ? $request->file('image')->store('images', 'public') : null,
+        ]);
+
+        foreach ($request->components as $componentType => $componentData) {
+            $component = Component::create([
+                'name' => $componentData['name'],
+                'type' => strtoupper($componentType),
+            ]);
+
+            foreach ($componentData as $parameterKey => $parameterValue) {
+                if ($parameterKey !== 'name') {
+                    $parameter = Parameter::firstOrCreate(['name' => $parameterKey]);
+
+                    $paramValue = ParameterValue::firstOrCreate([
+                        'parameter_id' => $parameter->id,
+                        'value' => $parameterValue,
+                    ]);
+
+                    ComponentParameter::create([
+                        'component_id' => $component->id,
+                        'parameter_value_id' => $paramValue->id,
+                    ]);
+                }
+            }
+
+            $computer->components()->attach($component->id);
+        }
+
+        return redirect()->route('admin.computer.create')->with('success', 'Компьютер успешно добавлен!');
     }
+
+
+
 
     /**
      * Display the specified resource.
