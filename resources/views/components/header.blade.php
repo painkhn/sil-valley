@@ -1,5 +1,5 @@
 <header class="w-full border-b-2 dark:border-green-400/20 dark:bg-gradient-to-t dark:from-[#111111] dark:to-[#0a0a0a]">
-    <div class="min-h-28 grid grid-cols-2 items-center px-10">
+    <div class="min-h-28 grid grid-cols-2 max-[1370px]:grid-cols-1 max-[1370px]:py-5 max-[1370px]:space-y-4 items-center px-10">
         <div class="justify-self-start flex items-center gap-8">
             <!-- лого -->
             <a href={{ route('index') }} class="transition-all hover:opacity-80">
@@ -34,8 +34,8 @@
                 </button>
             </div>
         </div>
-        <nav class="justify-self-end">
-            <ul class="flex items-center gap-5">
+        <nav class="justify-self-end max-[1370px]:justify-self-start">
+            <ul class="flex items-center flex-wrap gap-5">
                 <li>
                     <a href={{ route('shop.index') }}>
                         <button

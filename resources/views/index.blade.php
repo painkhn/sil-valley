@@ -9,9 +9,9 @@
     <!-- почему выбирают нас -->
     <section class="max-w-6xl w-full space-y-10 mx-auto">
         <h2 class="text-center text-2xl font-semibold">Почему выбирают нас?</h2>
-        <ul class="grid grid-cols-3 gap-10">
+        <ul class="grid grid-cols-3 max-[768px]:grid-cols-2 gap-10">
             <li>
-                <div class="w-full p-5 h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
+                <div class="w-full p-5 min-h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
                     <div class="flex items-center gap-5 justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
                             fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -26,7 +26,7 @@
                 </div>
             </li>
             <li>
-                <div class="w-full p-5 h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
+                <div class="w-full p-5 min-h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
                     <div class="flex items-center gap-5 justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
                             fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -42,7 +42,7 @@
                 </div>
             </li>
             <li>
-                <div class="w-full p-5 h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
+                <div class="w-full p-5 min-h-[130px] border-2 border-dashed border-green-400 rounded-md space-y-2">
                     <div class="flex items-center gap-5 justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
                             fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -73,11 +73,11 @@
     </section>
     <!-- инфо блок -->
     <section class="w-full max-w-6xl mx-auto" id="second-main-section">
-        <div class="flex w-full gap-10">
-            <div class="p-4 border border-white w-1/2">
+        <div class="flex max-[875px]:flex-col w-full gap-10">
+            <div class="p-4 border border-white w-1/2 max-[875px]:mx-auto">
                 <img src="/img/zxczxxc.jpg" alt="" class="rounded-md">
             </div>
-            <div class="w-1/2 flex flex-col justify-between">
+            <div class="w-1/2 max-[875px]:w-full flex flex-col justify-between max-[875px]:space-y-8 max-[875px]:text-center">
                 <div class="space-y-4">
                     <h2 class="font-black text-2xl">Самые современные сборки ПК</h2>
                     <p class="font-semibold">
