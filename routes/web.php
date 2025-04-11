@@ -41,14 +41,14 @@ Route::get('shop', function() {
         ['value' => '64 ГБ'],
     ];
     $pc_list = [
-        ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
-        ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
-        ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
-        ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
-        ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
-        ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
-        ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
-        ['title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ['id' => 0, 'title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ['id' => 1, 'title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ['id' => 2, 'title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ['id' => 3, 'title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ['id' => 4, 'title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ['id' => 5, 'title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ['id' => 6, 'title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
+        ['id' => 7, 'title' => 'ARDOR GAMING NEO M143', 'desc' => 'Intel Core i5-12400F, 6 x 2.5 ГГц, 16 ГБ DDR4, GeForce RTX 3050, SSD 1000 ГБ, без ОС, 1 x DisplayPort, 1 x DVI-D, 1 x HDMI, Intel H610, блок питания - 500 Вт'],
     ];
     return view('shop.index', compact('videocards', 'cpus', 'ram', 'pc_list'));
 })->name('shop.index');
@@ -58,6 +58,10 @@ Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(functi
         Route::get('/computer/create', 'create')->name('computer.create');
         Route::post('/computer/store', 'store')->name('computer.store');
     });
+});
+
+Route::controller(ComputerController::class)->group(function() {
+    Route::get('/product/{id}', 'show')->whereNumber('computer')->name('computer.show');
 });
 
 require __DIR__.'/auth.php';

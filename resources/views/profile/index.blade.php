@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="flex w-full gap-10">
-        <div class="w-1/3 p-5 border dark:border-white/50 rounded-md">
+        <div class="w-1/3 p-5 border-2 border-dashed dark:border-white/50 rounded-md">
             <div class="flex items-center gap-5">
                 <img src="/img/avatar-default.webp" alt="" class="max-w-[250px] w-full">
                 <div class="space-y-2">

@@ -19,9 +19,9 @@ class ComputerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function show(Computer $computer)
     {
-        //
+        return view('product.index', compact($computer));
     }
 
     /**
@@ -70,17 +70,6 @@ class ComputerController extends Controller
         }
 
         return redirect()->route('admin.computer.create')->with('success', 'Компьютер успешно добавлен!');
-    }
-
-
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Computer $computer)
-    {
-        //
     }
 
     /**
