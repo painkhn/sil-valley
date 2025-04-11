@@ -13,13 +13,14 @@ use App\Http\Requests\Computer\{
     UpdateComputerRequest,
     StoreComputerRequest
 };
+use Illuminate\Http\Request;
 
 class ComputerController extends Controller
 {
     /**
      * Отображение списка всех компов
      */
-    public function index()
+    public function index(Request $request)
     {
         $videocards = [
             ['title' => 'GeForce RTX 2060 SUPER'],
@@ -40,9 +41,21 @@ class ComputerController extends Controller
             ['value' => '64 ГБ'],
         ];
 
-        $pc_list = Computer::with('components')->get();
+        $query = Computer::with('components');
 
-        return view('shop.index', compact('videocards', 'cpus', 'ram', 'pc_list'));
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->input('min_price'));
+        }
+
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->input('max_price'));
+        }
+
+        $pc_list = $query->get();
+
+        $maxPrice = Computer::max('price') ?? 100000;
+
+        return view('shop.index', compact('videocards', 'cpus', 'ram', 'pc_list', 'maxPrice'));
     }
 
     /**

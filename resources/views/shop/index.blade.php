@@ -3,7 +3,7 @@
 @section('content')
     <section class="flex justify-between">
         <div class="w-[20%] p-5 border-2 border-dashed border-white/50 rounded-md">
-            <form class="space-y-6">
+            <form class="space-y-6" method="GET">
                 <div class="space-y-2">
                     <label class="font-semibold dark:text-white/80">Название ПК</label>
                     <input type="text" placeholder="Введите название ПК"
@@ -45,16 +45,16 @@
                     </select>
                 </div>
                 <div class="space-y-2 flex flex-col">
-                    <label class="font-semibold dark:text-white/80">Стоимость от: <output id="shopMinPriceValue"></output>
-                        ₽</label>
-                    <input type="range" min="1000" max="100000" step="100" id="shopMinPriceInput"
-                        class="shopMinPriceInput">
+                    <label class="font-semibold dark:text-white/80">Стоимость от: <output
+                            id="shopMinPriceValue">{{ request('min_price', 1000) }}</output> ₽</label>
+                    <input type="range" min="0" max="{{ $maxPrice }}" step="1" id="shopMinPriceInput"
+                        name="min_price" value="{{ request('min_price', 1000) }}" class="shopMinPriceInput">
                 </div>
                 <div class="space-y-2 flex flex-col">
-                    <label class="font-semibold dark:text-white/80">Стоимость до: <output id="shopMaxPriceValue"></output>
-                        ₽</label>
-                    <input type="range" min="1000" max="100000" step="100" id="shopMaxPriceInput"
-                        class="shopPriceInput">
+                    <label class="font-semibold dark:text-white/80">Стоимость до: <output
+                            id="shopMaxPriceValue">{{ request('max_price', 100000) }}</output> ₽</label>
+                    <input type="range" min="0" max="{{ $maxPrice }}" step="1" id="shopMaxPriceInput"
+                        name="max_price" value="{{ request('max_price', 100000) }}" class="shopPriceInput">
                 </div>
                 <button type="submit"
                     class="w-full py-2 font-semibold bg-green-500 transition-all hover:dark:bg-green-400 rounded-xl dark:text-black">Поиск</button>
