@@ -17,15 +17,44 @@ use App\Http\Requests\Computer\{
 class ComputerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Отображение списка всех компов
      */
-    public function show(Computer $computer)
+    public function index()
     {
-        return view('product.index', compact($computer));
+        $videocards = [
+            ['title' => 'GeForce RTX 2060 SUPER'],
+            ['title' => 'GeForce RTX 2080 TI'],
+            ['title' => 'AMD Radeon RX 7800'],
+            ['title' => 'AMD Radeon RX 7600'],
+        ];
+        $cpus = [
+            ['title' => 'Intel Core i5 5600'],
+            ['title' => 'Intel Core i7 7700'],
+            ['title' => 'AMD Ryzen 5 3600'],
+            ['title' => 'AMD Ryzen 5 5600'],
+        ];
+        $ram = [
+            ['value' => '8 ГБ'],
+            ['value' => '16 ГБ'],
+            ['value' => '32 ГБ'],
+            ['value' => '64 ГБ'],
+        ];
+
+        $pc_list = Computer::with('components')->get();
+
+        return view('shop.index', compact('videocards', 'cpus', 'ram', 'pc_list'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Отображение одного компа
+     */
+    public function show(Computer $computer)
+    {
+        return view('product.index', compact('computer'));
+    }
+
+    /**
+     * Отображение страницы добавления компа
      */
     public function create()
     {
@@ -33,7 +62,7 @@ class ComputerController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Добавление компьютера
      */
     public function store(StoreComputerRequest $request)
     {
@@ -89,10 +118,22 @@ class ComputerController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Удаление компьютера
      */
     public function destroy(Computer $computer)
     {
-        //
+        $computer->delete();
+
+        return redirect()->back()->with('success', 'Компьютер успешно удалён');
+    }
+
+    /**
+     * Восстановление компьютера
+     */
+    public function restore(Computer $computer)
+    {
+        $computer->restore();
+
+        return redirect()->back()->with('success', 'Компьютер успешно восстановлен');
     }
 }
