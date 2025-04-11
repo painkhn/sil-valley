@@ -1,6 +1,6 @@
 @props(['item', 'variant' => 'default'])
 
-<div
+<a href="{{ route('computer.show', $item->id) }}"
     class="p-5 border {{ isset($item->deleted_at) ? 'border-red-500/50' : 'border-green-500/50' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'bg-[#2a1a1a]/80' : 'bg-[#1f1f1f]/80' }} shadow-black relative">
 
     @if (isset($item->deleted_at))
@@ -84,4 +84,4 @@
             @endif
         </div>
     @endif
-</div>
+</a>
