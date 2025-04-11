@@ -79,7 +79,7 @@
                             Удалить
                         </button>
                     </form>
-                    <a href="#"
+                    <a href="{{ route('admin.computer.edit', $item->id) }}"
                         class="transition-all px-4 py-2 text-black rounded-md hover:opacity-80 font-semibold bg-green-500">
                         Редактировать
                     </a>

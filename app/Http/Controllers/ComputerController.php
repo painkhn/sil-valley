@@ -115,7 +115,7 @@ class ComputerController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Открытие страницы редактирования компьютера
      */
     public function edit(Computer $computer)
     {
@@ -123,7 +123,7 @@ class ComputerController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Обновление информации о компьютере
      */
     public function update(UpdateComputerRequest $request, Computer $computer)
     {

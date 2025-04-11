@@ -33,6 +33,8 @@ Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(functi
         Route::post('/computer/store', 'store')->name('computer.store');
         Route::delete('/computer/destroy/{computer}', 'destroy')->name('computer.destroy')->whereNumber('computer');
         Route::put('/computer/restore/{computer}', 'restore')->name('computer.restore')->whereNumber('computer')->withTrashed();
+        Route::get('/computer/edit/{computer}', 'edit')->name('computer.edit')->whereNumber('computer');
+        Route::patch('/computer/update/{computer}', 'update')->name('computer.update')->whereNumber('computer');
     });
 });
 
