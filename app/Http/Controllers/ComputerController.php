@@ -119,8 +119,26 @@ class ComputerController extends Controller
      */
     public function edit(Computer $computer)
     {
-        //
+        $computer->load('components.parameters.parameter');
+
+        $components = $computer->components->mapWithKeys(function ($component) {
+            $data = [
+                'name' => $component->name,
+            ];
+
+            $params = $component->parameters->mapWithKeys(function ($param) {
+                return [$param->parameter->name => $param->value];
+            });
+
+            return [$component->type => array_merge($data, $params->toArray())];
+        });
+
+        return view('admin.computer.edit', [
+            'computer' => $computer,
+            'components' => $components,
+        ]);
     }
+
 
     /**
      * Обновление информации о компьютере
