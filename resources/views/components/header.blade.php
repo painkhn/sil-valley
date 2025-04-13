@@ -36,6 +36,16 @@
         </div>
         <nav class="justify-self-end max-[1370px]:justify-self-start">
             <ul class="flex items-center flex-wrap gap-5">
+                @if (auth()->user()->role === 'admin')
+                    <li>
+                        <a href="/admin/computer/create">
+                            <button
+                                class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                                Добавить товар
+                            </button>
+                        </a>
+                    </li>       
+                @endif
                 <li>
                     <a href={{ route('shop.index') }}>
                         <button

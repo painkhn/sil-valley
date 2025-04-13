@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('components', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type', ['CPU', 'RAM', 'GPU', 'STORAGE', 'Motherboard', 'PSU', 'CASE']);
+            $table->enum('type', ['CPU', 'RAM', 'GPU', 'STORAGE', 'MOTHERBOARD', 'PSU', 'CASE']);
             $table->timestamps();
         });
     }

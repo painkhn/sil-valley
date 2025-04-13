@@ -2,7 +2,7 @@
 
 <a href="{{ route('computer.show', $item->id) }}" class="w-max">
     <div
-        class="p-5 border {{ isset($item->deleted_at) ? 'border-red-500/50' : 'border-green-500/50' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'bg-[#2a1a1a]/80' : 'bg-[#1f1f1f]/80' }} shadow-black relative">
+        class="p-7 {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'bg-[#2a1a1a]/80' : 'bg-[#1f1f1f]/80' }} shadow-black relative">
 
         @if (isset($item->deleted_at))
             <div class="absolute top-2 right-2 bg-red-500/80 text-white text-xs px-2 py-1 rounded-full font-mono">
@@ -12,7 +12,7 @@
 
         @if (isset($item->image))
             <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name ?? 'Компьютер' }}"
-                class="max-w-[250px] w-full block mx-auto rounded-md {{ isset($item->deleted_at) ? 'opacity-50' : '' }}">
+                class="h-[250px] w-full block mx-auto rounded-md {{ isset($item->deleted_at) ? 'opacity-50' : '' }}">
         @else
             <div
                 class="max-w-[250px] h-[150px] w-full mx-auto rounded-md {{ isset($item->deleted_at) ? 'bg-gray-900' : 'bg-gray-800' }} flex items-center justify-center">
@@ -25,23 +25,28 @@
             </div>
         @endif
 
-        <div class="space-y-2">
+        <div class="space-y-2 text-left">
             <h3 class="text-lg font-semibold {{ isset($item->deleted_at) ? 'text-white/70' : 'text-white' }}">
                 {{ $item->title ?? ($item->name ?? 'Компьютер') }}
             </h3>
-            <p class="text-sm {{ isset($item->deleted_at) ? 'text-white/60' : 'text-white/80' }}">
-                {{ $item->price ?? '0' }} Рублей
+            <p class="font-semibold text-2xl {{ isset($item->deleted_at) ? 'text-white/60' : 'text-green-400' }}">
+                {{ $item->price ?? '0' }} ₽
             </p>
 
             <div class="text-left {{ isset($item->deleted_at) ? 'text-white/70' : 'text-white/90' }} text-sm mt-3">
-                <p class="{{ isset($item->deleted_at) ? 'text-red-400' : 'text-green-400' }} font-mono mb-1">
+                <p class="{{ isset($item->deleted_at) ? 'text-red-400' : 'text-white/90' }} font-mono mb-1 font-semibold text-lg">
                     Характеристики:</p>
-                <ul class="space-y-1 pl-2">
+                <ul class="space-y-1">
                     @if (isset($item->components) && count($item->components) > 0)
                         @foreach ($item->components as $component)
                             <li
-                                class="font-mono {{ isset($item->deleted_at) ? 'text-red-300/70' : 'text-green-300' }}">
-                                {{ $component->name }}
+                                class="font-mono w-full {{ isset($item->deleted_at) ? 'text-red-300/70' : 'text-white/70' }}">
+                                <div class="w-full flex">
+                                    <div class="w-1/2">{{ $component->type }}</div>
+                                    <div class="w-1/2 line-clamp-1">
+                                        {{ $component->name }}
+                                    </div>
+                                </div>
                             </li>
                         @endforeach
                     @else
