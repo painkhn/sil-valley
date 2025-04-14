@@ -6,6 +6,7 @@ use App\Http\Controllers\{
     AdminController,
     MainController
 };
+use App\Http\Controllers\CartController;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,10 @@ Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(functi
 Route::controller(ComputerController::class)->group(function() {
     Route::get('shop', 'index')->name('shop.index');
     Route::get('/product/{computer}', 'show')->whereNumber('computer')->name('computer.show');
+});
+
+Route::controller(CartController::class)->group(function() {
+    Route::get('/cart', 'show')->name('cart.show');
 });
 
 require __DIR__.'/auth.php';

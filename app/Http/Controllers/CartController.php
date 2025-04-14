@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use App\Models\Computer;
 
 class CartController extends Controller
 {
@@ -37,7 +38,9 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        //
+        $computer = Computer::where('id', 2)->first();
+        // dd($computer);
+        return view('cart.index', compact('computer'));
     }
 
     /**

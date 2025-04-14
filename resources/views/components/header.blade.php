@@ -82,10 +82,12 @@
                 </li>
                 @auth
                     <li>
-                        <a href="#!">
+                        <a href={{ route('cart.show') }}>
                             <button
                                 class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
-                                Корзина
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M4 4a1 1 0 0 1 1-1h1.5a1 1 0 0 1 .979.796L7.939 6H19a1 1 0 0 1 .979 1.204l-1.25 6a1 1 0 0 1-.979.796H9.605l.208 1H17a3 3 0 1 1-2.83 2h-2.34a3 3 0 1 1-4.009-1.76L5.686 5H5a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
+                                </svg>
                             </button>
                         </a>
                     </li>
@@ -94,7 +96,11 @@
                 @endauth
                 <li>
                     @auth
-                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="px-4 py-2 capitalize transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold block">{{ auth()->user()->name }}</button>
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="px-4 py-2 capitalize transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold block">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
                         <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gradient-to-l dark:from-[#111111] dark:to-[#0a0a0a] border-2 border-dashed border-white/50">
                             <ul class="py-2 text-sm text-gray-700 dark:text-white/80 space-y-2" aria-labelledby="dropdownDefaultButton">
                                 <li>

@@ -31,14 +31,30 @@
                         {{ $computer->description }}
                     </p>
                     <div class="flex items-center gap-2">
-                        <button class="px-4 py-2 bg-green-500 font-semibold text-black/90 rounded-md transition-all hover:bg-green-400">
-                        В корзину
-                        </button>
-                        <button class="px-4 py-2 bg-green-500 font-semibold text-black/90 rounded-md transition-all hover:bg-green-400">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-black/90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667"/>
-                            </svg>
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <button class="px-4 py-2 bg-green-500 font-semibold text-black/90 rounded-md transition-all hover:bg-green-400">
+                                В корзину
+                            </button>
+                            <button class="px-4 py-2 bg-green-500 font-semibold text-black/90 rounded-md transition-all hover:bg-green-400">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-black/90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667"/>
+                                </svg>
+                            </button>
+                        </div>
+                        @auth
+                            @if (auth()->user()->role === "admin")
+                                <div class="w-3/5 flex items-center gap-2">
+                                    <button class="w-1/2 py-2 bg-blue-500 font-semibold text-black rounded-md transition-all hover:bg-blue-400">
+                                        Редактировать
+                                    </button>
+                                    <button class="w-1/2 py-2 bg-red-500 font-semibold text-black rounded-md transition-all hover:bg-red-400">
+                                        Удалить
+                                    </button>
+                                </div>
+                            @else
+                                {{ null }}
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>
