@@ -22,26 +22,27 @@ class ComputerController extends Controller
      */
     public function index(Request $request)
     {
-        $videocards = [
-            ['title' => 'GeForce RTX 2060 SUPER'],
-            ['title' => 'GeForce RTX 2080 TI'],
-            ['title' => 'AMD Radeon RX 7800'],
-            ['title' => 'AMD Radeon RX 7600'],
-        ];
-        $cpus = [
-            ['title' => 'Intel Core i5 5600'],
-            ['title' => 'Intel Core i7 7700'],
-            ['title' => 'AMD Ryzen 5 3600'],
-            ['title' => 'AMD Ryzen 5 5600'],
-        ];
-        $ram = [
-            ['value' => '8 ГБ'],
-            ['value' => '16 ГБ'],
-            ['value' => '32 ГБ'],
-            ['value' => '64 ГБ'],
-        ];
-
+        $videocards = Component::where('type', 'GPU')->select('name as title')->distinct()->get()->toArray();
+        $cpus = Component::where('type', 'CPU')->select('name as title')->distinct()->get()->toArray();
         $query = Computer::with('components');
+
+        if ($request->filled('title')) {
+            $query->where('name', 'like', '%' . $request->input('title') . '%');
+        }
+
+        if ($request->filled('videocard')) {
+            $query->whereHas('components', function ($query) use ($request) {
+                $query->where('name', $request->input('videocard'))
+                    ->where('type', 'GPU');
+            });
+        }
+
+        if ($request->filled('cpu')) {
+            $query->whereHas('components', function ($query) use ($request) {
+                $query->where('name', $request->input('cpu'))
+                    ->where('type', 'CPU');
+            });
+        }
 
         if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->input('min_price'));
@@ -52,11 +53,10 @@ class ComputerController extends Controller
         }
 
         $pc_list = $query->get();
-
         $maxPrice = Computer::max('price') ?? 100000;
-
-        return view('shop.index', compact('videocards', 'cpus', 'ram', 'pc_list', 'maxPrice'));
+        return view('shop.index', compact('videocards', 'cpus', 'pc_list', 'maxPrice'));
     }
+
 
     /**
      * Отображение одного компа
