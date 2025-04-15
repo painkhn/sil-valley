@@ -43,6 +43,7 @@ Route::controller(ComputerController::class)->group(function() {
 
 Route::controller(CartController::class)->group(function() {
     Route::get('/cart', 'show')->name('cart.show');
+    Route::post('/basket/store', 'store')->name('basket.store');
 });
 
 require __DIR__.'/auth.php';

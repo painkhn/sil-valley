@@ -197,7 +197,7 @@
                             type="text" name="components[motherboard][chipset]" id="motherboard_chipset"
                             value="{{ $components['Motherboard']['chipset'] }}" required>
                     </div>
- 
+
                     <div class="space-y-2">
                         <label for="motherboard_form_factor">Форм-фактор:</label>
                         <input

@@ -29,6 +29,6 @@ class Cart extends Model
      */
     public function items()
     {
-        return $this->belongsToMany(Computer::class, 'cart_items')->withPivot('quantity');
+        return $this->hasMany(CartItem::class);
     }
 }
