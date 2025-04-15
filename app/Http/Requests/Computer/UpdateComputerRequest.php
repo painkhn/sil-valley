@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Computer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,7 +11,7 @@ class UpdateComputerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**

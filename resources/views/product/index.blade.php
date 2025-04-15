@@ -54,10 +54,12 @@
                         @auth
                             @if (auth()->user()->role === 'admin')
                                 <div class="w-3/5 flex items-center gap-2">
-                                    <button
-                                        class="w-1/2 py-2 bg-blue-500 font-semibold text-black rounded-md transition-all hover:bg-blue-400">
-                                        Редактировать
-                                    </button>
+                                    <a href="{{ route('admin.computer.edit', $computer->id) }}">
+                                        <button
+                                            class="w-full py-2 bg-blue-500 font-semibold text-black rounded-md transition-all hover:bg-blue-400">
+                                            Редактировать
+                                        </button>
+                                    </a>
                                     <button
                                         class="w-1/2 py-2 bg-red-500 font-semibold text-black rounded-md transition-all hover:bg-red-400">
                                         Удалить

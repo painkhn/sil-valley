@@ -145,8 +145,51 @@ class ComputerController extends Controller
      */
     public function update(UpdateComputerRequest $request, Computer $computer)
     {
-        //
+        $computer->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $request->file('image')
+                ? $request->file('image')->store('images', 'public')
+                : $computer->image,
+        ]);
+
+        $computer->components()->detach();
+        foreach ($request->components as $componentType => $componentData) {
+            $component = Component::updateOrCreate(
+                [
+                    'name' => $componentData['name'],
+                    'type' => strtoupper($componentType),
+                ],
+                [
+                    'name' => $componentData['name'],
+                    'type' => strtoupper($componentType),
+                ]
+            );
+
+            ComponentParameter::where('component_id', $component->id)->delete();
+
+            foreach ($componentData as $paramKey => $paramValue) {
+                if ($paramKey === 'name') continue;
+
+                $parameter = Parameter::firstOrCreate(['name' => $paramKey]);
+                $parameterValue = ParameterValue::firstOrCreate([
+                    'parameter_id' => $parameter->id,
+                    'value' => $paramValue,
+                ]);
+
+                ComponentParameter::create([
+                    'component_id' => $component->id,
+                    'parameter_value_id' => $parameterValue->id,
+                ]);
+            }
+
+            $computer->components()->syncWithoutDetaching([$component->id]);
+        }
+
+        return redirect()->back()->with('success', 'Информация о компьютере успешно обновлена!');
     }
+
 
     /**
      * Удаление компьютера
