@@ -26,7 +26,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="space-y-2 bg-white/5 px-4 py-2">
+                                <div class="bg-white/5 px-4 py-2">
                                     <h3 class="font-semibold text-xl">{{ $item->name }}</h3>
                                     <p class="font-semibold text-2xl text-green-500">
                                         {{ $item->price }} ₽
@@ -34,6 +34,21 @@
                                 </div>
                             </div>
                         </a>
+                        <form class="max-w-[128px] w-full mx-auto block mt-4">
+                            <div class="relative flex items-center w-full">
+                                <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-transparent transition-all dark:hover:bg-white/5 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                    </svg>
+                                </button>
+                                <input type="text" id="quantity-input" min="1" data-input-counter aria-describedby="helper-text-explanation" class="focus:ring-0 focus:dark:border-gray-600 bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm block w-full py-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="от 0" required />
+                                <button type="button" id="increment-button" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-transparent transition-all dark:hover:bg-white/5 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
                     </li>
                 @endforeach
             </ul>

@@ -65,6 +65,11 @@
                 </div>
                 <button type="submit"
                     class="w-full py-2 font-semibold bg-green-500 transition-all hover:dark:bg-green-400 rounded-xl dark:text-black">Поиск</button>
+                <a href={{ route('shop.index') }} class="block">
+                    <button type="button" class="mx-auto block font-semibold transition-all hover:text-green-500">
+                        Сброс
+                    </button>
+                </a>
             </form>
 
         </div>
