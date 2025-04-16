@@ -22,17 +22,17 @@
             <div class="w-3/5">
                 <div class="w-2/3 space-y-4">
                     <div class="flex items-center justify-between">
-                        <h1 class="font-black text-5xl">{{ $computer->name }}</h1>
+                        <h1 class="font-black text-5xl text-black dark:text-white">{{ $computer->name }}</h1>
                         <p class="text-2xl font-bold text-green-500">
                             {{ $computer->price }} ₽
                         </p>
                     </div>
                     @if (isset($computer->deleted_at))
-                        <p class="text-lg font-semibold text-justify text-white/80">
+                        <p class="text-lg font-semibold text-justify dark:text-white/80 text-black/80">
                             Товар удален
                         </p>
                     @endif
-                    <p class="text-lg font-semibold text-justify text-white/80">
+                    <p class="text-lg font-semibold text-justify dark:text-white/80 text-black/80">
                         {{ $computer->description }}
                     </p>
                     <div class="flex items-center gap-2">
@@ -60,7 +60,7 @@
                             @if (auth()->user()->role === 'admin')
                                 <div class="w-3/5 flex items-center gap-2">
                                     @if (isset($computer->deleted_at))
-                                        <form action="{{ route('admin.computer.restore', $computer->id) }}" method="POST">
+                                        <form action="{{ route('admin.computer.restore', $computer->id) }}" method="POST" class="w-1/2">
                                             @csrf
                                             @method('PUT')
                                             <button
@@ -75,7 +75,7 @@
                                                 Редактировать
                                             </button>
                                         </a>
-                                        <form action="{{ route('admin.computer.destroy', $computer->id) }}" method="POST">
+                                        <form class="w-1/2" action="{{ route('admin.computer.destroy', $computer->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button
@@ -94,15 +94,15 @@
             </div>
         </section>
         <section class="space-y-4">
-            <h2 class="text-2xl font-semibold text-center">Характеристики</h2>
+            <h2 class="text-2xl font-semibold text-center text-black dark:text-white">Характеристики</h2>
             <ul class="space-y-4">
                 @if (isset($computer->components) && count($computer->components) > 0)
                     @foreach ($computer->components as $component)
                         <li class="font-mono w-full {{ isset($computer->deleted_at) ? 'text-red-300/70' : 'text-white' }}">
                             <div
-                                class="w-full flex p-4 border dark:border-white/40 rounded-md transition-all hover:bg-white/10">
-                                <div class="w-1/5 text-xl">{{ $component->type }}</div>
-                                <div class="line-clamp-1 text-xl text-green-500">
+                                class="w-full flex p-4 border dark:border-white/40 border-black/40 rounded-md transition-all hover:bg-black/10 dark:hover:bg-white/10">
+                                <div class="w-1/5 text-xl text-black dark:text-white">{{ $component->type }}</div>
+                                <div class="line-clamp-1 text-xl dark:text-green-500 text-green-600">
                                     {{ $component->name }}
                                 </div>
                             </div>

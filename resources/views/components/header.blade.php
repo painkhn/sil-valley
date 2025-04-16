@@ -1,12 +1,13 @@
-<header class="w-full border-b-2 dark:border-green-400/20 dark:bg-gradient-to-t dark:from-[#111111] dark:to-[#0a0a0a]">
+<header class="w-full border-b-2 dark:border-green-400/20 border-green-600/40 bg-gradient-to-t from-white to-[#eaeaea] dark:from-[#111111] dark:to-[#0a0a0a]">
     <div
         class="min-h-28 grid grid-cols-2 max-[1370px]:grid-cols-1 max-[1370px]:py-5 max-[1370px]:space-y-4 items-center px-10">
         <div class="justify-self-start flex items-center gap-8">
             <!-- лого -->
             <a href={{ route('index') }} class="transition-all hover:opacity-80">
-                <img src="/img/logo.svg" alt="" class="w-[250px]">
+                <img src="/img/logo.svg" alt="" class="w-[250px] hidden dark:block">
+                <img src="/img/logo-forLight-2.svg" alt="" class="w-[250px] dark:hidden">
             </a>
-            <span class="h-[52px] w-1 border-r border-white"></span>
+            <span class="h-[52px] w-1 border-r dark:border-white border-black"></span>
             <!-- поисковая строка -->
             <div class="relative w-[400px] flex items-center">
                 <!-- кнопка для отображения поисковой строки -->
@@ -20,15 +21,15 @@
                     </svg>
                 </button>
                 <!-- поисковая строка (для поиска нажать enter) -->
-                <form class="space-y-6" method="GET" action={{ route('shop.index') }}>
+                <form class="space-y-6 max-w-[400px] w-full" method="GET" action={{ route('shop.index') }}>
                     <input type="text" name="title" value="{{ request('title') }}"
-                        class="w-full opacity-0 pointer-events-none searchInput transition-all h-[52px] max-w-[400px] bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12"
+                        class="w-full focus:ring-green-700 opacity-0 pointer-events-none searchInput transition-all h-[52px] max-w-[400px] text-black dark:text-white dark:bg-white/5 border-0 outline-none dark:focus:ring-0 focus:ring-2 dark:ring-0 ring-2 ring-green-600 focus:bg-white/10 rounded-xl px-4 pr-12"
                         placeholder="Поиск...">
                 </form>
                 <!-- кнопка для закрытия посиковой строки -->
                 <button onclick="closeSearchInput()"
                     class="absolute right-4 top-1/2 -translate-y-1/2 searchCloseBtn opacity-0 pointer-events-none">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-green-500" aria-hidden="true"
+                    <svg class="w-6 h-6 text-green-600 dark:text-green-500" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,7 +45,7 @@
                         <li>
                             <a href="/admin/computer/create">
                                 <button
-                                    class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                                    class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
                                     Добавить товар
                                 </button>
                             </a>
@@ -54,7 +55,7 @@
                 <li>
                     <a href={{ route('shop.index') }}>
                         <button
-                            class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                            class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
                             Магазин
                         </button>
                     </a>
@@ -62,7 +63,7 @@
                 <li>
                     <a href="#!">
                         <button
-                            class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                            class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
                             О нас
                         </button>
                     </a>
@@ -70,7 +71,7 @@
                 <li>
                     <a href="#!">
                         <button
-                            class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                            class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
                             Контакты
                         </button>
                     </a>
@@ -78,7 +79,7 @@
                 <li>
                     <a href="#!">
                         <button
-                            class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                            class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
                             FaQ
                         </button>
                     </a>
@@ -91,8 +92,8 @@
                             localStorage.theme = isDark ? 'dark' : 'light';
                             document.getElementById('theme-icon').setAttribute('data-theme', isDark ? 'dark' : 'light');
                         "
-                        class="flex items-center justify-center" aria-label="Сменить тему">
-                        <svg id="theme-icon" data-theme="light" class="w-6 h-6" fill="none" stroke="currentColor"
+                        class="flex items-center justify-center px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold" aria-label="Сменить тему">
+                        <svg id="theme-icon" data-theme="light" class="w-6 h-6 flex items-center justify-center text-center relative dark:text-white text-black" fill="none" stroke="currentColor"
                             stroke-width="2" viewBox="0 0 24 24">
                             <!-- Солнце -->
                             <g data-theme="light">
@@ -111,7 +112,7 @@
                     <li>
                         <a href={{ route('cart.show') }}>
                             <button
-                                class="px-4 py-2 transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold">
+                                class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold">
                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                     viewBox="0 0 24 24">
@@ -128,7 +129,7 @@
                 <li>
                     @auth
                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                            class="px-4 py-2 capitalize transition-all dark:hover:border-b border-green-500 hover:dark:text-green-500 font-semibold block">
+                            class="px-4 py-2 capitalize transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold block">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">

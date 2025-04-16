@@ -2,7 +2,7 @@
 
 <a href="{{ route('computer.show', $item->id) }}" class="w-max">
     <div
-        class="p-7 {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'bg-[#2a1a1a]/80' : 'bg-[#1f1f1f]/80' }} shadow-black relative">
+        class="p-7 {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'bg-[#2a1a1a]/80' : 'dark:bg-[#1f1f1f]/80' }} dark:shadow-black shadow-black/40 relative">
 
         @if (isset($item->deleted_at))
             <div class="absolute top-2 right-2 bg-red-500/80 text-white text-xs px-2 py-1 rounded-full font-mono">
@@ -26,21 +26,22 @@
         @endif
 
         <div class="space-y-2 text-left">
-            <h3 class="text-lg font-semibold {{ isset($item->deleted_at) ? 'text-white/70' : 'text-white' }}">
+            <h3 class="text-lg font-semibold {{ isset($item->deleted_at) ? 'text-white/70' : 'dark:text-white text-black' }}">
                 {{ $item->title ?? ($item->name ?? 'Компьютер') }}
             </h3>
-            <p class="font-semibold text-2xl {{ isset($item->deleted_at) ? 'text-white/60' : 'text-green-400' }}">
+            <p class="font-semibold text-2xl {{ isset($item->deleted_at) ? 'text-white/60' : 'dark:text-green-400 text-green-500' }}">
                 {{ $item->price ?? '0' }} ₽
             </p>
 
             <div class="text-left {{ isset($item->deleted_at) ? 'text-white/70' : 'text-white/90' }} text-sm mt-3">
-                <p class="{{ isset($item->deleted_at) ? 'text-red-400' : 'text-white/90' }} font-mono mb-1 font-semibold text-lg">
-                    Характеристики:</p>
+                <p class="{{ isset($item->deleted_at) ? 'text-red-400' : 'dark:text-white/90 text-black/80' }} font-mono mb-1 font-semibold text-lg">
+                    Характеристики:
+                </p>
                 <ul class="space-y-1">
                     @if (isset($item->components) && count($item->components) > 0)
                         @foreach ($item->components as $component)
                             <li
-                                class="font-mono w-full {{ isset($item->deleted_at) ? 'text-red-300/70' : 'text-white/70' }}">
+                                class="font-mono w-full {{ isset($item->deleted_at) ? 'text-red-300/70' : 'dark:text-white/90 text-black/60' }}">
                                 <div class="w-full flex">
                                     <div class="w-1/2">{{ $component->type }}</div>
                                     <div class="w-1/2 line-clamp-1">
