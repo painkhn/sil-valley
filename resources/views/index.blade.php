@@ -77,7 +77,8 @@
             <div class="p-4 border border-white w-1/2 max-[875px]:mx-auto">
                 <img src="/img/zxczxxc.jpg" alt="" class="rounded-md">
             </div>
-            <div class="w-1/2 max-[875px]:w-full flex flex-col justify-between max-[875px]:space-y-8 max-[875px]:text-center">
+            <div
+                class="w-1/2 max-[875px]:w-full flex flex-col justify-between max-[875px]:space-y-8 max-[875px]:text-center">
                 <div class="space-y-4">
                     <h2 class="font-black text-2xl">Самые современные сборки ПК</h2>
                     <p class="font-semibold">
@@ -107,44 +108,46 @@
     </section>
     @auth
         <section class="max-w-6xl w-full mx-auto text-center pb-10">
-            <a href={{ route('shop.index') }} class="inline text-center text-2xl font-black transition-all hover:text-green-500">Чего вы ждёте? Переходите в магазин и выбирайте ПК своей мечты!</a>
+            <a href={{ route('shop.index') }}
+                class="inline text-center text-2xl font-black transition-all hover:text-green-500">Чего вы ждёте? Переходите в
+                магазин и выбирайте ПК своей мечты!</a>
         </section>
     @else
         <!-- авторизация на главной странице -->
         <section class="max-w-6xl w-full mx-auto space-y-12 pb-10">
             <h2 class="text-center text-2xl font-black">Авторизируйтесь, чтобы заказать ПК своей мечты</h2>
-            <form class="w-[55%] mx-auto space-y-8">
+            <form class="w-[55%] mx-auto space-y-8" method="POST" action="{{ route('login') }}">
+                @csrf
                 <div class="space-y-2">
-                    <label for="" class="font-semibold dark:text-white/80">Электронная почта</label>
-                    <input type="text"
+                    <label for="email" class="font-semibold dark:text-white/80">Электронная почта</label>
+                    <input type="email" name="email" :value="old('email')" required autofocus
                         class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
                 </div>
                 <div class="space-y-2">
-                    <label for="" class="font-semibold dark:text-white/80">Пароль</label>
-                    <input type="password"
+                    <label for="password" class="font-semibold dark:text-white/80">Пароль</label>
+                    <input type="password" name="password" required
                         class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
                 </div>
                 <button type="submit"
                     class="w-full py-4 font-semibold bg-green-500 transition-all hover:dark:bg-green-400 rounded-xl dark:text-black">
                     Войти
                 </button>
-                <div class="text-center">
-                    <a href="#!" class="font-semibold transition-all hover:text-green-500">
-                        Регистрация
-                    </a>
-                </div>
             </form>
+            <div class="text-center">
+                <button onclick="getRegister()" class="font-semibold transition-all hover:text-green-500">
+                    Регистрация
+                </button>
+            </div>
         </section>
     @endauth
 
     <script>
-        // плавная прокрутка на главной странцие
-         document.querySelector('a[href="#second-main-section"]').addEventListener('click', (e) => {
-             e.preventDefault(); // Отменяем стандартное поведение ссылки
-             document.getElementById('second-main-section').scrollIntoView({
-                 behavior: 'smooth', // Плавная прокрутка
-                 block: 'start'     // Выравнивание по верху (можно 'center' или 'end')
-             });
-         });
+        document.querySelector('a[href="#second-main-section"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('second-main-section').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
     </script>
 @endsection
