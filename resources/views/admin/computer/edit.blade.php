@@ -49,7 +49,7 @@
                         <label for="image">Фото:</label>
                         <input
                             class="transition-all w-full py-2 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12"
-                            type="file" name="image" id="image">
+                            type="file" name="image" id="image" accept="image/*">
                     </div>
                 </div>
 
