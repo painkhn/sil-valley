@@ -32,7 +32,7 @@
                     </p>
                     <div class="flex items-center gap-2">
                         <div class="flex items-center gap-2">
-                            <form action="{{ route('basket.store') }}" method="POST">
+                            <form action="{{ route('cart.store') }}" method="POST">
                                 @csrf
                                 <input type="text" name="computer" id="computer" value="{{ $computer->id }}"
                                     class="hidden">

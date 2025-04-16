@@ -38,33 +38,39 @@ class CartController extends Controller
 
     /**
      *  Отображение страницы корзины
+     *
      */
     public function show()
     {
+        // Получаем товары из корзины пользователя
         $cart = Cart::with(['items.computer'])->where('user_id', Auth::id())->first();
 
         if (!$cart || $cart->items->isEmpty()) {
             return $this->emptyCartView();
         }
 
+        // Объявляем переменные
         $computers = [];
         $totalQuantity = 0;
         $totalPrice = 0;
         $discountAmount = 0;
 
+        // Получаем общую сумму, сумму скидки и др
         foreach ($cart->items as $item) {
             $computerObj = $this->processCartItem($item);
             if (!$computerObj) continue;
 
+            $computerObj->cart_item_id = $item->id;
             $computers[] = $computerObj;
             $totalQuantity += $computerObj->quantity;
             $totalPrice += $computerObj->sum;
             $discountAmount += $computerObj->discount;
         }
 
-        $finalPrice = $totalPrice - $discountAmount;
-        $discountPercent = $totalPrice > 0 ? round(($discountAmount / $totalPrice) * 100) : 0;
+        $finalPrice = $totalPrice - $discountAmount; // Итоговоя сумма
+        $discountPercent = $totalPrice > 0 ? round(($discountAmount / $totalPrice) * 100) : 0; // Скидка
 
+        // Отображаем
         return view('cart.index', compact(
             'computers',
             'totalQuantity',
@@ -75,6 +81,10 @@ class CartController extends Controller
         ));
     }
 
+    /*
+    * Получаем информацию о товаре в виде массива
+    *
+    */
     private function processCartItem($item): ?object
     {
         $computer = $item->computer;
@@ -98,20 +108,25 @@ class CartController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Редактирование корзины (Изменение кол-ва товара)
      */
-    public function edit(Cart $cart)
+    public function update(CartItem $item, $status)
     {
-        //
+        if ($status === 'plus') {
+            $item->increment('quantity');
+        } elseif ($status === 'minus') {
+            if ($item->quantity > 1) {
+                $item->decrement('quantity');
+            } else {
+                $productName = $item->computer->name ?? 'Товар';
+                $item->delete();
+
+                return redirect()->route('cart.show')->with('success', "Товар $productName удален из корзины.");
+            }
+        }
+        return redirect()->route('cart.show');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCartRequest $request, Cart $cart)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

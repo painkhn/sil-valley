@@ -43,7 +43,8 @@ Route::controller(ComputerController::class)->group(function() {
 
 Route::controller(CartController::class)->group(function() {
     Route::get('/cart', 'show')->name('cart.show');
-    Route::post('/basket/store', 'store')->name('basket.store');
+    Route::post('/cart/store', 'store')->name('cart.store');
+    Route::patch('/cart/quantity/update/{item}/{status}', 'update')->name('cart.update');
 });
 
 require __DIR__.'/auth.php';
