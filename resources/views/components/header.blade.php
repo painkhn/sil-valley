@@ -20,9 +20,11 @@
                     </svg>
                 </button>
                 <!-- поисковая строка (для поиска нажать enter) -->
-                <input type="text"
-                    class="opacity-0 pointer-events-none searchInput transition-all h-[52px] max-w-[400px] w-[52px] bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12"
-                    placeholder="Поиск...">
+                <form class="space-y-6" method="GET" action={{ route('shop.index') }}>
+                    <input type="text" name="title" value="{{ request('title') }}"
+                        class="w-full opacity-0 pointer-events-none searchInput transition-all h-[52px] max-w-[400px] bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12"
+                        placeholder="Поиск...">
+                </form>
                 <!-- кнопка для закрытия посиковой строки -->
                 <button onclick="closeSearchInput()"
                     class="absolute right-4 top-1/2 -translate-y-1/2 searchCloseBtn opacity-0 pointer-events-none">
