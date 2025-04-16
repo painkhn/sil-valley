@@ -38,7 +38,7 @@ Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(functi
 
 Route::controller(ComputerController::class)->group(function() {
     Route::get('shop', 'index')->name('shop.index');
-    Route::get('/product/{computer}', 'show')->whereNumber('computer')->name('computer.show');
+    Route::get('/product/{computer}', 'show')->whereNumber('computer')->withTrashed()->name('computer.show');
 });
 
 Route::controller(CartController::class)->group(function() {

@@ -27,6 +27,11 @@
                             {{ $computer->price }} ₽
                         </p>
                     </div>
+                    @if (isset($computer->deleted_at))
+                        <p class="text-lg font-semibold text-justify text-white/80">
+                            Товар удален
+                        </p>
+                    @endif
                     <p class="text-lg font-semibold text-justify text-white/80">
                         {{ $computer->description }}
                     </p>
@@ -54,16 +59,31 @@
                         @auth
                             @if (auth()->user()->role === 'admin')
                                 <div class="w-3/5 flex items-center gap-2">
-                                    <a href="{{ route('admin.computer.edit', $computer->id) }}" class="w-1/2">
-                                        <button
-                                            class="w-full py-2 bg-blue-500 font-semibold text-black rounded-md transition-all hover:bg-blue-400">
-                                            Редактировать
-                                        </button>
-                                    </a>
-                                    <button
-                                        class="w-1/2 py-2 bg-red-500 font-semibold text-black rounded-md transition-all hover:bg-red-400">
-                                        Удалить
-                                    </button>
+                                    @if (isset($computer->deleted_at))
+                                        <form action="{{ route('admin.computer.restore', $computer->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button
+                                                class="w-full py-2 bg-red-500 font-semibold text-black rounded-md transition-all hover:bg-red-400">
+                                                Восстановить
+                                            </button>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('admin.computer.edit', $computer->id) }}" class="w-1/2">
+                                            <button
+                                                class="w-full py-2 bg-blue-500 font-semibold text-black rounded-md transition-all hover:bg-blue-400">
+                                                Редактировать
+                                            </button>
+                                        </a>
+                                        <form action="{{ route('admin.computer.destroy', $computer->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button
+                                                class="w-full py-2 bg-red-500 font-semibold text-black rounded-md transition-all hover:bg-red-400">
+                                                Удалить
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             @else
                                 {{ null }}

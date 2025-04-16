@@ -63,6 +63,10 @@ class ComputerController extends Controller
      */
     public function show(Computer $computer)
     {
+        if ($computer->trashed() && !(auth()->check() && auth()->user()->role == 'admin')) {
+            abort(404);
+        }
+
         return view('product.index', compact('computer'));
     }
 
