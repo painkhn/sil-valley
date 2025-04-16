@@ -187,7 +187,7 @@
                         <input
                             class="transition-all w-full py-2 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12"
                             type="text" name="components[motherboard][name]" id="motherboard_name"
-                            value="{{ $components['Motherboard']['name'] }}" required>
+                            value="{{ $components['MOTHERBOARD']['name'] }}" required>
                     </div>
 
                     <div class="space-y-2">
@@ -195,7 +195,7 @@
                         <input
                             class="transition-all w-full py-2 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12"
                             type="text" name="components[motherboard][chipset]" id="motherboard_chipset"
-                            value="{{ $components['Motherboard']['chipset'] }}" required>
+                            value="{{ $components['MOTHERBOARD']['chipset'] }}" required>
                     </div>
 
                     <div class="space-y-2">
@@ -203,7 +203,7 @@
                         <input
                             class="transition-all w-full py-2 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12"
                             type="text" name="components[motherboard][form_factor]" id="motherboard_form_factor"
-                            value="{{ $components['Motherboard']['form_factor'] }}" required>
+                            value="{{ $components['MOTHERBOARD']['form_factor'] }}" required>
                     </div>
                 </div>
 
