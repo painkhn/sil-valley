@@ -11,3 +11,7 @@
 ::-webkit-scrollbar {
     width: 0;
 }
+
+.grid-adaptive-cols {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}

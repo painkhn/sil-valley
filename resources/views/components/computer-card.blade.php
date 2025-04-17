@@ -2,7 +2,7 @@
 
 <a href="{{ route('computer.show', $item->id) }}" class="w-max">
     <div
-        class="p-7 {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'bg-[#2a1a1a]/80' : 'dark:bg-[#1f1f1f]/80' }} dark:shadow-black shadow-black/40 relative">
+        class="p-7 {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'dark:bg-[#2a1a1a]/80' : 'dark:bg-[#1f1f1f]/80' }} dark:shadow-black shadow-black/40 relative">
 
         @if (isset($item->deleted_at))
             <div class="absolute top-2 right-2 bg-red-500/80 text-white text-xs px-2 py-1 rounded-full font-mono">
@@ -26,10 +26,10 @@
         @endif
 
         <div class="space-y-2 text-left">
-            <h3 class="text-lg font-semibold {{ isset($item->deleted_at) ? 'text-white/70' : 'dark:text-white text-black' }}">
+            <h3 class="text-lg font-semibold {{ isset($item->deleted_at) ? 'dark:text-white/70 text-black/70' : 'dark:text-white text-black' }}">
                 {{ $item->title ?? ($item->name ?? 'Компьютер') }}
             </h3>
-            <p class="font-semibold text-2xl {{ isset($item->deleted_at) ? 'text-white/60' : 'dark:text-green-400 text-green-500' }}">
+            <p class="font-semibold text-2xl {{ isset($item->deleted_at) ? 'dark:text-green-400/60 text-green-500/60' : 'dark:text-green-400 text-green-500' }}">
                 {{ $item->price ?? '0' }} ₽
             </p>
 
@@ -72,7 +72,7 @@
                         @csrf
                         @method('PUT')
                         <button
-                            class="transition-all px-4 py-2 text-black rounded-md hover:opacity-80 font-semibold bg-blue-500">
+                            class="transition-all px-4 py-2 dark:text-black text-white rounded-md hover:opacity-80 font-semibold bg-blue-500">
                             Восстановить
                         </button>
                     </form>
@@ -81,12 +81,12 @@
                         @csrf
                         @method('DELETE')
                         <button
-                            class="transition-all px-4 py-2 text-black rounded-md hover:opacity-80 font-semibold bg-green-500">
+                            class="transition-all px-4 py-2 dark:text-black text-white rounded-md hover:opacity-80 font-semibold bg-green-500">
                             Удалить
                         </button>
                     </form>
                     <a href="{{ route('admin.computer.edit', $item->id) }}"
-                        class="transition-all px-4 py-2 text-black rounded-md hover:opacity-80 font-semibold bg-green-500">
+                        class="transition-all px-4 py-2 dark:text-black text-white rounded-md hover:opacity-80 font-semibold bg-green-500">
                         Редактировать
                     </a>
                 @endif

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="px-10">
+        <h1 class="text-xl font-semibold text-black dark:text-white text-center mb-10">Добавление товара</h1>
         <form action="{{ route('admin.computer.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 

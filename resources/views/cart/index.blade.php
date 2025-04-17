@@ -2,12 +2,12 @@
 
 @section('content')
     <section class="max-w-6xl w-full mx-auto flex gap-10">
-        <div class="w-3/5 p-5 border dark:border-white/40 rounded-md">
+        <div class="w-3/5 p-5 border dark:border-white/40 border-black/40 rounded-md">
             <ul class="grid grid-cols-3 gap-5">
                 @foreach ($computers as $item)
                     <li>
                         <a href="{{ route('computer.show', $item->id) }}">
-                            <div class="transition-all hover:scale-105 space-y-2 border border-white/5 rounded-[3px]">
+                            <div class="transition-all hover:scale-105 space-y-2 border dark:border-white/5 border-black/5 rounded-md">
                                 <div>
                                     @if (isset($item->image))
                                         <img src="{{ asset('storage/' . $item->image) }}"
@@ -26,9 +26,9 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="bg-white/5 px-4 py-2">
-                                    <h3 class="font-semibold text-xl">{{ $item->name }}</h3>
-                                    <p class="font-semibold text-2xl text-green-500">
+                                <div class="dark:bg-white/5 bg-black/5 px-4 py-2 rounded-b-md">
+                                    <h3 class="font-black text-lg text-black dark:text-white">{{ $item->name }}</h3>
+                                    <p class="font-semibold text-lg dark:text-green-500 text-green-600">
                                         {{ $item->price }} ₽
                                     </p>
                                 </div>
@@ -75,13 +75,13 @@
             </ul>
         </div>
         <div class="w-2/5 space-y-4">
-            <h1 class="text-center text-2xl font-semibold">
+            <h1 class="text-center text-black dark:text-white text-2xl font-semibold">
                 Ваша корзина
             </h1>
             <ul class="grid grid-cols-2 gap-4 text-left">
                 <li>
-                    <div class="w-full border border-white/10 p-4 rounded-sm">
-                        <h2 class="font-semibold text-lg">
+                    <div class="w-full border dark:border-white/10 border-black/20 p-4 rounded-sm">
+                        <h2 class="font-semibold text-lg text-black dark:text-white">
                             Количество товаров:
                         </h2>
                         <p class="text-green-500">
@@ -90,8 +90,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="w-full border border-white/10 p-4 rounded-sm">
-                        <h2 class="font-semibold text-lg">
+                    <div class="w-full border dark:border-white/10 border-black/20 p-4 rounded-sm">
+                        <h2 class="font-semibold text-lg text-black dark:text-white">
                             Размер скидки:
                         </h2>
                         <p class="text-green-500">
@@ -100,8 +100,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="w-full border border-white/10 p-4 rounded-sm">
-                        <h2 class="font-semibold text-lg">
+                    <div class="w-full border dark:border-white/10 border-black/20 p-4 rounded-sm">
+                        <h2 class="font-semibold text-lg text-black dark:text-white">
                             Сумма заказа:
                         </h2>
                         <p class="text-green-500">
@@ -110,8 +110,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="w-full border border-white/10 p-4 rounded-sm">
-                        <h2 class="font-semibold text-lg">
+                    <div class="w-full border dark:border-white/10 border-black/20 p-4 rounded-sm">
+                        <h2 class="font-semibold text-lg text-black dark:text-white">
                             Сумма скидки:
                         </h2>
                         <p class="text-green-500">
@@ -122,12 +122,12 @@
             </ul>
             <div class="text-green-500 flex justify-end items-center gap-2 text-xl font-semibold">
                 <h2>Итого:</h2>
-                <p class="text-white">
+                <p class="text-black dark:text-white">
                     <span>{{ number_format($finalPrice, 0, ',', ' ') }}</span> ₽
                 </p>
             </div>
             <button
-                class="w-full py-2 bg-green-500 font-semibold text-black/90 rounded-md transition-all hover:bg-green-400">
+                class="w-full py-2 bg-green-500 font-semibold dark:text-black/90 text-white rounded-md transition-all hover:bg-green-600 dark:hover:bg-green-400">
                 Перейти к оплате
             </button>
         </div>

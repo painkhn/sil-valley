@@ -42,13 +42,13 @@
                                 <input type="text" name="computer" id="computer" value="{{ $computer->id }}"
                                     class="hidden">
                                 <button
-                                    class="px-4 py-2 bg-green-500 font-semibold text-black/90 rounded-md transition-all hover:bg-green-400">
+                                    class="px-4 py-2 bg-green-500 font-semibold dark:text-black/90 text-white rounded-md transition-all hover:bg-green-400">
                                     В корзину
                                 </button>
                             </form>
                             <button
-                                class="px-4 py-2 bg-green-500 font-semibold text-black/90 rounded-md transition-all hover:bg-green-400">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-black/90" aria-hidden="true"
+                                class="px-4 py-2 bg-green-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-green-400">
+                                <svg class="w-6 h-6 transition-all dark:text-black text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -64,14 +64,14 @@
                                             @csrf
                                             @method('PUT')
                                             <button
-                                                class="w-full py-2 bg-red-500 font-semibold text-black rounded-md transition-all hover:bg-red-400">
+                                                class="w-full py-2 bg-red-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-red-400">
                                                 Восстановить
                                             </button>
                                         </form>
                                     @else
                                         <a href="{{ route('admin.computer.edit', $computer->id) }}" class="w-1/2">
                                             <button
-                                                class="w-full py-2 bg-blue-500 font-semibold text-black rounded-md transition-all hover:bg-blue-400">
+                                                class="w-full py-2 bg-blue-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-blue-400">
                                                 Редактировать
                                             </button>
                                         </a>
@@ -79,7 +79,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button
-                                                class="w-full py-2 bg-red-500 font-semibold text-black rounded-md transition-all hover:bg-red-400">
+                                                class="w-full py-2 bg-red-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-red-400">
                                                 Удалить
                                             </button>
                                         </form>
