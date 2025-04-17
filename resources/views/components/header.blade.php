@@ -1,4 +1,5 @@
-<header class="w-full border-b-2 dark:border-green-400/20 border-green-600/40 bg-gradient-to-t from-white to-[#eaeaea] dark:from-[#111111] dark:to-[#0a0a0a]">
+<header
+    class="w-full border-b-2 dark:border-green-400/20 border-green-600/40 bg-gradient-to-t from-white to-[#eaeaea] dark:from-[#111111] dark:to-[#0a0a0a]">
     <div
         class="min-h-28 grid grid-cols-2 max-[1370px]:grid-cols-1 max-[1370px]:py-5 max-[1370px]:space-y-4 items-center px-10">
         <div class="justify-self-start flex items-center gap-8">
@@ -55,8 +56,8 @@
                                         <a href="/admin"
                                             class="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white">
                                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                                viewBox="0 0 24 24">
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-width="2"
                                                     d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                             </svg>
@@ -80,7 +81,7 @@
                                 </ul>
                             </div>
                             <!-- <a href="/admin/computer/create">
-                            </a> -->
+                                                </a> -->
                         </li>
                     @endif
                 @endauth
@@ -124,9 +125,11 @@
                             localStorage.theme = isDark ? 'dark' : 'light';
                             document.getElementById('theme-icon').setAttribute('data-theme', isDark ? 'dark' : 'light');
                         "
-                        class="flex items-center justify-center px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold" aria-label="Сменить тему">
-                        <svg id="theme-icon" data-theme="light" class="w-6 h-6 flex items-center justify-center text-center relative dark:text-white text-black" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
+                        class="flex items-center justify-center px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold"
+                        aria-label="Сменить тему">
+                        <svg id="theme-icon" data-theme="light"
+                            class="w-6 h-6 flex items-center justify-center text-center relative dark:text-white text-black"
+                            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <!-- Солнце -->
                             <g data-theme="light">
                                 <circle cx="12" cy="12" r="5"></circle>
@@ -135,7 +138,7 @@
                             </g>
                             <!-- Луна -->
                             <g data-theme="dark" style="display: none;">
-                                <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 0021 12.79z" />
+                                <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
                             </g>
                         </svg>
                     </button>
@@ -178,8 +181,8 @@
                                     <a href={{ route('profile.index') }}
                                         class="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                            viewBox="0 0 24 24">
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-width="2"
                                                 d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         </svg>
