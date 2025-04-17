@@ -42,35 +42,30 @@ class CartController extends Controller
      */
     public function show()
     {
-        // Получаем товары из корзины пользователя
         $cart = Cart::with(['items.computer'])->where('user_id', Auth::id())->first();
 
-        if (!$cart || $cart->items->isEmpty()) {
-            return $this->emptyCartView();
-        }
-
-        // Объявляем переменные
+        // Заготовка на случай пустой корзины или невалидных товаров
         $computers = [];
         $totalQuantity = 0;
         $totalPrice = 0;
         $discountAmount = 0;
 
-        // Получаем общую сумму, сумму скидки и др
-        foreach ($cart->items as $item) {
-            $computerObj = $this->processCartItem($item);
-            if (!$computerObj) continue;
+        if ($cart && $cart->items->isNotEmpty()) {
+            foreach ($cart->items as $item) {
+                $computerObj = $this->processCartItem($item);
+                if (!$computerObj) continue;
 
-            $computerObj->cart_item_id = $item->id;
-            $computers[] = $computerObj;
-            $totalQuantity += $computerObj->quantity;
-            $totalPrice += $computerObj->sum;
-            $discountAmount += $computerObj->discount;
+                $computerObj->cart_item_id = $item->id;
+                $computers[] = $computerObj;
+                $totalQuantity += $computerObj->quantity;
+                $totalPrice += $computerObj->sum;
+                $discountAmount += $computerObj->discount;
+            }
         }
 
-        $finalPrice = $totalPrice - $discountAmount; // Итоговоя сумма
-        $discountPercent = $totalPrice > 0 ? round(($discountAmount / $totalPrice) * 100) : 0; // Скидка
+        $finalPrice = $totalPrice - $discountAmount;
+        $discountPercent = $totalPrice > 0 ? round(($discountAmount / $totalPrice) * 100) : 0;
 
-        // Отображаем
         return view('cart.index', compact(
             'computers',
             'totalQuantity',
