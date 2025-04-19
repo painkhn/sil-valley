@@ -17,6 +17,7 @@ Route::controller(MainController::class)->group(function () {
 
 
 Route::controller(OrderController::class)->middleware('auth')->group(function () {
+    Route::get('/profile/orders', 'index')->name('profile.orders');
     Route::post('/order/store', 'store')->name('order.store');
 });
 

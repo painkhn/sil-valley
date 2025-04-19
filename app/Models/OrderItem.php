@@ -26,10 +26,10 @@ class OrderItem extends Model
     }
 
     /**
-     * Связь с моделью Build
+     * Связь с моделью Computer
      */
-    public function build()
+    public function computer()
     {
-        return $this->belongsTo(Build::class)->withTrashed();
+        return $this->belongsTo(Computer::class)->withTrashed();
     }
 }

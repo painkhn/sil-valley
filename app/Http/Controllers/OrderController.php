@@ -10,23 +10,35 @@ use App\Models\OrderItem;
 use App\Models\OrderDeliveryDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\Order\StoreOrderRequest;
 
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Отображение заказов пользователя
      */
     public function index()
     {
-        //
+        $orders = Order::with(['items.computer', 'deliveryDetail'])->where('user_id', auth()->id())->latest()->get();
+        return view('profile.orders', compact('orders'));
     }
+
 
     /**
      * Создание заказа
      */
     public function store(StoreOrderRequest $request)
     {
+        if ($request->deliveryMethod === 'delivery') {
+            $validator->addRules([
+                'full_name' => 'required|string|max:255',
+                'city' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
+                'postal_code' => 'required|digits:6',
+                'phone' => 'required|digits_between:10,15',
+            ]);
+        }
+
         $user = Auth::user();
 
         $cart = Cart::with('items.computer')->where('user_id', $user->id)->first();
@@ -84,7 +96,7 @@ class OrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('profile.index')->with('success', 'Заказ успешно оформлен!');
+            return redirect()->route('profile.orders')->with('success', 'Заказ успешно оформлен!');
         } catch (\Throwable $e) {
             DB::rollBack();
             report($e);

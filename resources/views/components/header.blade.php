@@ -81,7 +81,7 @@
                                 </ul>
                             </div>
                             <!-- <a href="/admin/computer/create">
-                                                                                            </a> -->
+                                                                                                                            </a> -->
                         </li>
                     @endif
                 @endauth
@@ -190,7 +190,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('profile.orders') }}"
                                         class="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white">
                                         <svg class="w-6 h-5 text-gray-800 dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
