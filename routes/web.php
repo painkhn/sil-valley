@@ -29,7 +29,12 @@ Route::controller(ProfileController::class)->middleware('auth')->group(function 
 Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(function () {
 
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.index');
+        Route::get('/products', 'products')->name('products');
+        Route::get('/orders', 'orders')->name('orders');
+    });
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::patch('/orders/{order}/update', 'update')->whereNumber('order')->name('orders.update');
     });
 
     Route::controller(ComputerController::class)->group(function () {

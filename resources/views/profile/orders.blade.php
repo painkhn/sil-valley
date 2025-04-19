@@ -23,25 +23,12 @@
                 <p class="text-sm text-gray-600 dark:text-gray-300">Доставка:
                     {{ $order->delivery_method === 'delivery' ? 'Доставка' : 'Самовывоз' }}</p>
 
-                @if ($order->delivery_method === 'delivery' && $order->deliveryDetails)
-                    <div class="text-sm text-gray-700 dark:text-gray-200">
-                        <p>ФИО: {{ $order->deliveryDetails->full_name }}</p>
-                        <p>Город: {{ $order->deliveryDetails->city }}</p>
-                        <p>Адрес:
-                            {{ $order->deliveryDetails->address }}{{ $order->deliveryDetails->apartment ? ', кв. ' . $order->deliveryDetails->apartment : '' }}
-                        </p>
-                        <p>Индекс: {{ $order->deliveryDetails->postal_code }}</p>
-                        <p>Телефон: {{ $order->deliveryDetails->phone }}</p>
-                    </div>
-                @endif
-
                 <div class="mt-4 space-y-2">
                     @foreach ($order->items as $item)
                         <div
                             class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
                             <div class="flex items-start gap-4">
-                                <img src={{ asset('storage/' . $item->computer->image) }}
-                                    alt="{{ $item->computer->name }}"
+                                <img src={{ asset('storage/' . $item->computer->image) }} alt="{{ $item->computer->name }}"
                                     class="w-24 h-24 object-cover rounded-md border dark:border-gray-600">
 
                                 <div>
@@ -80,12 +67,18 @@
                                 {{ $order->deliveryDetail->address }}{{ $order->deliveryDetail->apartment ? ', кв. ' . $order->deliveryDetail->apartment : '' }}
                             </p>
                             <p>Индекс: {{ $order->deliveryDetail->postal_code }}</p>
-                            <p>Телефон: {{ $order->deliveryDetail->phone }}</p>
+                            @php
+                                $phone = $order->deliveryDetail->phone;
+                                $formattedPhone = preg_replace(
+                                    '/^(\d)(\d{3})(\d{3})(\d{2})(\d{2})$/',
+                                    '+$1 ($2) $3-$4-$5',
+                                    $phone,
+                                );
+                            @endphp
+                            <p>Телефон: {{ $formattedPhone }}</p>
                         </div>
                     </details>
                 @endif
-
-
 
                 <div class="text-right text-green-600 dark:text-green-400 font-semibold">
                     Итого: {{ number_format($total, 0, ',', ' ') }} ₽

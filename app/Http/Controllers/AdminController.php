@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Computer;
+use App\Models\{Cart, Computer, OrderDeliveryDetail, OrderItem, Order};
+use Illuminate\Support\Facades\{DB, Auth};
+use App\Http\Requests\Order\StoreOrderRequest;
 
 class AdminController extends Controller
 {
     /*
     * Отображение страницы администратора
     */
-    public function index(Request $request)
+    public function products(Request $request)
     {
         $query = Computer::withTrashed()->with('components');
 
@@ -52,4 +54,12 @@ class AdminController extends Controller
         $maxPrice = Computer::max('price') ?? 100000;
         return view('admin.index', compact('pc_list', 'maxPrice'));
     }
+
+    public function orders()
+    {
+        $orders = Order::with(['items.computer', 'deliveryDetail'])->latest()->paginate(10);
+
+        return view('admin.orders', compact('orders'));
+    }
+
 }

@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
-use App\Models\Computer;
+use App\Models\{Cart, Computer, OrderDeliveryDetail, OrderItem, Order};
+use Illuminate\Support\Facades\{DB, Auth};
 use Illuminate\Http\Request;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\OrderDeliveryDetail;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\Order\StoreOrderRequest;
+use App\Http\Requests\Order\{StoreOrderRequest, UpdateOrderRequest};
 
 class OrderController extends Controller
 {
@@ -105,34 +100,13 @@ class OrderController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Обновление статуса заказа
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
-    }
+        $order->status = $request->validated()['status'];
+        $order->save();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
+        return redirect()->back()->with('success', 'Статус заказа обновлён.');
     }
 }
