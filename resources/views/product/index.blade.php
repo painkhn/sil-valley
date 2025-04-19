@@ -35,7 +35,7 @@
                     <p class="text-lg font-semibold text-justify dark:text-white/80 text-black/80">
                         {{ $computer->description }}
                     </p>
-                    <div class="flex items-center gap-2">
+                    <div class=" space-y-2">
                         <div class="flex items-center gap-2">
                             <form action="{{ route('cart.store') }}" method="POST">
                                 @csrf
@@ -76,41 +76,43 @@
                                 </button>
                             </form>
                         </div>
-                        @auth
-                            @if (auth()->user()->role === 'admin')
-                                <div class="w-3/5 flex items-center gap-2">
-                                    @if (isset($computer->deleted_at))
-                                        <form action="{{ route('admin.computer.restore', $computer->id) }}" method="POST"
-                                            class="w-1/2">
-                                            @csrf
-                                            @method('PUT')
-                                            <button
-                                                class="w-full py-2 bg-red-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-red-400">
-                                                Восстановить
-                                            </button>
-                                        </form>
-                                    @else
-                                        <a href="{{ route('admin.computer.edit', $computer->id) }}" class="w-1/2">
-                                            <button
-                                                class="w-full py-2 bg-blue-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-blue-400">
-                                                Редактировать
-                                            </button>
-                                        </a>
-                                        <form class="w-1/2" action="{{ route('admin.computer.destroy', $computer->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                class="w-full py-2 bg-red-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-red-400">
-                                                Удалить
-                                            </button>
-                                        </form>
-                                    @endif
-                                </div>
-                            @else
-                                {{ null }}
-                            @endif
-                        @endauth
+                        <div>
+                            @auth
+                                @if (auth()->user()->role === 'admin')
+                                    <div class="w-3/5 flex items-center gap-2">
+                                        @if (isset($computer->deleted_at))
+                                            <form action="{{ route('admin.computer.restore', $computer->id) }}" method="POST"
+                                                class="w-1/2">
+                                                @csrf
+                                                @method('PUT')
+                                                <button
+                                                    class="w-full py-2 bg-red-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-red-400">
+                                                    Восстановить
+                                                </button>
+                                            </form>
+                                        @else
+                                            <a href="{{ route('admin.computer.edit', $computer->id) }}" class="w-1/2">
+                                                <button
+                                                    class="w-full py-2 bg-blue-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-blue-400">
+                                                    Редактировать
+                                                </button>
+                                            </a>
+                                            <form class="w-1/2" action="{{ route('admin.computer.destroy', $computer->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    class="w-full py-2 bg-red-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-red-400">
+                                                    Удалить
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                @else
+                                    {{ null }}
+                                @endif
+                            @endauth
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,7 +125,23 @@
                         <li class="font-mono w-full {{ isset($computer->deleted_at) ? 'text-red-300/70' : 'text-white' }}">
                             <div
                                 class="w-full flex p-4 border dark:border-white/40 border-black/40 rounded-md transition-all hover:bg-black/10 dark:hover:bg-white/10">
-                                <div class="w-1/5 text-xl text-black dark:text-white">{{ $component->type }}</div>
+                                <div class="w-1/5 text-xl text-black dark:text-white">
+                                    @if ( $component->type === 'CPU' )
+                                        Процессор
+                                    @elseif ( $component->type === 'RAM' )
+                                        ОЗУ
+                                    @elseif ( $component->type === 'GPU' )
+                                        Видеокарта
+                                    @elseif ( $component->type === 'STORAGE' )
+                                        Память
+                                    @elseif ( $component->type === 'MOTHERBOARD' )
+                                        Материнская плата
+                                    @elseif ( $component->type === 'PSU' )
+                                        Блок питания
+                                    @elseif ( $component->type === 'CASE' )
+                                        Корпус
+                                    @endif
+                                </div>
                                 <div class="line-clamp-1 text-xl dark:text-green-500 text-green-600">
                                     {{ $component->name }}
                                 </div>
