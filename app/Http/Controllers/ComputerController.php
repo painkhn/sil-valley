@@ -67,8 +67,17 @@ class ComputerController extends Controller
             abort(404);
         }
 
-        return view('product.index', compact('computer'));
+        $isFavorite = false;
+
+        if (auth()->check()) {
+            $isFavorite = auth()->user()->favorites()
+                ->where('computer_id', $computer->id)
+                ->exists();
+        }
+
+        return view('product.index', compact('computer', 'isFavorite'));
     }
+
 
     /**
      * Отображение страницы добавления компа

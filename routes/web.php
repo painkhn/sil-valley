@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\{
     ComputerController,
+    FavoriteController,
     ProfileController,
     AdminController,
     OrderController,
@@ -20,6 +21,9 @@ Route::controller(OrderController::class)->middleware('auth')->group(function ()
     Route::get('/profile/orders', 'index')->name('profile.orders');
     Route::post('/order/store', 'store')->name('order.store');
 });
+Route::controller(FavoriteController::class)->middleware('auth')->group(function () {
+    Route::post('/favorites/{computer}/store', 'store')->name('favorites.store');
+});
 
 Route::controller(ProfileController::class)->middleware('auth')->group(function () {
     Route::get('/profile', 'index')->name('profile.index');
@@ -27,7 +31,6 @@ Route::controller(ProfileController::class)->middleware('auth')->group(function 
 });
 
 Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(function () {
-
     Route::controller(AdminController::class)->group(function () {
         Route::get('/products', 'products')->name('products');
         Route::get('/orders', 'orders')->name('orders');

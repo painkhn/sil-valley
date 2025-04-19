@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Favorite;
 use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
+use App\Models\Computer;
+use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
@@ -25,12 +27,26 @@ class FavoriteController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Добавление/удаление из избранного
      */
-    public function store(StoreFavoriteRequest $request)
+    public function store(Request $request, Computer $computer)
     {
-        //
+        $user = auth()->user();
+
+        $favorite = $user->favorites()->where('computer_id', $computer->id)->first();
+
+        if ($favorite) {
+            $favorite->delete();
+            return redirect()->back()->with('success', 'Товар удалён из избранного');
+        } else {
+            Favorite::create([
+                'user_id' => $user->id,
+                'computer_id' => $computer->id,
+            ]);
+            return redirect()->back()->with('success', 'Товар добавлен в избранное');
+        }
     }
+
 
     /**
      * Display the specified resource.
