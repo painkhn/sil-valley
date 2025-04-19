@@ -125,7 +125,7 @@
                         <li class="font-mono w-full {{ isset($computer->deleted_at) ? 'text-red-300/70' : 'text-white' }}">
                             <div
                                 class="w-full flex p-4 border dark:border-white/40 border-black/40 rounded-md transition-all hover:bg-black/10 dark:hover:bg-white/10">
-                                <div class="w-1/5 text-xl text-black dark:text-white">
+                                <div class="w-1/5 text-xl text-black dark:text-white line-clamp-1">
                                     @if ( $component->type === 'CPU' )
                                         Процессор
                                     @elseif ( $component->type === 'RAM' )

@@ -2,7 +2,7 @@
 
 <a href="{{ route('computer.show', $item->id) }}" class="w-max">
     <div
-        class="p-7 {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'dark:bg-[#2a1a1a]/80' : 'dark:bg-[#1f1f1f]/80' }} dark:shadow-black shadow-black/40 relative">
+        class="p-7 max-w-[300px] {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'dark:bg-[#2a1a1a]/80' : 'dark:bg-[#1f1f1f]/80' }} dark:shadow-black shadow-black/40 relative">
 
         @if (isset($item->deleted_at))
             <div class="absolute top-2 right-2 bg-red-500/80 text-white text-xs px-2 py-1 rounded-full font-mono">
@@ -43,7 +43,23 @@
                             <li
                                 class="font-mono w-full {{ isset($item->deleted_at) ? 'text-red-300/70' : 'dark:text-white/90 text-black/60' }}">
                                 <div class="w-full flex">
-                                    <div class="w-1/2">{{ $component->type }}</div>
+                                    <div class="w-1/2 line-clamp-1">
+                                        @if ( $component->type === 'CPU' )
+                                            Процессор
+                                        @elseif ( $component->type === 'RAM' )
+                                            ОЗУ
+                                        @elseif ( $component->type === 'GPU' )
+                                            Видеокарта
+                                        @elseif ( $component->type === 'STORAGE' )
+                                            Память
+                                        @elseif ( $component->type === 'MOTHERBOARD' )
+                                            Материнская плата
+                                        @elseif ( $component->type === 'PSU' )
+                                            Блок питания
+                                        @elseif ( $component->type === 'CASE' )
+                                            Корпус
+                                        @endif
+                                    </div>
                                     <div class="w-1/2 line-clamp-1">
                                         {{ $component->name }}
                                     </div>

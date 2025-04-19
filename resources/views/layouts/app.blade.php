@@ -28,7 +28,7 @@
 </head>
 
 <body
-    class="bg-[#FDFDFC] dark:bg-gradient-to-r dark:from-[#0a0a0a] dark:to-[#1f1f1f] text-white flex min-h-screen flex-col relative">
+    class="bg-[#f5f5f5] dark:bg-gradient-to-r dark:from-[#0a0a0a] dark:to-[#1f1f1f] text-white flex min-h-screen flex-col relative">
     <!-- хедер -->
     <x-header />
 

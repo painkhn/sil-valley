@@ -74,11 +74,17 @@
 
         </div>
         <div class="w-[75%]">
-            <ul class="grid grid-cols-4 w-full gap-y-5">
-                @foreach ($pc_list as $item)
-                    <x-computer-card :item="$item" />
-                @endforeach
-            </ul>
+            @if ( empty($pc_list) )
+                <p class="opacity-80 dark:text-white text-black mt-10">
+                    Кажется, в данный момент нет доступных товаров. Перезагрузите страницу или проверьте наличие позже.
+                </p>
+            @else
+                <ul class="grid grid-cols-4 w-full gap-y-5">
+                    @foreach ($pc_list as $item)
+                        <x-computer-card :item="$item" />
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </section>
 @endsection
