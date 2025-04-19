@@ -11,7 +11,16 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'phone' => preg_replace('/\D+/', '', $this->phone),
+            'paymentMethod' => strtolower($this->paymentMethod),
+            'deliveryMethod' => strtolower($this->deliveryMethod),
+        ]);
     }
 
     /**
@@ -22,7 +31,17 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'comment' => 'nullable|string|max:1000',
+            'paymentMethod' => 'required|in:cash,card',
+            'deliveryMethod' => 'required|in:pickup,delivery',
+
+            // Delivery details (только если доставка)
+            'full_name' => 'required_if:deliveryMethod,delivery|string|max:255',
+            'city' => 'required_if:deliveryMethod,delivery|string|max:255',
+            'address' => 'required_if:deliveryMethod,delivery|string|max:255',
+            'postal_code' => 'required_if:deliveryMethod,delivery|digits:6',
+            'apartment' => 'nullable|string|max:10',
+            'phone' => 'required_if:deliveryMethod,delivery|digits_between:10,15',
         ];
     }
 }

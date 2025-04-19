@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('payment_method', ['cash', 'non-cash'])->default('cash');
             $table->text('comment')->nullable();
             $table->timestamps();
-
         });
     }
 

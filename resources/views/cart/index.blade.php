@@ -137,8 +137,18 @@
                     Перейти к оплате
                 </button>
 
-                <form id="orderForm"
+                <form id="orderForm" action="{{ route('order.store') }}" method="POST"
                     class="hidden mt-4 bg-white dark:bg-white/5 border border-black/20 dark:border-white/10 rounded-md p-4 space-y-5 transition-all">
+                    @csrf
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <textarea name="comment" id="comment"
                         class="w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"></textarea>
                     <!-- Способ оплаты -->

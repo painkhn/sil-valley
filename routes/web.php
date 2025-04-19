@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     ComputerController,
     ProfileController,
     AdminController,
+    OrderController,
     MainController
 };
 use App\Http\Controllers\CartController;
@@ -14,6 +15,10 @@ Route::controller(MainController::class)->group(function () {
     Route::get('/', 'index')->name('index');
 });
 
+
+Route::controller(OrderController::class)->middleware('auth')->group(function () {
+    Route::post('/order/store', 'store')->name('order.store');
+});
 
 Route::controller(ProfileController::class)->middleware('auth')->group(function () {
     Route::get('/profile', 'index')->name('profile.index');
