@@ -132,11 +132,81 @@
                         <span>{{ number_format($finalPrice, 0, ',', ' ') }}</span> ₽
                     </p>
                 </div>
-                <button
+                <button onclick="openOrderInput()"
                     class="w-full py-2 bg-green-500 font-semibold dark:text-black/90 text-white rounded-md transition-all hover:bg-green-600 dark:hover:bg-green-400">
                     Перейти к оплате
                 </button>
+
+                <form id="orderForm"
+                    class="hidden mt-4 bg-white dark:bg-white/5 border border-black/20 dark:border-white/10 rounded-md p-4 space-y-5 transition-all">
+
+                    <!-- Способ оплаты -->
+                    <div>
+                        <label for="paymentMethod" class="block mb-2 text-black dark:text-white font-semibold">Способ
+                            оплаты:</label>
+                        <select id="paymentMethod" name="paymentMethod"
+                            class="w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all">
+                            <option value="card">Картой при получении</option>
+                            <option value="cash">Наличными при получении</option>
+                        </select>
+                    </div>
+
+                    <!-- Тип доставки -->
+                    <div>
+                        <label for="deliveryMethod" class="block mb-2 text-black dark:text-white font-semibold">Тип
+                            доставки:</label>
+                        <select id="deliveryMethod" name="deliveryMethod" onchange="toggleDeliveryDetails()"
+                            class="w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all">
+                            <option value="pickup">Самовывоз</option>
+                            <option value="delivery">Доставка</option>
+                        </select>
+                    </div>
+
+                    <!-- Детали доставки -->
+                    <div id="deliveryDetails" class="hidden space-y-4">
+                        <div>
+                            <label for="fullname" class="block mb-1 text-black dark:text-white">ФИО:</label>
+                            <input type="text" id="fullname" name="fullname"
+                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                placeholder="Введите ваше имя">
+                        </div>
+                        <div>
+                            <label for="address" class="block mb-1 text-black dark:text-white">Адрес:</label>
+                            <input type="text" id="address" name="address"
+                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                placeholder="Улица, дом, квартира">
+                        </div>
+                        <div>
+                            <label for="phone" class="block mb-1 text-black dark:text-white">Телефон:</label>
+                            <input type="text" id="phone" name="phone"
+                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                placeholder="Контактный номер">
+                        </div>
+                    </div>
+
+                    <!-- Кнопка отправки -->
+                    <button type="submit"
+                        class="w-full py-2 bg-green-500 font-semibold dark:text-black/90 text-white rounded-md transition-all hover:bg-green-600 dark:hover:bg-green-400">
+                        Оформить заказ
+                    </button>
+                </form>
             </div>
         @endif
     </section>
+    <script>
+        const openOrderInput = () => {
+            const form = document.getElementById('orderForm');
+            form.classList.remove('hidden');
+        }
+
+        const toggleDeliveryDetails = () => {
+            const deliverySelect = document.getElementById('deliveryMethod');
+            const deliveryDetails = document.getElementById('deliveryDetails');
+            if (deliverySelect.value === 'delivery') {
+                deliveryDetails.classList.remove('hidden');
+            } else {
+                deliveryDetails.classList.add('hidden');
+            }
+        }
+    </script>
 @endsection
