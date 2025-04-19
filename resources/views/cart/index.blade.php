@@ -139,7 +139,8 @@
 
                 <form id="orderForm"
                     class="hidden mt-4 bg-white dark:bg-white/5 border border-black/20 dark:border-white/10 rounded-md p-4 space-y-5 transition-all">
-
+                    <textarea name="comment" id="comment"
+                        class="w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"></textarea>
                     <!-- Способ оплаты -->
                     <div>
                         <label for="paymentMethod" class="block mb-2 text-black dark:text-white font-semibold">Способ
@@ -164,23 +165,54 @@
 
                     <!-- Детали доставки -->
                     <div id="deliveryDetails" class="hidden space-y-4">
+                        <!-- ФИО -->
                         <div>
-                            <label for="fullname" class="block mb-1 text-black dark:text-white">ФИО:</label>
-                            <input type="text" id="fullname" name="fullname"
+                            <label for="full_name" class="block mb-1 text-black dark:text-white">ФИО:</label>
+                            <input type="text" id="full_name" name="full_name"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
-                                placeholder="Введите ваше имя">
+                                placeholder="Введите ваше полное имя">
                         </div>
+
+                        <!-- Город -->
+                        <div>
+                            <label for="city" class="block mb-1 text-black dark:text-white">Город:</label>
+                            <input type="text" id="city" name="city"
+                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                placeholder="Ваш город">
+                        </div>
+
+                        <!-- Адрес -->
                         <div>
                             <label for="address" class="block mb-1 text-black dark:text-white">Адрес:</label>
                             <input type="text" id="address" name="address"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
-                                placeholder="Улица, дом, квартира">
+                                placeholder="Улица, дом">
                         </div>
+
+                        <!-- Квартира (необязательная) -->
+                        <div>
+                            <label for="apartment" class="block mb-1 text-black dark:text-white">Квартира (если
+                                есть):</label>
+                            <input type="text" id="apartment" name="apartment"
+                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                placeholder="Квартира, подъезд и т.д.">
+                        </div>
+
+                        <!-- Почтовый индекс -->
+                        <div>
+                            <label for="postal_code" class="block mb-1 text-black dark:text-white">Почтовый
+                                индекс:</label>
+                            <input type="text" id="postal_code" name="postal_code" maxlength="6"
+                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                placeholder="Например, 123456">
+                        </div>
+
+                        <!-- Телефон -->
                         <div>
                             <label for="phone" class="block mb-1 text-black dark:text-white">Телефон:</label>
-                            <input type="text" id="phone" name="phone"
+                            <input type="tel" id="phone" name="phone"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
-                                placeholder="Контактный номер">
+                                placeholder="+7 (___) ___-__-__">
                         </div>
                     </div>
 
@@ -193,7 +225,13 @@
             </div>
         @endif
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $("[type='tel']").mask('+7 (999) 999-99-99');
+        });
+
         const openOrderInput = () => {
             const form = document.getElementById('orderForm');
             form.classList.remove('hidden');
