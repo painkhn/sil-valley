@@ -22,6 +22,7 @@ Route::controller(OrderController::class)->middleware('auth')->group(function ()
     Route::post('/order/store', 'store')->name('order.store');
 });
 Route::controller(FavoriteController::class)->middleware('auth')->group(function () {
+    Route::get('/favorites', 'show')->name('favorites.show');
     Route::post('/favorites/{computer}/store', 'store')->name('favorites.store');
 });
 

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
 use App\Models\Computer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{DB, Auth};
 
 class FavoriteController extends Controller
 {
@@ -47,13 +48,13 @@ class FavoriteController extends Controller
         }
     }
 
-
     /**
-     * Display the specified resource.
+     * Отображение страницы избранных
      */
-    public function show(Favorite $favorite)
+    public function show()
     {
-        //
+        $favorite = Favorite::with('computer')->where('user_id', Auth::id())->get();
+        return view('favourite.index', compact('favorite'));
     }
 
     /**
