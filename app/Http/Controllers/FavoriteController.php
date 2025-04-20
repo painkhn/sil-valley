@@ -53,7 +53,9 @@ class FavoriteController extends Controller
      */
     public function show()
     {
-        $favorite = Favorite::with('computer')->where('user_id', Auth::id())->get();
+        $favorite = Favorite::whereHas('computer', function ($query) {
+            $query->whereNull('deleted_at');
+        })->with('computer')->where('user_id', Auth::id())->get();
         return view('favourite.index', compact('favorite'));
     }
 
