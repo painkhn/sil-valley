@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Comparison;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,18 +11,18 @@ class StoreComparisonRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Правила валидации
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'computer' => ['required', 'exists:computers,id'],
         ];
     }
 }

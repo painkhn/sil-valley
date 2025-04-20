@@ -29,4 +29,13 @@ class Comparison extends Model
     {
         return $this->belongsToMany(Computer::class, 'comparison_items');
     }
+
+    /**
+     * Связь с компьютерами через comparison_items
+     *
+     */
+    public function items()
+    {
+        return $this->hasMany(ComparisonItem::class);
+    }
 }

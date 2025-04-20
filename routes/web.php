@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
+    ComparisonController,
     ComputerController,
     FavoriteController,
     ProfileController,
@@ -24,6 +25,10 @@ Route::controller(OrderController::class)->middleware('auth')->group(function ()
 Route::controller(FavoriteController::class)->middleware('auth')->group(function () {
     Route::get('/favorites', 'show')->name('favorites.show');
     Route::post('/favorites/{computer}/store', 'store')->name('favorites.store');
+});
+Route::controller(ComparisonController::class)->middleware('auth')->group(function () {
+    Route::get('/comparison', 'show')->name('comparisons.show');
+    Route::post('/comparison/store', 'store')->name('comparison.store');
 });
 
 Route::controller(ProfileController::class)->middleware('auth')->group(function () {

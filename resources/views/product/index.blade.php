@@ -46,15 +46,21 @@
                                     В корзину
                                 </button>
                             </form>
-                            <button
-                                class="px-4 py-2 bg-green-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-green-400">
-                                <svg class="w-6 h-6 transition-all dark:text-black text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                    viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
-                                </svg>
-                            </button>
+                            <form action="{{ route('comparison.store') }}" method="POST">
+                                @csrf
+                                <input type="text" name="computer" id="computer" value="{{ $computer->id }}"
+                                    class="hidden">
+                                <button
+                                    class="px-4 py-2 bg-green-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-green-400">
+                                    <svg class="w-6 h-6 transition-all dark:text-black text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
+                                    </svg>
+                                </button>
+                            </form>
                             <form method="POST" action="{{ route('favorites.store', $computer->id) }}">
                                 @csrf
                                 <button
@@ -126,19 +132,19 @@
                             <div
                                 class="w-full flex p-4 border dark:border-white/40 border-black/40 rounded-md transition-all hover:bg-black/10 dark:hover:bg-white/10">
                                 <div class="w-1/5 text-xl text-black dark:text-white line-clamp-1">
-                                    @if ( $component->type === 'CPU' )
+                                    @if ($component->type === 'CPU')
                                         Процессор
-                                    @elseif ( $component->type === 'RAM' )
+                                    @elseif ($component->type === 'RAM')
                                         ОЗУ
-                                    @elseif ( $component->type === 'GPU' )
+                                    @elseif ($component->type === 'GPU')
                                         Видеокарта
-                                    @elseif ( $component->type === 'STORAGE' )
+                                    @elseif ($component->type === 'STORAGE')
                                         Память
-                                    @elseif ( $component->type === 'MOTHERBOARD' )
+                                    @elseif ($component->type === 'MOTHERBOARD')
                                         Материнская плата
-                                    @elseif ( $component->type === 'PSU' )
+                                    @elseif ($component->type === 'PSU')
                                         Блок питания
-                                    @elseif ( $component->type === 'CASE' )
+                                    @elseif ($component->type === 'CASE')
                                         Корпус
                                     @endif
                                 </div>
