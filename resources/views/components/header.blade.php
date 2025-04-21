@@ -3,7 +3,172 @@
     <div
         class="min-h-28 grid grid-cols-2 max-[1370px]:grid-cols-1 max-[1370px]:py-5 max-[1370px]:space-y-4 items-center px-10">
         <div class="justify-self-start flex items-center gap-8">
-            <!-- лого -->
+            <!-- дравер -->
+            <button data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example" class="min-[1000px]:hidden">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10.83 5a3.001 3.001 0 0 0-5.66 0H4a1 1 0 1 0 0 2h1.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-9.17ZM4 11h9.17a3.001 3.001 0 0 1 5.66 0H20a1 1 0 1 1 0 2h-1.17a3.001 3.001 0 0 1-5.66 0H4a1 1 0 1 1 0-2Zm1.17 6H4a1 1 0 1 0 0 2h1.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-9.17a3.001 3.001 0 0 0-5.66 0Z"/>
+                </svg>
+            </button>
+            <!-- drawer component -->
+            <div id="drawer-example" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-[#111111] border-r dark:border-white" tabindex="-1" aria-labelledby="drawer-label">
+                <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>Info</h5>
+                <button type="button" data-drawer-hide="drawer-example" aria-controls="drawer-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close menu</span>
+                </button>
+                    
+                <ul>
+                    <li>
+                        <a href={{ route('shop.index') }}>
+                            <button
+                                class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
+                                Магазин
+                            </button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <button
+                                class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
+                                О нас
+                            </button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <button
+                                class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
+                                Контакты
+                            </button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <button
+                                class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
+                                FaQ
+                            </button>
+                        </a>
+                    </li>
+                    <div class="p-4 border dark:border-white/50 rounded-md my-4">
+                        @auth
+                            <h2 class="text-black dark:text-white">Панель администратора</h2>
+                            @if (auth()->user()->role === 'admin')
+                                <li>
+                                    <a href="{{ route('admin.products') }}"
+                                        class="flex items-center gap-1 py-2 hover:bg-gray-100 text-black dark:hover:bg-white/10 dark:hover:text-white">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" 
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M12 15v5m-3 0h6M4 11h16M5 15h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1Z" />
+                                        </svg>
+                                        Товар
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.orders') }}"
+                                        class="flex items-center gap-1 py-2 hover:bg-gray-100 text-black dark:hover:bg-white/10 dark:hover:text-white">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M12 6h8m-8 6h8m-8 6h8M4 16a2 2 0 1 1 3.321 1.5L4 20h5M4 5l2-1v6m-2 0h4" />
+                                        </svg>
+                                        Заказы
+                                    </a>
+                                </li>
+                            @endif
+                        @endauth
+                    </div>
+                    <div class="flex justify-between">
+                        <li>
+                            <button
+                                onclick="
+                                    const html = document.documentElement;
+                                    const isDark = html.classList.toggle('dark');
+                                    localStorage.theme = isDark ? 'dark' : 'light';
+                                    document.getElementById('theme-icon').setAttribute('data-theme', isDark ? 'dark' : 'light');
+                                "
+                                class="flex items-center justify-center px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold"
+                                aria-label="Сменить тему">
+                                <svg id="theme-icon" data-theme="light"
+                                    class="w-6 h-6 flex items-center justify-center text-center relative dark:text-white text-black"
+                                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <!-- Солнце -->
+                                    <g data-theme="light">
+                                        <circle cx="12" cy="12" r="5"></circle>
+                                        <path
+                                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                                    </g>
+                                    <!-- Луна -->
+                                    <g data-theme="dark" style="display: none;">
+                                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </li>
+                        @auth
+                            <li>
+                                <a href={{ route('favorites.show') }}>
+                                    <button
+                                        class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
+                                        </svg>
+                                    </button>
+                                </a>
+                            </li>
+                            <li>
+                                <a href={{ route('cart.show') }}>
+                                    <button
+                                        class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd"
+                                                d="M4 4a1 1 0 0 1 1-1h1.5a1 1 0 0 1 .979.796L7.939 6H19a1 1 0 0 1 .979 1.204l-1.25 6a1 1 0 0 1-.979.796H9.605l.208 1H17a3 3 0 1 1-2.83 2h-2.34a3 3 0 1 1-4.009-1.76L5.686 5H5a1 1 0 0 1-1-1Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </a>
+                            </li>
+                            <li>
+                                <a href={{ route('comparisons.show') }}>
+                                    <button
+                                        class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 font-semibold">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                            viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
+                                        </svg>
+                                    </button>
+                                </a>
+                            </li>
+                        @else
+                            {{ null }}
+                        @endauth
+                    </div>
+                </ul>
+                
+                <!-- <div class="grid grid-cols-2 gap-4">
+                    <a href="#" class="px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Learn more</a>
+                    <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get access <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </a>
+                </div> -->
+            </div>
             <a href={{ route('index') }} class="transition-all hover:opacity-80">
                 <img src="/img/logo.svg" alt="" class="w-[250px] hidden dark:block">
                 <img src="/img/logo-forLight-2.svg" alt="" class="w-[250px] dark:hidden">
@@ -39,7 +204,8 @@
                 </button>
             </div>
         </div>
-        <nav class="justify-self-end max-[1370px]:justify-self-start">
+        <!-- навигация -->
+        <nav class="justify-self-end max-[1370px]:justify-self-start max-[1000px]:hidden">
             <ul class="flex items-center flex-wrap gap-2">
                 @auth
                     @if (auth()->user()->role === 'admin')

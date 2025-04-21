@@ -112,7 +112,7 @@
     @auth
         <section class="max-w-6xl w-full mx-auto text-center pb-10">
             <a href={{ route('shop.index') }}
-                class="inline text-black dark:text-white text-center text-2xl font-black transition-all hover:text-green-500">Чего вы ждёте? Переходите в
+                class="inline text-black dark:text-white text-center text-2xl font-black transition-all hover:text-green-500 dark:hover:text-green-500">Чего вы ждёте? Переходите в
                 магазин и выбирайте ПК своей мечты!</a>
         </section>
     @else

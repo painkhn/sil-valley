@@ -2,25 +2,25 @@
 
 @section('content')
     <div class="container mx-auto py-6">
-        <h1 class="text-2xl font-bold mb-4">Сравнение компьютеров</h1>
+        <h1 class="text-2xl font-semibold mb-4 text-center text-black dark:text-white">Сравнение компьютеров</h1>
 
-        <div class="grid grid-cols-3 gap-4">
+        <!-- <div class="grid grid-cols-3 gap-4">
             <div></div>
             @foreach ($computers as $computer)
                 <div class="text-center font-semibold text-xl">{{ $computer->name }}</div>
             @endforeach
-        </div>
+        </div> -->
 
-        <table class="table-auto w-full mt-6 border">
-            <thead>
+        <table class="min-w-full divide-y shadow-sm rounded-lg overflow-hidden">
+            <thead class="bg-gray-50 dark:bg-white/20">
                 <tr>
-                    <th class="p-2 border">Характеристика</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b border-gray-200 dark:border-white/20">Характеристика</th>
                     @foreach ($computers as $computer)
-                        <th class="p-2 border text-center">{{ $computer->name }}</th>
+                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b border-gray-200 dark:border-white/20">{{ $computer->name }}</th>
                     @endforeach
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-white dark:bg-black divide-y divide-gray-200">
                 @php
                     $allParams = collect();
 
@@ -36,8 +36,8 @@
                 @endphp
 
                 @foreach ($uniqueParams as $paramName)
-                    <tr>
-                        <td class="p-2 border font-medium">{{ $paramName }}</td>
+                    <tr class="hover:bg-gray-50 transition-colors duration-150 hover:bg-white/10">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white/90 border-b border-gray-200 dark:border-white/20">{{ $paramName }}</td>
 
                         @php
                             $values = [];
@@ -70,10 +70,10 @@
                         @endphp
 
                         @foreach ($values as $index => $val)
-                            <td
-                                class="p-2 border text-center
-                                @if ($highlight[$index] === 'green') text-green-600 font-bold
-                                @elseif($highlight[$index] === 'red') text-red-600 font-bold @endif
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center border-b border-gray-200 dark:border-white/20
+                                @if ($highlight[$index] === 'green') text-green-600 font-bold bg-green-500/10
+                                @elseif($highlight[$index] === 'red') text-red-600 font-bold bg-red-500/10
+                                @else text-gray-500 dark:text-white/60 @endif
                             ">
                                 {{ $val ?? '—' }}
                             </td>
