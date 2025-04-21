@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="flex justify-between">
-        <div class="w-[20%] p-5 border-2 border-dashed border-black/50 dark:border-white/50 rounded-md">
+    <section class="flex justify-between gap-10 max-[800px]:flex-col max-[800px]:items-center">
+        <div class="max-w-[380px] max-[800px]:max-w-[500px] w-full p-5 border-2 border-dashed border-black/50 dark:border-white/50 rounded-md">
             <form class="space-y-6" method="GET">
                 <div class="space-y-2">
                     <label class="font-semibold text-black/80 dark:text-white/80">Название ПК</label>
@@ -79,7 +79,7 @@
                     Кажется, в данный момент нет доступных товаров. Перезагрузите страницу или проверьте наличие позже.
                 </p>
             @else
-                <ul class="grid grid-cols-4 w-full gap-y-5">
+                <ul class="flex gap-10 flex-wrap max-[800px]:justify-center max-[800px]:gap-x-5 w-full gap-y-5">
                     @foreach ($pc_list as $item)
                         <x-computer-card :item="$item" />
                     @endforeach

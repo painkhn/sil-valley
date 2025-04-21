@@ -2,7 +2,7 @@
 
 <a href="{{ route('computer.show', $item->id) }}" class="w-max">
     <div
-        class="p-7 max-w-[300px] {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'dark:bg-[#2a1a1a]/80' : 'dark:bg-[#1f1f1f]/80' }} dark:shadow-black shadow-black/40 relative">
+        class="p-7 max-w-[300px] max-[1100px]:max-w-full {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'dark:bg-[#2a1a1a]/80' : 'dark:bg-[#1f1f1f]/80' }} dark:shadow-black shadow-black/40 relative">
 
         @if (isset($item->deleted_at))
             <div class="absolute top-2 right-2 bg-red-500/80 text-white text-xs px-2 py-1 rounded-full font-mono">
@@ -12,7 +12,7 @@
 
         @if (isset($item->image))
             <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name ?? 'Компьютер' }}"
-                class="h-[250px] w-full block mx-auto rounded-md {{ isset($item->deleted_at) ? 'opacity-50' : '' }}">
+                class="h-[250px] max-[1100px]:h-auto max-[1100px]:w-[400px] max-[800px]:w-[500px] w-full block mx-auto rounded-md transition-all {{ isset($item->deleted_at) ? 'opacity-50' : '' }}">
         @else
             <div
                 class="max-w-[250px] h-[150px] w-full mx-auto rounded-md {{ isset($item->deleted_at) ? 'bg-gray-900' : 'bg-gray-800' }} flex items-center justify-center">

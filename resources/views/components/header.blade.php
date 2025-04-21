@@ -60,7 +60,7 @@
                             @if (auth()->user()->role === 'admin')
                                 <li>
                                     <a href="{{ route('admin.products') }}"
-                                        class="flex items-center gap-1 py-2 hover:bg-gray-100 text-black dark:hover:bg-white/10 dark:hover:text-white">
+                                        class="flex items-center gap-1 py-2 text-black dark:text-white">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" 
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="none" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.orders') }}"
-                                        class="flex items-center gap-1 py-2 hover:bg-gray-100 text-black dark:hover:bg-white/10 dark:hover:text-white">
+                                        class="flex items-center gap-1 py-2 text-black dark:text-white">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="none" viewBox="0 0 24 24">
@@ -159,6 +159,14 @@
                             {{ null }}
                         @endauth
                     </div>
+                    <li class="mt-4">
+                        <!-- поисковая строка (для поиска нажать enter) -->
+                        <form class="space-y-6 max-w-[400px] w-full" method="GET" action={{ route('shop.index') }}>
+                            <input type="text" name="title" value="{{ request('title') }}"
+                                class="w-full focus:ring-green-700 transition-all h-[52px] max-w-[400px] text-black dark:text-white dark:bg-white/5 border-0 outline-none dark:focus:ring-0 focus:ring-2 dark:ring-0 ring-2 ring-green-600 focus:bg-white/10 rounded-xl px-4 pr-12"
+                                placeholder="Поиск...">
+                        </form>
+                    </li>
                 </ul>
                 
                 <!-- <div class="grid grid-cols-2 gap-4">
@@ -169,13 +177,14 @@
                     </a>
                 </div> -->
             </div>
+            <!-- логотип -->
             <a href={{ route('index') }} class="transition-all hover:opacity-80">
                 <img src="/img/logo.svg" alt="" class="w-[250px] hidden dark:block">
                 <img src="/img/logo-forLight-2.svg" alt="" class="w-[250px] dark:hidden">
             </a>
-            <span class="h-[52px] w-1 border-r dark:border-white border-black"></span>
+            <span class="h-[52px] w-1 border-r dark:border-white border-black max-[1000px]:hidden"></span>
             <!-- поисковая строка -->
-            <div class="relative w-[400px] flex items-center">
+            <div class="relative w-[400px] flex items-center max-[1000px]:hidden">
                 <!-- кнопка для отображения поисковой строки -->
                 <button onclick="openSearchInput()"
                     class="p-3 rounded-full hover:dark:bg-white/10 transition-all absolute left-0 top-1/2 -translate-y-1/2 searchBtn">

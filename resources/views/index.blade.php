@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="w-1/3 mx-auto text-center space-y-8 pt-10">
+    <section class="max-w-[550px] w-full mx-auto text-center space-y-8 pt-10">
         <div>
             <img src="/img/logo.svg" alt="" class="hidden dark:inline w-80">
             <img src="/img/logo-forLight-2.svg" alt="" class="w-80 inline dark:hidden">
@@ -12,7 +12,7 @@
     <!-- почему выбирают нас -->
     <section class="max-w-6xl w-full space-y-10 mx-auto">
         <h2 class="text-center text-2xl font-semibold dark:text-white text-black">Почему выбирают нас?</h2>
-        <ul class="grid grid-cols-3 max-[768px]:grid-cols-2 gap-10 text-black dark:text-white">
+        <ul class="grid grid-cols-3 max-[768px]:grid-cols-2 max-[500px]:grid-cols-1 gap-10 text-black dark:text-white">
             <li>
                 <div class="w-full p-5 min-h-[130px] border-2 border-dashed dark:border-green-400 border-green-600 rounded-md space-y-2">
                     <div class="flex items-center gap-5 justify-center">
@@ -77,7 +77,7 @@
     <!-- инфо блок -->
     <section class="w-full max-w-6xl mx-auto text-black dark:text-white" id="second-main-section">
         <div class="flex max-[875px]:flex-col w-full gap-10">
-            <div class="p-4 border border-white w-1/2 max-[875px]:mx-auto">
+            <div class="p-4 border border-white w-1/2 max-[875px]:mx-auto max-[500px]:w-full">
                 <img src="/img/zxczxxc.jpg" alt="" class="rounded-md">
             </div>
             <div
