@@ -203,7 +203,6 @@ class ComputerController extends Controller
         return redirect()->back()->with('success', 'Информация о компьютере успешно обновлена!');
     }
 
-
     /**
      * Удаление компьютера
      */

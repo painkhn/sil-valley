@@ -17,7 +17,8 @@ class ComponentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word,
+            'type' => $this->faker->randomElement(['CPU', 'RAM', 'GPU', 'STORAGE', 'MOTHERBOARD', 'PSU', 'CASE']),
         ];
     }
 }
