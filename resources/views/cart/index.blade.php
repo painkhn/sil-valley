@@ -179,6 +179,7 @@
                         <div>
                             <label for="full_name" class="block mb-1 text-black dark:text-white">ФИО:</label>
                             <input type="text" id="full_name" name="full_name"
+                                value="{{ old('full_name', $deliveryDetails->full_name ?? '') }}"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
                                 placeholder="Введите ваше полное имя">
                         </div>
@@ -187,6 +188,7 @@
                         <div>
                             <label for="city" class="block mb-1 text-black dark:text-white">Город:</label>
                             <input type="text" id="city" name="city"
+                                value="{{ old('city', $deliveryDetails->city ?? '') }}"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
                                 placeholder="Ваш город">
                         </div>
@@ -195,6 +197,7 @@
                         <div>
                             <label for="address" class="block mb-1 text-black dark:text-white">Адрес:</label>
                             <input type="text" id="address" name="address"
+                                value="{{ old('address', $deliveryDetails->address ?? '') }}"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
                                 placeholder="Улица, дом">
                         </div>
@@ -204,6 +207,7 @@
                             <label for="apartment" class="block mb-1 text-black dark:text-white">Квартира (если
                                 есть):</label>
                             <input type="text" id="apartment" name="apartment"
+                                value="{{ old('apartment', $deliveryDetails->apartment ?? '') }}"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
                                 placeholder="Квартира, подъезд и т.д.">
                         </div>
@@ -213,6 +217,7 @@
                             <label for="postal_code" class="block mb-1 text-black dark:text-white">Почтовый
                                 индекс:</label>
                             <input type="text" id="postal_code" name="postal_code" maxlength="6"
+                                value="{{ old('postal_code', $deliveryDetails->postal_code ?? '') }}"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
                                 placeholder="Например, 123456">
                         </div>
@@ -221,6 +226,7 @@
                         <div>
                             <label for="phone" class="block mb-1 text-black dark:text-white">Телефон:</label>
                             <input type="tel" id="phone" name="phone"
+                                value="{{ old('phone', $deliveryDetails->phone ?? '') }}"
                                 class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
                                 placeholder="+7 (___) ___-__-__">
                         </div>

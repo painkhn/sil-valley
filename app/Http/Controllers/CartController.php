@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Cart, CartItem};
+use App\Models\{Cart, CartItem, OrderDeliveryDetail};
 use App\Http\Requests\Cart\StoreCartItemRequest;
 use App\Models\Computer;
 use Illuminate\Support\Facades\Auth;
@@ -66,13 +66,18 @@ class CartController extends Controller
         $finalPrice = $totalPrice - $discountAmount;
         $discountPercent = $totalPrice > 0 ? round(($discountAmount / $totalPrice) * 100) : 0;
 
+        $deliveryDetails = OrderDeliveryDetail::whereHas('order', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->latest()->first();
+
         return view('cart.index', compact(
             'computers',
             'totalQuantity',
             'totalPrice',
             'discountAmount',
             'discountPercent',
-            'finalPrice'
+            'finalPrice',
+            'deliveryDetails'
         ));
     }
 
