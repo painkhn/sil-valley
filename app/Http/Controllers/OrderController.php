@@ -18,7 +18,6 @@ class OrderController extends Controller
         return view('profile.orders', compact('orders'));
     }
 
-
     /**
      * Создание заказа
      */

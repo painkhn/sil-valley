@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\{DB, Auth};
 class ComparisonController extends Controller
 {
     /**
-     * Добавлени е для сравнения
+     * Добавление для сравнения
      */
     public function store(StoreComparisonRequest $request)
     {

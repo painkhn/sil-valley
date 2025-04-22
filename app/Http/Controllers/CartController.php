@@ -37,8 +37,7 @@ class CartController extends Controller
     }
 
     /**
-     *  Отображение страницы корзины
-     *
+     * Отображение страницы корзины
      */
     public function show()
     {
@@ -83,7 +82,6 @@ class CartController extends Controller
 
     /*
     * Получаем информацию о товаре в виде массива
-    *
     */
     private function processCartItem($item): ?object
     {

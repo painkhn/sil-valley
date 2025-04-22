@@ -55,8 +55,12 @@ class AdminController extends Controller
         return view('admin.index', compact('pc_list', 'maxPrice'));
     }
 
+    /*
+    * Отображение страницы заказов
+    */
     public function orders()
     {
+        // Получаем список заказов
         $orders = Order::with(['items.computer', 'deliveryDetail'])->latest()->paginate(10);
 
         return view('admin.orders', compact('orders'));

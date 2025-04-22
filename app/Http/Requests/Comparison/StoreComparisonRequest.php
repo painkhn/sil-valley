@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreComparisonRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Можно ли выполнить этот запрос
      */
     public function authorize(): bool
     {

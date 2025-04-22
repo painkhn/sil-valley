@@ -11,7 +11,6 @@ class IsAdmin
 {
     /**
      * Проверка запроса
-     *
      */
     public function handle(Request $request, Closure $next): Response
     {

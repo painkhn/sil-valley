@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreComputerRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Можно ли выполнить этот запрос
      */
     public function authorize(): bool
     {
@@ -15,7 +15,7 @@ class StoreComputerRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Правила валидации
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
@@ -65,45 +65,4 @@ class StoreComputerRequest extends FormRequest
             'components.case.form_factor' => 'nullable|string|max:255',
         ];
     }
-
-    // /**
-    //  * Get custom attributes for validator errors.
-    //  *
-    //  * @return array
-    //  */
-    // public function attributes()
-    // {
-    //     return [
-    //         'components.cpu.name' => 'название процессора',
-    //         'components.cpu.cores' => 'ядра процессора',
-    //         'components.cpu.threads' => 'потоки процессора',
-    //         'components.cpu.base_clock' => 'базовая частота процессора',
-
-    //         'components.ram.name' => 'название оперативной памяти',
-    //         'components.ram.capacity' => 'объем оперативной памяти',
-    //         'components.ram.speed' => 'частота оперативной памяти',
-
-    //         'components.gpu.name' => 'название видеокарты',
-    //         'components.gpu.memory' => 'объем памяти видеокарты',
-    //         'components.gpu.clock' => 'частота видеокарты',
-
-    //         'components.storage.name' => 'название жесткого диска',
-    //         'components.storage.capacity' => 'объем жесткого диска',
-    //         'components.storage.type' => 'тип жесткого диска',
-
-    //         'components.motherboard.name' => 'название материнской платы',
-    //         'components.motherboard.chipset' => 'чипсет материнской платы',
-    //         'components.motherboard.form_factor' => 'форм-фактор материнской платы',
-
-    //         'components.psu.name' => 'название блока питания',
-    //         'components.psu.wattage' => 'мощность блока питания',
-    //         'components.psu.efficiency' => 'эффективность блока питания',
-
-    //         'components.case.name' => 'название корпуса',
-    //         'components.case.form_factor' => 'форм-фактор корпуса',
-
-    //         'components.cooler.name' => 'название системы охлаждения',
-    //         'components.cooler.type' => 'тип системы охлаждения',
-    //     ];
-    // }
 }
