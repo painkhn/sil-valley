@@ -1,86 +1,149 @@
 @extends('layouts.app')
 
+@php
+    $typeTranslations = [
+        'CPU' => 'Процессор',
+        'RAM' => 'Оперативная память',
+        'GPU' => 'Видеокарта',
+        'STORAGE' => 'Накопитель',
+        'MOTHERBOARD' => 'Материнская плата',
+        'PSU' => 'Блок питания',
+        'CASE' => 'Корпус',
+    ];
+
+    $parameterTranslations = [
+        'capacity' => 'Емкость',
+        'base_clock' => 'Базовая частота',
+        'cores' => 'Ядра',
+        'threads' => 'Потоки',
+        'speed' => 'Скорость',
+        'clock' => 'Частота',
+        'memory' => 'Память',
+        'type' => 'Тип',
+        'chipset' => 'Чипсет',
+        'form_factor' => 'Форм-фактор',
+        'efficiency' => 'Эффективность',
+        'wattage' => 'Мощность',
+    ];
+@endphp
+
 @section('content')
     <div class="container mx-auto py-6">
         <h1 class="text-2xl font-semibold mb-4 text-center text-black dark:text-white">Сравнение компьютеров</h1>
 
-        <!-- <div class="grid grid-cols-3 gap-4">
-            <div></div>
+        <div class="flex justify-center gap-8 mb-10">
             @foreach ($computers as $computer)
-                <div class="text-center font-semibold text-xl">{{ $computer->name }}</div>
+                <div class="text-center">
+                    <img src="{{ asset('storage/' . $computer->image) }}" class="w-[150px] mx-auto rounded-lg shadow">
+                    <div class="mt-2 text-lg font-bold text-black dark:text-white">{{ $computer->name }}</div>
+                    <div class="text-gray-600 dark:text-gray-300">{{ number_format($computer->price, 0, ',', ' ') }} ₽</div>
+                </div>
             @endforeach
-        </div> -->
+        </div>
 
-        <table class="min-w-full divide-y shadow-sm rounded-lg overflow-hidden">
-            <thead class="bg-gray-50 dark:bg-white/20">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b border-gray-200 dark:border-white/20">Характеристика</th>
-                    @foreach ($computers as $computer)
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b border-gray-200 dark:border-white/20">{{ $computer->name }}</th>
-                    @endforeach
-                </tr>
-            </thead>
-            <tbody class="bg-white dark:bg-black divide-y divide-gray-200">
-                @php
-                    $allParams = collect();
+        @php
+            $groupedParams = [];
 
-                    foreach ($computers as $computer) {
-                        foreach ($computer->components as $component) {
-                            foreach ($component->parameters as $paramValue) {
-                                $allParams->push($paramValue->parameter->name);
-                            }
+            foreach ($computers as $computer) {
+                foreach ($computer->components as $component) {
+                    foreach ($component->parameters as $paramValue) {
+                        $type = $component->type;
+                        $name = $paramValue->parameter->name;
+
+                        if (!isset($groupedParams[$type])) {
+                            $groupedParams[$type] = [];
                         }
+
+                        $groupedParams[$type][] = $name;
                     }
+                }
+            }
 
-                    $uniqueParams = $allParams->unique()->sort()->values();
-                @endphp
+            foreach ($groupedParams as $type => $params) {
+                $groupedParams[$type] = collect($params)->unique()->sort()->values();
+            }
+        @endphp
 
-                @foreach ($uniqueParams as $paramName)
-                    <tr class="hover:bg-gray-50 transition-colors duration-150 hover:bg-white/10">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white/90 border-b border-gray-200 dark:border-white/20">{{ $paramName }}</td>
+        @foreach ($groupedParams as $type => $params)
+            <h2 class="text-xl font-bold mt-10 mb-2 text-black dark:text-white">
+                Тип компонента: {{ $typeTranslations[$type] ?? $type }}
+            </h2>
 
-                        @php
-                            $values = [];
-
-                            foreach ($computers as $computer) {
-                                $found = null;
-                                foreach ($computer->components as $component) {
-                                    foreach ($component->parameters as $paramValue) {
-                                        if ($paramValue->parameter->name === $paramName) {
-                                            $found = $paramValue->value;
-                                            break 2;
-                                        }
-                                    }
-                                }
-                                $values[] = $found;
-                            }
-
-                            // Проверка на числовые значения
-                            $isNumeric = is_numeric($values[0]) && is_numeric($values[1]);
-
-                            $highlight = [];
-                            if ($isNumeric) {
-                                $highlight = [
-                                    $values[0] > $values[1] ? 'green' : ($values[0] < $values[1] ? 'red' : 'neutral'),
-                                    $values[1] > $values[0] ? 'green' : ($values[1] < $values[0] ? 'red' : 'neutral'),
-                                ];
-                            } else {
-                                $highlight = ['neutral', 'neutral'];
-                            }
-                        @endphp
-
-                        @foreach ($values as $index => $val)
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center border-b border-gray-200 dark:border-white/20
-                                @if ($highlight[$index] === 'green') text-green-600 font-bold bg-green-500/10
-                                @elseif($highlight[$index] === 'red') text-red-600 font-bold bg-red-500/10
-                                @else text-gray-500 dark:text-white/60 @endif
-                            ">
-                                {{ $val ?? '—' }}
-                            </td>
+            <table class="min-w-full divide-y shadow-sm rounded-lg overflow-hidden mb-6">
+                <thead class="bg-gray-100 dark:bg-white/20">
+                    <tr>
+                        <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b border-gray-200 dark:border-white/20">
+                            Характеристика</th>
+                        @foreach ($computers as $computer)
+                            <th
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b border-gray-200 dark:border-white/20">
+                                {{ $computer->name }}
+                            </th>
                         @endforeach
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="bg-white dark:bg-black divide-y divide-gray-200">
+                    @foreach ($params as $paramName)
+                        <tr class="hover:bg-gray-50 transition-colors duration-150 hover:bg-white/10">
+                            <td
+                                class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white/90 border-b border-gray-200 dark:border-white/20">
+                                {{ $parameterTranslations[$paramName] ?? $paramName }}</td>
+
+                            @php
+                                $values = [];
+
+                                foreach ($computers as $computer) {
+                                    $found = null;
+                                    foreach ($computer->components as $component) {
+                                        if ($component->type !== $type) {
+                                            continue;
+                                        }
+
+                                        foreach ($component->parameters as $paramValue) {
+                                            if ($paramValue->parameter->name === $paramName) {
+                                                $found = $paramValue->value;
+                                                break 2;
+                                            }
+                                        }
+                                    }
+                                    $values[] = $found;
+                                }
+
+                                $highlight = [];
+                                $isNumeric = is_numeric($values[0]);
+
+                                if ($isNumeric) {
+                                    $maxValue = max($values);
+                                    $minValue = min($values);
+
+                                    foreach ($values as $value) {
+                                        if ($value == $maxValue) {
+                                            $highlight[] = 'green';
+                                        } elseif ($value == $minValue) {
+                                            $highlight[] = 'red';
+                                        } else {
+                                            $highlight[] = 'neutral';
+                                        }
+                                    }
+                                } else {
+                                    $highlight = array_fill(0, count($values), 'neutral');
+                                }
+                            @endphp
+
+                            @foreach ($values as $index => $val)
+                                <td
+                                    class="px-6 py-4 text-sm text-center border-b border-gray-200 dark:border-white/20
+                                    @if ($highlight[$index] === 'green') text-green-600 font-bold bg-green-500/10
+                                    @elseif ($highlight[$index] === 'red') text-red-600 font-bold bg-red-500/10
+                                    @else text-gray-500 dark:text-white/60 @endif">
+                                    {{ $val ?? '—' }}
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endforeach
     </div>
 @endsection

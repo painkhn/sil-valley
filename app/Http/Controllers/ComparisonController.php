@@ -42,9 +42,9 @@ class ComparisonController extends Controller
         ])->where('user_id', Auth::id())->first();
 
         // Только если выбрано ровно 2 компьютера
-        if (!$comparison || $comparison->computers->count() !== 2) {
-            return redirect()->back()->with('error', 'Выберите ровно 2 компьютера для сравнения.');
-        }
+        // if (!$comparison || $comparison->computers->count() !== 2) {
+        //     return redirect()->back()->with('error', 'Выберите ровно 2 компьютера для сравнения.');
+        // }
 
         $computers = $comparison->computers;
 
