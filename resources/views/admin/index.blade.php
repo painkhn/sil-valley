@@ -5,7 +5,7 @@
         <h1 class="text-xl font-semibold text-black dark:text-white">Товары</h1>
     </section>
 
-    <div class="w-1/3 mx-auto">
+    <div class="max-w-[200px] w-full mx-auto">
         <a href="{{ route('admin.computer.create') }}"
             class="flex items-center justify-center transition-all rounded-md gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white dark:text-white text-black">
             <svg class="w-6 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@
             Добавить товар
         </a>
     </div>
-    <section class="w-1/3 mx-auto text-center">
+    <section class="max-w-[730px] mx-auto text-center">
         <form class="space-y-4">
             <div class="space-y-2">
                 <label class="font-semibold text-black/80 dark:text-white/80">Название ПК</label>
@@ -81,8 +81,8 @@
         </form>
     </section>
 
-    <div class="w-[75%] mx-auto">
-        <ul class="grid grid-cols-4 w-full gap-y-5 gap-x-10">
+    <div class="w-[75%] max-[500px]:w-full mx-auto">
+        <ul class="flex flex-wrap max-[1100px]:justify-center w-full gap-y-5 gap-x-10">
             @foreach ($pc_list as $item)
                 <li>
                     <x-computer-card :item="$item" variant="admin" />

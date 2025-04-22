@@ -42,34 +42,10 @@
                             </button>
                         </a>
                     </li>
-                    <li>
-                        <a href="#!">
-                            <button
-                                class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
-                                О нас
-                            </button>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <button
-                                class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
-                                Контакты
-                            </button>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <button
-                                class="px-4 py-2 transition-all hover:border-b border-green-600 dark:border-green-500 hover:dark:text-green-500 hover:text-green-600 text-black dark:text-white font-semibold">
-                                FaQ
-                            </button>
-                        </a>
-                    </li>
-                    <div class="p-4 border dark:border-white/50 rounded-md my-4">
-                        @auth
-                            <h2 class="text-black dark:text-white">Панель администратора</h2>
-                            @if (auth()->user()->role === 'admin')
+                    @auth
+                        @if (auth()->user()->role === 'admin')
+                            <div class="p-4 border dark:border-white/50 rounded-md my-4">
+                                <h2 class="text-black dark:text-white">Панель администратора</h2>
                                 <li>
                                     <a href="{{ route('admin.products') }}"
                                         class="flex items-center gap-1 py-2 text-black dark:text-white">
@@ -96,9 +72,56 @@
                                         Заказы
                                     </a>
                                 </li>
-                            @endif
-                        @endauth
-                    </div>
+                            </div>
+                        @endif
+                    @endauth
+                    <li>
+                        <a href="{{ route('profile.orders') }}"
+                            class="flex items-center gap-1 pr-4 py-2 text-black dark:text-white">
+                            <svg class="w-6 h-5 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12.013 6.175 7.006 9.369l5.007 3.194-5.007 3.193L2 12.545l5.006-3.193L2 6.175l5.006-3.194 5.007 3.194ZM6.981 17.806l5.006-3.193 5.006 3.193L11.987 21l-5.006-3.194Z" />
+                                <path
+                                    d="m12.013 12.545 5.006-3.194-5.006-3.176 4.98-3.194L22 6.175l-5.007 3.194L22 12.562l-5.007 3.194-4.98-3.211Z" />
+                            </svg>
+                            Заказы
+                        </a>
+                    </li>
+                    <li>
+                        <a href={{ route('profile.index') }}
+                            class="flex items-center gap-1 pr-4 py-2 text-black dark:text-white">
+                            <svg class="w-6 h-5 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                            </svg>
+                            Настройки
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="flex items-center gap-1 pr-4 py-2 text-black dark:text-white">
+                            <svg class="w-6 h-5 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2" />
+                            </svg>
+                            Выход
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
                     <div class="flex justify-between">
                         <li>
                             <button

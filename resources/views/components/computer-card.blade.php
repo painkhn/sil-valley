@@ -3,7 +3,7 @@
 <a href="{{ route('computer.show', $item->id) }}" class="w-max">
     <div
         class="p-7 max-w-[300px] max-[1100px]:max-w-full {{ isset($item->deleted_at) ? 'border border-red-500/50' : '' }} rounded-md space-y-4 text-center transition-all hover:scale-105 shadow-lg {{ isset($item->deleted_at) ? 'dark:bg-[#2a1a1a]/80' : 'dark:bg-[#1f1f1f]/80' }} dark:shadow-black shadow-black/40 relative">
-
+        {{ $slot }}
         @if (isset($item->deleted_at))
             <div class="absolute top-2 right-2 bg-red-500/80 text-white text-xs px-2 py-1 rounded-full font-mono">
                 Удален {{ $item->deleted_at->format('d.m.Y') }}
@@ -82,7 +82,7 @@
         </div>
 
         @if ($variant == 'admin')
-            <div class="flex justify-between pt-3">
+            <div class="flex justify-between max-[440px]:flex-col max-[440px]:items-center gap-y-2 pt-3">
                 @if (isset($item->deleted_at))
                     <form action="{{ route('admin.computer.restore', $item->id) }}" method="POST">
                         @csrf
@@ -93,11 +93,11 @@
                         </button>
                     </form>
                 @else
-                    <form action="{{ route('admin.computer.destroy', $item->id) }}" method="POST">
+                    <form action="{{ route('admin.computer.destroy', $item->id) }}" method="POST" class="max-[440px]:w-full">
                         @csrf
                         @method('DELETE')
                         <button
-                            class="transition-all px-4 py-2 dark:text-black text-white rounded-md hover:opacity-80 font-semibold bg-green-500">
+                            class="transition-all max-[440px]:w-full px-4 py-2 dark:text-black text-white rounded-md hover:opacity-80 font-semibold bg-green-500">
                             Удалить
                         </button>
                     </form>

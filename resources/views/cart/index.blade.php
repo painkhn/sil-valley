@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="max-w-6xl w-full gap-5 mx-auto flex justify-center">
+    <section class="max-w-6xl w-full gap-5 mx-auto flex justify-center max-[800px]:flex-col-reverse max-[800px]:items-center max-[800px]:gap-y-10">
         @if (empty($computers))
             <h1 class="text-center text-black dark:text-white text-2xl font-semibold my-10 w-full">
                 Корзина пуста
             </h1>
         @else
-            <div class="w-3/5 p-5 border dark:border-white/40 border-black/40 rounded-md">
-                <ul class="grid grid-cols-3 gap-5">
+            <div class="w-3/5 max-[800px]:max-w-[450px] max-[800px]:w-full p-5 border dark:border-white/40 border-black/40 rounded-md">
+                <ul class="flex flex-wrap max-[900px]:justify-center gap-x-5 gap-y-10">
                     @foreach ($computers as $item)
-                        <li>
+                        <li class="max-w-[220px] max-[900px]:max-w-full w-full">
                             <a href="{{ route('computer.show', $item->id) }}">
                                 <div
                                     class="transition-all hover:scale-105 space-y-2 border dark:border-white/5 border-black/5 rounded-md">
@@ -80,7 +80,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="w-2/5 space-y-4">
+            <div class="w-2/5 max-[800px]:max-w-[450px] max-[800px]:w-full space-y-4">
                 <h1 class="text-center text-black dark:text-white text-2xl font-semibold">
                     Ваша корзина
                 </h1>

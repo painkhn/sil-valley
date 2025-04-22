@@ -8,24 +8,24 @@
             @forelse ($orders as $order)
                 <li>
                     <div class="overflow-x-auto bg-white dark:bg-white/5 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-4">
-                        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+                        <table class="min-w-full text-sm text-left text-gray-700 dark:text-gray-200">
                             <thead class="text-xs text-gray-700 uppercase dark:text-gray-300 border-b dark:border-gray-600">
                                 <tr>
-                                    <th class="px-4 py-2">ID заказа</th>
-                                    <th class="px-4 py-2">Статус</th>
+                                    <th class="px-4 py-2 whitespace-nowrap">ID заказа</th>
+                                    <th class="px-4 py-2 w-[122px]">Статус</th>
                                     <th class="px-4 py-2">Оплата</th>
                                     <th class="px-4 py-2">Доставка</th>
                                     <th class="px-4 py-2">Позиции</th>
-                                    <th class="px-4 py-2">Данные доставки</th>
+                                    <th class="px-4 py-2 whitespace-nowrap">Данные доставки</th>
                                     <th class="px-4 py-2 text-right">Итого</th>
-                                    <th class="px-4 py-2 text-center">Действия</th>
+                                    <th class="px-4 py-2 text-center w-[190px]">Действия</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="border-b dark:border-gray-600">
                                     <td class="px-4 py-3 font-medium">#{{ $order->id }}</td>
                                     <td class="px-4 py-3">
-                                        <span class="font-semibold">
+                                        <span class="font-semibold whitespace-nowrap">
                                             {{ $order->status === 'pending' ? 'В обработке' : 'Завершён' }}
                                         </span>
                                     </td>
@@ -37,7 +37,7 @@
                                             <div class="mb-2">
                                                 <div class="font-semibold">{{ $item->computer->name }} (x{{ $item->quantity }})
                                                 </div>
-                                                <div class="text-gray-500 dark:text-gray-400">{{ $item->computer->description }}
+                                                <div class="text-gray-500 dark:text-gray-400 whitespace-nowrap">{{ $item->computer->description }}
                                                 </div>
                                                 <div>{{ number_format($item->price, 0, ',', ' ') }} ₽</div>
                                             </div>
@@ -66,7 +66,7 @@
                                             <span class="text-gray-500">-</span>
                                         @endif
                                     </td>
-                                    <td class="px-4 py-3 text-right text-green-600 dark:text-green-400 font-semibold">
+                                    <td class="px-4 py-3 text-right text-green-600 dark:text-green-400 font-semibold whitespace-nowrap">
                                         {{ number_format($order->items->sum('price'), 0, ',', ' ') }} ₽
                                     </td>
                                     <td class="px-4 py-3 text-center space-y-2">
@@ -86,7 +86,7 @@
                                                 @method('PATCH')
                                                 <input type="hidden" name="status" value="pending">
                                                 <button type="submit"
-                                                    class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 text-xs">
+                                                    class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 text-xs whitespace-nowrap">
                                                     Вернуть в обработку
                                                 </button>
                                             </form>

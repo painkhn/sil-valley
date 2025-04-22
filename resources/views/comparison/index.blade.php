@@ -73,11 +73,11 @@
                 <thead class="bg-gray-100 dark:bg-white/20">
                     <tr>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b border-gray-200 dark:border-white/20">
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b bg-black/5 border-gray-200 dark:border-white/20">
                             Характеристика</th>
                         @foreach ($computers as $computer)
                             <th
-                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b border-gray-200 dark:border-white/20">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider border-b bg-black/5 border-gray-200 dark:border-white/20">
                                 {{ $computer->name }}
                             </th>
                         @endforeach
@@ -85,7 +85,7 @@
                 </thead>
                 <tbody class="bg-white dark:bg-black divide-y divide-gray-200">
                     @foreach ($params as $paramName)
-                        <tr class="hover:bg-gray-50 transition-colors duration-150 hover:bg-white/10">
+                        <tr class="hover:bg-gray-100 transition-colors duration-150 dark:hover:bg-white/10">
                             <td
                                 class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white/90 border-b border-gray-200 dark:border-white/20">
                                 {{ $parameterTranslations[$paramName] ?? $paramName }}</td>

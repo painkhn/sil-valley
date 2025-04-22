@@ -73,7 +73,7 @@
             </form>
 
         </div>
-        <div class="w-[75%]">
+        <div class="w-[75%] max-[600px]:w-full">
             @if ( empty($pc_list) )
                 <p class="opacity-80 dark:text-white text-black mt-10">
                     Кажется, в данный момент нет доступных товаров. Перезагрузите страницу или проверьте наличие позже.

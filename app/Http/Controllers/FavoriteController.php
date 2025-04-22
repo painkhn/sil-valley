@@ -19,6 +19,7 @@ class FavoriteController extends Controller
         $user = auth()->user();
 
         $favorite = $user->favorites()->where('computer_id', $computer->id)->first();
+        
 
         if ($favorite) {
             $favorite->delete();
@@ -40,6 +41,9 @@ class FavoriteController extends Controller
         $favorite = Favorite::whereHas('computer', function ($query) {
             $query->whereNull('deleted_at');
         })->with('computer')->where('user_id', Auth::id())->get();
-        return view('favourite.index', compact('favorite'));
+
+        $isFavorite = true;
+
+        return view('favourite.index', compact('favorite', 'isFavorite'));
     }
 }

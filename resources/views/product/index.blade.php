@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="max-w-6xl w-full mx-auto space-y-8">
-        <section class="flex items-center">
-            <div class="w-2/5">
+        <section class="flex items-center max-[768px]:flex-col">
+            <div class="w-2/5 max-[768px]:mb-4 max-[768px]:w-full">
                 @if (isset($computer->image))
                     <img src="{{ asset('storage/' . $computer->image) }}" alt="{{ $computer->name ?? 'Компьютер' }}"
-                        class="max-w-[400px] w-full block rounded-md {{ isset($computer->deleted_at) ? 'opacity-50' : '' }}">
+                        class="max-w-[400px] max-[768px]:mx-auto w-full block rounded-md {{ isset($computer->deleted_at) ? 'opacity-50' : '' }}">
                 @else
                     <div
                         class="max-w-[250px] h-[150px] w-full mx-auto rounded-md {{ isset($computer->deleted_at) ? 'bg-gray-900' : 'bg-gray-800' }} flex items-center justify-center">
@@ -19,11 +19,11 @@
                     </div>
                 @endif
             </div>
-            <div class="w-3/5">
-                <div class="w-2/3 space-y-4">
-                    <div class="flex items-center justify-between">
+            <div class="w-3/5 max-[768px]:w-full">
+                <div class="w-2/3 max-[400px]:w-full space-y-4 max-[768px]:mx-auto">
+                    <div class="flex items-center justify-between gap-y-2 max-[500px]:flex-col">
                         <h1 class="font-black text-5xl text-black dark:text-white">{{ $computer->name }}</h1>
-                        <p class="text-2xl font-bold text-green-500">
+                        <p class="text-2xl max-[768px]:text-4xl font-bold text-green-500">
                             {{ $computer->price }} ₽
                         </p>
                     </div>
@@ -35,8 +35,8 @@
                     <p class="text-lg font-semibold text-justify dark:text-white/80 text-black/80">
                         {{ $computer->description }}
                     </p>
-                    <div class=" space-y-2">
-                        <div class="flex items-center gap-2">
+                    <div class="space-y-2">
+                        <div class="flex items-center max-[500px]:justify-center gap-2">
                             <form action="{{ route('cart.store') }}" method="POST">
                                 @csrf
                                 <input type="text" name="computer" id="computer" value="{{ $computer->id }}"
@@ -82,13 +82,13 @@
                                 </button>
                             </form>
                         </div>
-                        <div>
+                        <div class="max-[400px]:justify-center max-[400px]:flex max-[400px]:w-full">
                             @auth
                                 @if (auth()->user()->role === 'admin')
-                                    <div class="w-3/5 flex items-center gap-2">
+                                    <div class="w-[280px] flex items-center gap-2">
                                         @if (isset($computer->deleted_at))
                                             <form action="{{ route('admin.computer.restore', $computer->id) }}" method="POST"
-                                                class="w-1/2">
+                                                class="w-1/2 max-[500px]:mx-auto">
                                                 @csrf
                                                 @method('PUT')
                                                 <button
@@ -130,8 +130,8 @@
                     @foreach ($computer->components as $component)
                         <li class="font-mono w-full {{ isset($computer->deleted_at) ? 'text-red-300/70' : 'text-white' }}">
                             <div
-                                class="w-full flex p-4 border dark:border-white/40 border-black/40 rounded-md transition-all hover:bg-black/10 dark:hover:bg-white/10">
-                                <div class="w-1/5 text-xl text-black dark:text-white line-clamp-1">
+                                class="w-full  flex p-4 gap-x-4 border dark:border-white/40 border-black/40 rounded-md transition-all hover:bg-black/10 dark:hover:bg-white/10">
+                                <div class="w-1/5 max-[768px]:w-[40%] text-xl max-[768px]:text-lg text-black dark:text-white line-clamp-1">
                                     @if ($component->type === 'CPU')
                                         Процессор
                                     @elseif ($component->type === 'RAM')
@@ -148,7 +148,7 @@
                                         Корпус
                                     @endif
                                 </div>
-                                <div class="line-clamp-1 text-xl dark:text-green-500 text-green-600">
+                                <div class="line-clamp-1 max-[768px]:w-[60%] max-[530px]:text-right text-xl max-[768px]:text-lg dark:text-green-500 text-green-600">
                                     {{ $component->name }}
                                 </div>
                             </div>

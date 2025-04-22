@@ -29,13 +29,17 @@
                             @foreach ($order->items as $item)
                                 <div
                                     class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
-                                    <div class="flex items-start gap-4">
+                                    <div class="flex items-start gap-4 w-[80%]">
                                         <img src={{ asset('storage/' . $item->computer->image) }} alt="{{ $item->computer->name }}"
                                             class="w-24 h-24 object-cover rounded-md border dark:border-gray-600">
 
                                         <div>
-                                            <p class="text-lg font-semibold text-black dark:text-white">{{ $item->computer->name }}
-                                            </p>
+                                            <div class="flex items-center justify-between">
+                                                <p class="text-lg font-semibold text-black dark:text-white">{{ $item->computer->name }}</p>
+                                                <p class="text-lg font-semibold text-black dark:text-white min-[640px]:hidden">
+                                                    {{ number_format($item->price, 0, ',', ' ') }} ₽
+                                                </p>
+                                            </div>
                                             <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->computer->description }}
                                             </p>
                                             <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Количество:
@@ -43,7 +47,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="text-right">
+                                    <div class="text-right w-[20%] max-[640px]:hidden">
                                         <p class="text-sm font-semibold text-black dark:text-white">
                                             {{ number_format($item->price, 0, ',', ' ') }} ₽
                                         </p>
