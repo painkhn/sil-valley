@@ -38,13 +38,8 @@ class ComparisonController extends Controller
     public function show()
     {
         $comparison = Comparison::with([
-            'computers.components.parameters.parameter' // жёсткая загрузка
+            'computers.components.parameters.parameter'
         ])->where('user_id', Auth::id())->first();
-
-        // Только если выбрано ровно 2 компьютера
-        // if (!$comparison || $comparison->computers->count() !== 2) {
-        //     return redirect()->back()->with('error', 'Выберите ровно 2 компьютера для сравнения.');
-        // }
 
         $computers = $comparison->computers;
 

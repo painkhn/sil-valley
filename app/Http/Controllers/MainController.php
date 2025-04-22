@@ -8,7 +8,6 @@ class MainController extends Controller
 {
     /*
     * Отображение главной страницы
-    *
     */
     public function index() {
         return view('index');

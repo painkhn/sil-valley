@@ -12,22 +12,6 @@ use Illuminate\Support\Facades\{DB, Auth};
 class FavoriteController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Добавление/удаление из избранного
      */
     public function store(Request $request, Computer $computer)
@@ -57,29 +41,5 @@ class FavoriteController extends Controller
             $query->whereNull('deleted_at');
         })->with('computer')->where('user_id', Auth::id())->get();
         return view('favourite.index', compact('favorite'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Favorite $favorite)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateFavoriteRequest $request, Favorite $favorite)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Favorite $favorite)
-    {
-        //
     }
 }

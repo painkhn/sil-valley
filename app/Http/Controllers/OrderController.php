@@ -45,7 +45,6 @@ class OrderController extends Controller
         DB::beginTransaction();
 
         try {
-            // 1. Заказ
             $order = Order::create([
                 'user_id' => $user->id,
                 'delivery_method' => $request->deliveryMethod,
@@ -53,7 +52,6 @@ class OrderController extends Controller
                 'comment' => $request->comment,
             ]);
 
-            // 2. Товары
             foreach ($cart->items as $item) {
                 $computer = $item->computer;
 
@@ -62,18 +60,16 @@ class OrderController extends Controller
                 $quantity = $item->quantity;
                 $pricePerItem = $computer->price;
 
-                // скидка на 1 товар, если 3+
                 $finalPricePerItem = $quantity >= 3 ? $pricePerItem * 0.9 : $pricePerItem;
 
                 OrderItem::create([
                     'order_id' => $order->id,
                     'computer_id' => $computer->id,
                     'quantity' => $quantity,
-                    'price' => round($finalPricePerItem * $quantity), // Общая цена за этот товар
+                    'price' => round($finalPricePerItem * $quantity),
                 ]);
             }
 
-            // 3. Адрес
             if ($request->deliveryMethod === 'delivery') {
                 OrderDeliveryDetail::create([
                     'order_id' => $order->id,
@@ -86,7 +82,6 @@ class OrderController extends Controller
                 ]);
             }
 
-            // 4. Очистить корзину
             $cart->items()->delete();
 
             DB::commit();

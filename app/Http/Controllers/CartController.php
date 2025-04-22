@@ -126,13 +126,4 @@ class CartController extends Controller
         }
         return redirect()->route('cart.show');
     }
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cart $cart)
-    {
-        //
-    }
 }
