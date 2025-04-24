@@ -230,8 +230,8 @@
                         <label for="psu_efficiency" class="text-black dark:text-white">Эффективность (%):</label>
                         <input
                             class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4"
-                            type="number" name="components[psu][efficiency]" id="psu_efficiency"
-                            value="{{ old('components.psu.efficiency') }}" required>
+                            type="number" name="components[psu][efficiency]" id="psu_efficiency" max="100"
+                            min="0" value="{{ old('components.psu.efficiency') }}" required>
                     </div>
                 </div>
 

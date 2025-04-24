@@ -22,10 +22,13 @@ Route::controller(OrderController::class)->middleware('auth')->group(function ()
     Route::get('/profile/orders', 'index')->name('profile.orders');
     Route::post('/order/store', 'store')->name('order.store');
 });
+
 Route::controller(FavoriteController::class)->middleware('auth')->group(function () {
     Route::get('/favorites', 'show')->name('favorites.show');
     Route::post('/favorites/{computer}/store', 'store')->name('favorites.store');
+    Route::delete('/favorites/clear', 'clear')->name('favorites.clear');
 });
+
 Route::controller(ComparisonController::class)->middleware('auth')->group(function () {
     Route::get('/comparison', 'show')->name('comparisons.show');
     Route::post('/comparison/store', 'store')->name('comparison.store');

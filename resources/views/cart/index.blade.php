@@ -1,13 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="max-w-6xl w-full gap-5 mx-auto flex justify-center max-[800px]:flex-col-reverse max-[800px]:items-center max-[800px]:gap-y-10">
-        @if (empty($computers))
-            <h1 class="text-center text-black dark:text-white text-2xl font-semibold my-10 w-full">
-                Корзина пуста
+    @if (empty($computers))
+        <section class="max-w-6xl w-full mx-auto space-y-10">
+            <h1 class="text-center font-semibold text-2xl text-black dark:text-white">
+                Корзина
             </h1>
-        @else
-            <div class="w-3/5 max-[800px]:max-w-[450px] max-[800px]:w-full p-5 border dark:border-white/40 border-black/40 rounded-md">
+            <div class="text-center text-gray-600 dark:text-gray-300 space-y-4">
+                <p class="text-lg">Вы ещё не добавили товары в избранное</p>
+                <a href="{{ route('shop.index') }}"
+                    class="inline-block px-6 py-2 bg-green-500 hover:bg-green-600 hover:dark:bg-green-400 text-white dark:text-black font-semibold rounded-xl transition-all">
+                    Перейти к покупкам
+                </a>
+            </div>
+        </section>
+    @else
+        <section
+            class="max-w-6xl w-full gap-5 mx-auto flex justify-center max-[800px]:flex-col-reverse max-[800px]:items-center max-[800px]:gap-y-10">
+            <div
+                class="w-3/5 max-[800px]:max-w-[450px] max-[800px]:w-full p-5 border dark:border-white/40 border-black/40 rounded-md">
                 <ul class="flex flex-wrap max-[900px]:justify-center gap-x-5 gap-y-10">
                     @foreach ($computers as $item)
                         <li class="max-w-[220px] max-[900px]:max-w-full w-full">
@@ -239,8 +250,8 @@
                     </button>
                 </form>
             </div>
-        @endif
-    </section>
+        </section>
+    @endif
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>

@@ -41,9 +41,10 @@ class ComparisonController extends Controller
             'computers.components.parameters.parameter'
         ])->where('user_id', Auth::id())->first();
 
-        $computers = $comparison->computers;
+        $computers = $comparison ? $comparison->computers : collect();
 
         return view('comparison.index', compact('computers'));
     }
+
 
 }

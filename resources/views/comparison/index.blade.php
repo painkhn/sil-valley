@@ -28,15 +28,27 @@
 @endphp
 
 @section('content')
-    <div class="container mx-auto py-6">
-        <h1 class="text-2xl font-semibold mb-4 text-center text-black dark:text-white">Сравнение компьютеров</h1>
-
+    @if ($computers->isEmpty())
+        <section class="max-w-6xl w-full mx-auto space-y-10">
+            <h1 class="text-center font-semibold text-2xl text-black dark:text-white">
+                Сравнение компьютеров
+            </h1>
+            <div class="text-center text-gray-600 dark:text-gray-300 space-y-4">
+                <p class="text-lg">Вы ещё не добавили товары в сравнение</p>
+                <a href="{{ route('shop.index') }}"
+                    class="inline-block px-6 py-2 bg-green-500 hover:bg-green-600 hover:dark:bg-green-400 text-white dark:text-black font-semibold rounded-xl transition-all">
+                    Перейти к покупкам
+                </a>
+            </div>
+        </section>
+    @else
         <div class="flex justify-center gap-8 mb-10">
             @foreach ($computers as $computer)
                 <div class="text-center">
                     <img src="{{ asset('storage/' . $computer->image) }}" class="w-[150px] mx-auto rounded-lg shadow">
                     <div class="mt-2 text-lg font-bold text-black dark:text-white">{{ $computer->name }}</div>
-                    <div class="text-gray-600 dark:text-gray-300">{{ number_format($computer->price, 0, ',', ' ') }} ₽</div>
+                    <div class="text-gray-600 dark:text-gray-300">{{ number_format($computer->price, 0, ',', ' ') }} ₽
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -145,5 +157,5 @@
                 </tbody>
             </table>
         @endforeach
-    </div>
+    @endif
 @endsection
