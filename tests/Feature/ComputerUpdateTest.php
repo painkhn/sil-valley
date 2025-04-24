@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Computer;
-use App\Models\Component;
-use App\Models\User;
+use App\Models\{Computer, Component, User};
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -14,9 +12,15 @@ class ComputerUpdateTest extends TestCase
 {
     use RefreshDatabase;
 
+    /*
+    * Тест на успешное обновление компьютера администратором
+    */
     public function test_admin_can_update_computer(): void
     {
+        // Подготавливаем фейковое хранилище
         Storage::fake('public');
+
+        // Создаём администратора и компьютер
         $admin = User::factory()->admin()->create();
         $computer = Computer::factory()->create([
             'name' => 'Old Name',
@@ -24,12 +28,14 @@ class ComputerUpdateTest extends TestCase
             'price' => 1000,
         ]);
 
+        // Добавляем старый компонент
         $oldComponent = Component::factory()->create([
             'name' => 'Old CPU',
             'type' => 'CPU',
         ]);
-
         $computer->components()->attach($oldComponent);
+
+        // Новые данные для обновления
         $data = [
             'name' => 'Updated PC',
             'description' => 'Updated description',
@@ -75,9 +81,14 @@ class ComputerUpdateTest extends TestCase
             ],
         ];
 
+        // Выполняем PATCH-запрос на обновление
         $response = $this->actingAs($admin)->patch(route('admin.computer.update', $computer), $data);
+
+        // Проверка редиректа и успешного сообщения
         $response->assertRedirect('/');
         $response->assertSessionHas('success');
+
+        // Проверка обновлений в БД
         $this->assertDatabaseHas('computers', [
             'id' => $computer->id,
             'name' => 'Updated PC',
@@ -92,21 +103,27 @@ class ComputerUpdateTest extends TestCase
             'type' => 'RAM',
         ]);
 
+        // Проверка загрузки изображения
         Storage::disk('public')->assertExists('images/' . $data['image']->hashName());
     }
 
+    /*
+    * Тест на обновление пк с невалидными данными
+    */
     public function test_admin_cannot_update_with_invalid_data(): void
     {
         Storage::fake('public');
+
+        // Создаем администратора и компьютер
         $admin = User::factory()->admin()->create();
         $computer = Computer::factory()->create();
 
+        // Некорректные данные
         $invalidData = [
             'name' => '',
             'description' => '',
             'price' => 'not-a-number',
             'image' => 'not-an-image',
-
             'components' => [
                 'cpu' => [
                     'name' => '',
@@ -115,8 +132,10 @@ class ComputerUpdateTest extends TestCase
             ],
         ];
 
+        // Отправка PATCH-запроса
         $response = $this->actingAs($admin)->patch(route('admin.computer.update', $computer), $invalidData);
 
+        // Проверка ошибок валидации
         $response->assertSessionHasErrors([
             'name',
             'price',
@@ -125,18 +144,25 @@ class ComputerUpdateTest extends TestCase
             'components.cpu.cores',
         ]);
 
+        // Убеждаемся, что данные в базе не изменились
         $this->assertDatabaseHas('computers', [
             'id' => $computer->id,
             'name' => $computer->name,
         ]);
     }
 
+    /*
+    * Тест на ошибку, если не передано название компонента
+    */
     public function test_update_computer_fails_when_component_name_missing(): void
     {
         Storage::fake('public');
+
+        // Создаем администратора и компьютер
         $admin = User::factory()->admin()->create();
         $computer = Computer::factory()->create();
 
+        // Данные без имени CPU
         $data = [
             'name' => 'Updated PC',
             'description' => 'Updated description',
@@ -151,18 +177,28 @@ class ComputerUpdateTest extends TestCase
             ]
         ];
 
+        // Отправка PATCH-запроса
         $response = $this->actingAs($admin)->patch(route('admin.computer.update', $computer), $data);
 
+        // Проверка ошибки по имени CPU
         $response->assertSessionHasErrors(['components.cpu.name']);
+
+        // Проверка, что компьютер не обновлён
         $this->assertDatabaseMissing('computers', ['name' => 'Updated PC']);
     }
 
+    /*
+    * Тест обновления с невалидной ценой
+    */
     public function test_update_computer_fails_with_invalid_price(): void
     {
         Storage::fake('public');
+
+        // Создаем администратора и компьютер
         $admin = User::factory()->admin()->create();
         $computer = Computer::factory()->create();
 
+        // Данные с невалидной ценой
         $data = [
             'name' => 'Updated PC',
             'description' => 'Updated description',
@@ -178,9 +214,14 @@ class ComputerUpdateTest extends TestCase
             ]
         ];
 
+        // Отправка PATCH-запроса
         $response = $this->actingAs($admin)->patch(route('admin.computer.update', $computer), $data);
 
+        // Проверка ошибки по полю price
         $response->assertSessionHasErrors(['price']);
+
+        // Убеждаемся, что компьютер не обновился
         $this->assertDatabaseMissing('computers', ['name' => 'Updated PC']);
     }
+
 }
