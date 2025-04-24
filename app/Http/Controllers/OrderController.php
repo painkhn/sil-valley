@@ -24,7 +24,7 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
         if ($request->deliveryMethod === 'delivery') {
-            $validator->addRules([
+            $request->validate([
                 'full_name' => 'required|string|max:255',
                 'city' => 'required|string|max:255',
                 'address' => 'required|string|max:255',

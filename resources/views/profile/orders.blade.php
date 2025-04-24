@@ -30,17 +30,21 @@
                                 <div
                                     class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
                                     <div class="flex items-start gap-4 w-[80%]">
-                                        <img src={{ asset('storage/' . $item->computer->image) }} alt="{{ $item->computer->name }}"
+                                        <img src={{ asset('storage/' . $item->computer->image) }}
+                                            alt="{{ $item->computer->name }}"
                                             class="w-24 h-24 object-cover rounded-md border dark:border-gray-600">
 
                                         <div>
                                             <div class="flex items-center justify-between">
-                                                <p class="text-lg font-semibold text-black dark:text-white">{{ $item->computer->name }}</p>
-                                                <p class="text-lg font-semibold text-black dark:text-white min-[640px]:hidden">
+                                                <p class="text-lg font-semibold text-black dark:text-white">
+                                                    {{ $item->computer->name }}</p>
+                                                <p
+                                                    class="text-lg font-semibold text-black dark:text-white min-[640px]:hidden">
                                                     {{ number_format($item->price, 0, ',', ' ') }} ₽
                                                 </p>
                                             </div>
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->computer->description }}
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $item->computer->description }}
                                             </p>
                                             <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Количество:
                                                 x{{ $item->quantity }}</p>
@@ -90,8 +94,12 @@
                             Итого: {{ number_format($total, 0, ',', ' ') }} ₽
                         </div>
                     </div>
-                    @empty
-                    <p class="text-gray-500 dark:text-gray-400">У вас пока нет заказов.</p>
+                @empty
+                    <section class="max-w-6xl w-full mx-auto space-y-10">
+                        <div class="text-center text-gray-600 dark:text-gray-300 space-y-4">
+                            <p class="text-lg">Заказов не найдено</p>
+                        </div>
+                    </section>
                 </li>
             @endforelse
         </ul>
