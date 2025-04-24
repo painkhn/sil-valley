@@ -60,9 +60,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function CallbackGithub() : RedirectResponse
     {
+        // Получаем данные о пользователе и проверяем, есть ли такой в бд
         $user = Socialite::driver('github')->user();
         $existingUser = User::where('email', $user->email)->first();
 
+        // Если нет такого, то создаем
         if (!$existingUser) {
             $newUser = User::create([
                 'name' => $user->nickname,
@@ -74,10 +76,13 @@ class AuthenticatedSessionController extends Controller
             Auth::login($newUser);
             return redirect(route('profile.index'));
         } else {
+            // Если есть, то проверяем метод регистрации
             if ($existingUser->provider === 'github') {
+                // Если github то авторизируем
                 Auth::login($existingUser);
                 return redirect(route('profile.index'));
             } else {
+                // Если нет, то просим войти через форму входа
                 return redirect(route('index'))->with('error', 'Используйте логин-пароль для входа');
             }
         }

@@ -14,6 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
+        // Получаем заказ пользователя
         $orders = Order::with(['items.computer', 'deliveryDetail'])->where('user_id', auth()->id())->latest()->get();
         return view('profile.orders', compact('orders'));
     }
@@ -23,6 +24,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+        // Если выбран метод доставка, то валидируем данные
         if ($request->deliveryMethod === 'delivery') {
             $request->validate([
                 'full_name' => 'required|string|max:255',
@@ -33,17 +35,19 @@ class OrderController extends Controller
             ]);
         }
 
-        $user = Auth::user();
+        $user = Auth::user(); // Получаем пользователя
 
-        $cart = Cart::with('items.computer')->where('user_id', $user->id)->first();
+        $cart = Cart::with('items.computer')->where('user_id', $user->id)->first(); // Получаем корщину
 
+        // Если корзина пуста, возвращаем уведомление об ошибке
         if (!$cart || $cart->items->isEmpty()) {
             return back()->with('error', 'Корзина пуста');
         }
 
-        DB::beginTransaction();
+        DB::beginTransaction(); // Начало транзакции
 
         try {
+            // Создаем заказ
             $order = Order::create([
                 'user_id' => $user->id,
                 'delivery_method' => $request->deliveryMethod,
@@ -51,6 +55,7 @@ class OrderController extends Controller
                 'comment' => $request->comment,
             ]);
 
+            // Получаем данные из корзины и переносим в заказ
             foreach ($cart->items as $item) {
                 $computer = $item->computer;
 
@@ -59,8 +64,10 @@ class OrderController extends Controller
                 $quantity = $item->quantity;
                 $pricePerItem = $computer->price;
 
+                // Учитывая скидку
                 $finalPricePerItem = $quantity >= 3 ? $pricePerItem * 0.9 : $pricePerItem;
 
+                // Заносим данные в заказ
                 OrderItem::create([
                     'order_id' => $order->id,
                     'computer_id' => $computer->id,
@@ -69,6 +76,7 @@ class OrderController extends Controller
                 ]);
             }
 
+            // Если доставка, то сохраняем данные о доставке
             if ($request->deliveryMethod === 'delivery') {
                 OrderDeliveryDetail::create([
                     'order_id' => $order->id,
@@ -81,12 +89,13 @@ class OrderController extends Controller
                 ]);
             }
 
-            $cart->items()->delete();
+            $cart->items()->delete(); // Удаляем данные из корзины
 
-            DB::commit();
+            DB::commit(); // Сохраняем изменения
 
             return redirect()->route('profile.orders')->with('success', 'Заказ успешно оформлен!');
         } catch (\Throwable $e) {
+            // Если ошибка, то отменяем изменения
             DB::rollBack();
             report($e);
             return back()->with('error', 'Произошла ошибка при оформлении заказа.');
@@ -98,9 +107,11 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
+        // Обновляем статус
         $order->status = $request->validated()['status'];
-        $order->save();
+        $order->save(); // Сохраняем
 
-        return redirect()->back()->with('success', 'Статус заказа обновлён.');
+        // Возвращаем назад с сообщение о обновлении статуса
+        return redirect()->back()->with('success', 'Статус заказа обновлён');
     }
 }

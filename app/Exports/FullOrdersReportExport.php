@@ -56,6 +56,9 @@ class FullOrdersReportExport implements FromCollection, WithHeadings, WithMappin
         ];
     }
 
+    /*
+    * Перевод статуса заказа
+    */
     protected function translateStatus($status)
     {
         return match ($status) {
@@ -65,6 +68,9 @@ class FullOrdersReportExport implements FromCollection, WithHeadings, WithMappin
         };
     }
 
+    /*
+    * Перевод метода оплаты
+    */
     protected function translatePayment($method)
     {
         return match ($method) {
@@ -74,6 +80,9 @@ class FullOrdersReportExport implements FromCollection, WithHeadings, WithMappin
         };
     }
 
+    /*
+    * Перевод метода доставки
+    */
     protected function translateDelivery($method)
     {
         return match ($method) {
@@ -83,6 +92,9 @@ class FullOrdersReportExport implements FromCollection, WithHeadings, WithMappin
         };
     }
 
+    /*
+    * Стили
+    */
     public function styles(Worksheet $sheet)
     {
         // Заголовки жирные, с заливкой и черной чертой снизу

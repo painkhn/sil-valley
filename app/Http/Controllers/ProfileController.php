@@ -26,7 +26,7 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
-        $request->user()->save();
+        $request->user()->save(); // Обновляем информацию профиля
 
         return Redirect::route('profile.index')->with('success', 'Данные успешно обновлены');
     }

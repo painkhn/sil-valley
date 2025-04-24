@@ -14,25 +14,28 @@ class CartController extends Controller
      */
     public function store(StoreCartItemRequest $request)
     {
+        // Получаем корщзину пользователя
         $cart = Cart::firstOrCreate([
             'user_id' => Auth::id(),
         ]);
 
-        $computerId = $request->input('computer');
+        $computerId = $request->input('computer'); // Получаем айди компьютер, который добавляем в корзину
         $cartItem = CartItem::where('cart_id', $cart->id)
             ->where('computer_id', $computerId)
             ->first();
 
+        // Если товар уже в корзине увеличиваем его кол-во
         if ($cartItem) {
             $cartItem->increment('quantity');
         } else {
+            // Если нет, то создаем запись в бд
             CartItem::create([
                 'cart_id' => $cart->id,
                 'computer_id' => $computerId,
                 'quantity' => 1,
             ]);
         }
-
+        // Возваращаем с уведомлением
         return redirect()->back()->with('success', 'Товар успешно добавлен в корзину');
     }
 
@@ -41,6 +44,7 @@ class CartController extends Controller
      */
     public function show()
     {
+        // Получаем корзину пользователя
         $cart = Cart::with(['items.computer'])->where('user_id', Auth::id())->first();
 
         // Заготовка на случай пустой корзины или невалидных товаров
@@ -62,13 +66,15 @@ class CartController extends Controller
             }
         }
 
-        $finalPrice = $totalPrice - $discountAmount;
-        $discountPercent = $totalPrice > 0 ? round(($discountAmount / $totalPrice) * 100) : 0;
+        $finalPrice = $totalPrice - $discountAmount; // Получаем полную сумму
+        $discountPercent = $totalPrice > 0 ? round(($discountAmount / $totalPrice) * 100) : 0; // Получем скидки
 
+        // Получаем данные для доставки, если уже есть
         $deliveryDetails = OrderDeliveryDetail::whereHas('order', function ($query) {
             $query->where('user_id', Auth::id());
         })->latest()->first();
 
+        // Отображаем корзину
         return view('cart.index', compact(
             'computers',
             'totalQuantity',
@@ -110,18 +116,23 @@ class CartController extends Controller
      */
     public function update(CartItem $item, $status)
     {
+        // Если статус плюс - увеличиваем кол-во на 1
         if ($status === 'plus') {
             $item->increment('quantity');
         } elseif ($status === 'minus') {
+            // Если минус, то уменьшаем на 1
             if ($item->quantity > 1) {
                 $item->decrement('quantity');
             } else {
+                // Если меньше 1, то удаляем из корзины
                 $productName = $item->computer->name ?? 'Товар';
                 $item->delete();
 
+                // Возвращаем с уведомлением, о удалении товара
                 return redirect()->route('cart.show')->with('success', "Товар $productName удален из корзины.");
             }
         }
+        // Возвращаем назад
         return redirect()->route('cart.show');
     }
 }

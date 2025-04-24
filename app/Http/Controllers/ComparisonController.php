@@ -13,16 +13,19 @@ class ComparisonController extends Controller
      */
     public function store(StoreComparisonRequest $request)
     {
-        $user = Auth::user();
+        $user = Auth::user(); // Получаем пользователя
 
+        // Получаем товары в сравнениие
         $comparison = Comparison::firstOrCreate([
             'user_id' => $user->id,
         ]);
 
+        // Проверяем, есть ли этот товар уже в сравнении
         $alreadyExists = $comparison->items()
             ->where('computer_id', $request->computer)
             ->exists();
 
+        // Если нет, то добавляем
         if (!$alreadyExists) {
             $comparison->items()->create([
                 'computer_id' => $request->computer,
@@ -37,14 +40,13 @@ class ComparisonController extends Controller
      */
     public function show()
     {
+        // Получаем компьютеры, которые добавлены в сравнение
         $comparison = Comparison::with([
             'computers.components.parameters.parameter'
         ])->where('user_id', Auth::id())->first();
 
-        $computers = $comparison ? $comparison->computers : collect();
+        $computers = $comparison ? $comparison->computers : collect(); // Проверяем, есть ли они
 
         return view('comparison.index', compact('computers'));
     }
-
-
 }

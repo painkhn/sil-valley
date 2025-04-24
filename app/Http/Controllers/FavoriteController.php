@@ -16,15 +16,17 @@ class FavoriteController extends Controller
      */
     public function store(Computer $computer)
     {
-        $user = auth()->user();
+        $user = auth()->user(); // Получаем пользователя
 
+        // Получаем избранные
         $favorite = $user->favorites()->where('computer_id', $computer->id)->first();
 
 
-        if ($favorite) {
+        if ($favorite) { // Если уже в избранном, то удаляем
             $favorite->delete();
             return redirect()->back()->with('success', 'Товар удалён из избранного');
         } else {
+            // Добавляем в избранное
             Favorite::create([
                 'user_id' => $user->id,
                 'computer_id' => $computer->id,
@@ -38,6 +40,7 @@ class FavoriteController extends Controller
      */
     public function show()
     {
+        // Получаем избранные, которые не удалены
         $favorite = Favorite::whereHas('computer', function ($query) {
             $query->whereNull('deleted_at');
         })->with('computer')->where('user_id', Auth::id())->get();
@@ -50,7 +53,9 @@ class FavoriteController extends Controller
     /**
      * Удаление всех товаров из избранного
      */
-    public function clear() {
+    public function clear()
+    {
+        // Получаем и удаляем все товары из избранного
         Favorite::where('user_id', Auth::id())->delete();
         $favorite = Favorite::whereHas('computer', function ($query) {
             $query->whereNull('deleted_at');

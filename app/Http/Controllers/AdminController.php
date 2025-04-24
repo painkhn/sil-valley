@@ -53,7 +53,7 @@ class AdminController extends Controller
         }
 
         $pc_list = $query->get();
-        $maxPrice = Computer::max('price') ?? 100000;
+        $maxPrice = Computer::max('price') ?? 100000; // Получаем мааксимальную цену пк
         return view('admin.index', compact('pc_list', 'maxPrice'));
     }
 
@@ -68,6 +68,9 @@ class AdminController extends Controller
         return view('admin.orders', compact('orders'));
     }
 
+    /*
+    * Скачивание отчетов
+    */
     public function excel() {
         return Excel::download(new FullOrdersReportExport, 'excel.xlsx');
     }
