@@ -43,6 +43,7 @@ Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(functi
     Route::controller(AdminController::class)->group(function () {
         Route::get('/products', 'products')->name('products');
         Route::get('/orders', 'orders')->name('orders');
+        Route::get('/excel', 'excel')->name('excel');
     });
 
     Route::controller(OrderController::class)->group(function () {

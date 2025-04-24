@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\{Cart, Computer, OrderDeliveryDetail, OrderItem, Order};
 use Illuminate\Support\Facades\{DB, Auth};
 use App\Http\Requests\Order\StoreOrderRequest;
+use App\Exports\FullOrdersReportExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -64,6 +66,10 @@ class AdminController extends Controller
         $orders = Order::with(['items.computer', 'deliveryDetail'])->latest()->paginate(10);
 
         return view('admin.orders', compact('orders'));
+    }
+
+    public function excel() {
+        return Excel::download(new FullOrdersReportExport, 'excel.xlsx');
     }
 
 }

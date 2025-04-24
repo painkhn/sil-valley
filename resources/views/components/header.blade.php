@@ -73,7 +73,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.orders') }}"
+                                    <a href="{{ route('admin.excel') }}"
                                         class="flex items-center gap-1 py-2 text-black dark:text-white">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -301,7 +301,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('admin.orders') }}"
+                                        <a href="{{ route('admin.excel') }}"
                                             class="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white">
                                             <svg class="w-6 h-6 text-gray-800 dark:text-white"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
