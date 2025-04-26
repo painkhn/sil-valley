@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="flex justify-between gap-10 max-[800px]:flex-col max-[800px]:items-center">
+    <section class="flex justify-between items-start gap-10 max-[800px]:flex-col max-[800px]:items-center">
         <div
             class="max-w-[380px] max-[800px]:max-w-[500px] w-full p-5 border-2 border-dashed border-black/50 dark:border-white/50 rounded-md">
             <form class="space-y-6" method="GET">

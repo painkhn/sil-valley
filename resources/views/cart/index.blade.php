@@ -7,7 +7,7 @@
                 Корзина
             </h1>
             <div class="text-center text-gray-600 dark:text-gray-300 space-y-4">
-                <p class="text-lg">Вы ещё не добавили товары в избранное</p>
+                <p class="text-lg">Вы ещё не добавили товары в корзину</p>
                 <a href="{{ route('shop.index') }}"
                     class="inline-block px-6 py-2 bg-green-500 hover:bg-green-600 hover:dark:bg-green-400 text-white dark:text-black font-semibold rounded-xl transition-all">
                     Перейти к покупкам
@@ -16,9 +16,19 @@
         </section>
     @else
         <section
-            class="max-w-6xl w-full gap-5 mx-auto flex justify-center max-[800px]:flex-col-reverse max-[800px]:items-center max-[800px]:gap-y-10">
+            class="max-w-6xl w-full gap-5 mx-auto flex justify-center items-start max-[800px]:flex-col-reverse max-[800px]:items-center max-[800px]:gap-y-10">
             <div
                 class="w-3/5 max-[800px]:max-w-[450px] max-[800px]:w-full p-5 border dark:border-white/40 border-black/40 rounded-md">
+                <form method="post" action="{{ route('cart.clear') }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="px-4 py-2 bg-green-500 flex items-center gap-2 font-semibold dark:text-black/90 text-white rounded-md transition-all hover:bg-green-600 dark:hover:bg-green-400 mb-5">
+                        <svg class="w-6 h-6 text-white dark:text-black/90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                        </svg>
+                        Очистить корзину
+                    </button>
+                </form>
                 <ul class="flex flex-wrap max-[900px]:justify-center gap-x-5 gap-y-10">
                     @foreach ($computers as $item)
                         <li class="max-w-[220px] max-[900px]:max-w-full w-full">
@@ -160,16 +170,20 @@
                             </ul>
                         </div>
                     @endif
-                    <textarea name="comment" id="comment"
-                        class="w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"></textarea>
+                    <!-- Описание к заказу -->
+                    <div class="!-mt-1">
+                        <label for="comment" class="block mb-2 text-black dark:text-white font-semibold">Комментарий к заказу:</label>
+                        <textarea name="comment" id="comment"
+                            class="transition-all w-full min-h-20 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4"></textarea>
+                    </div>
                     <!-- Способ оплаты -->
                     <div>
                         <label for="paymentMethod" class="block mb-2 text-black dark:text-white font-semibold">Способ
                             оплаты:</label>
                         <select id="paymentMethod" name="paymentMethod"
-                            class="w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all">
-                            <option value="card">Картой при получении</option>
-                            <option value="cash">Наличными при получении</option>
+                            class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4">
+                            <option value="card" class="dark:bg-black">Картой при получении</option>
+                            <option value="cash" class="dark:bg-black">Наличными при получении</option>
                         </select>
                     </div>
 
@@ -178,9 +192,9 @@
                         <label for="deliveryMethod" class="block mb-2 text-black dark:text-white font-semibold">Тип
                             доставки:</label>
                         <select id="deliveryMethod" name="deliveryMethod" onchange="toggleDeliveryDetails()"
-                            class="w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all">
-                            <option value="pickup">Самовывоз</option>
-                            <option value="delivery">Доставка</option>
+                            class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4">
+                            <option value="pickup" class="dark:bg-black">Самовывоз</option>
+                            <option value="delivery" class="dark:bg-black">Доставка</option>
                         </select>
                     </div>
 
@@ -191,7 +205,7 @@
                             <label for="full_name" class="block mb-1 text-black dark:text-white">ФИО:</label>
                             <input type="text" id="full_name" name="full_name"
                                 value="{{ old('full_name', $deliveryDetails->full_name ?? '') }}"
-                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4"
                                 placeholder="Введите ваше полное имя">
                         </div>
 
@@ -200,7 +214,7 @@
                             <label for="city" class="block mb-1 text-black dark:text-white">Город:</label>
                             <input type="text" id="city" name="city"
                                 value="{{ old('city', $deliveryDetails->city ?? '') }}"
-                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4"
                                 placeholder="Ваш город">
                         </div>
 
@@ -209,7 +223,7 @@
                             <label for="address" class="block mb-1 text-black dark:text-white">Адрес:</label>
                             <input type="text" id="address" name="address"
                                 value="{{ old('address', $deliveryDetails->address ?? '') }}"
-                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4"
                                 placeholder="Улица, дом">
                         </div>
 
@@ -219,7 +233,7 @@
                                 есть):</label>
                             <input type="text" id="apartment" name="apartment"
                                 value="{{ old('apartment', $deliveryDetails->apartment ?? '') }}"
-                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4"
                                 placeholder="Квартира, подъезд и т.д.">
                         </div>
 
@@ -229,7 +243,7 @@
                                 индекс:</label>
                             <input type="text" id="postal_code" name="postal_code" maxlength="6"
                                 value="{{ old('postal_code', $deliveryDetails->postal_code ?? '') }}"
-                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4"
                                 placeholder="Например, 123456">
                         </div>
 
@@ -238,7 +252,7 @@
                             <label for="phone" class="block mb-1 text-black dark:text-white">Телефон:</label>
                             <input type="tel" id="phone" name="phone"
                                 value="{{ old('phone', $deliveryDetails->phone ?? '') }}"
-                                class="w-full px-3 py-2 bg-gray-100 dark:bg-transparent border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500 transition-all"
+                                class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4"
                                 placeholder="+7 (___) ___-__-__">
                         </div>
                     </div>

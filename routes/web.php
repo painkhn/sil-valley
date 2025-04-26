@@ -69,6 +69,7 @@ Route::controller(CartController::class)->group(function() {
     Route::get('/cart', 'show')->name('cart.show');
     Route::post('/cart/store', 'store')->name('cart.store');
     Route::patch('/cart/quantity/update/{item}/{status}', 'update')->name('cart.update');
+    Route::delete('/cart/clear', 'clear')->name('cart.clear');
 });
 
 require __DIR__.'/auth.php';

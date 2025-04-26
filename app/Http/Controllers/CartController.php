@@ -135,4 +135,24 @@ class CartController extends Controller
         // Возвращаем назад
         return redirect()->route('cart.show');
     }
+
+    /**
+        * Полная очистка корзины пользователя
+    */
+    public function clear()
+    {
+        // Находим корзину текущего пользователя
+        $cart = Cart::where('user_id', Auth::id())->first();
+
+        // Если корзина существует - удаляем все её элементы
+        if ($cart) {
+            $cart->items()->delete(); // Удаляем все связанные CartItem
+            
+            // Можно также полностью удалить саму корзину, если нужно:
+            // $cart->delete();
+        }
+
+        // Редирект с сообщением об успехе
+        return redirect()->route('cart.show')->with('success', 'Корзина успешно очищена');
+    }
 }
