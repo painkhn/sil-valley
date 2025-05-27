@@ -10,7 +10,7 @@
             <!-- футер модалки -->
             <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button data-modal-hide="default-modal" type="button"
-                    class="mx-auto font-semibold transition-all hover:dark:text-green-500">Отмена</button>
+                    class="mx-auto font-semibold text-black dark:text-white transition-all hover:text-green-500 dark:hover:text-green-500">Отмена</button>
             </div>
         </div>
     </div>

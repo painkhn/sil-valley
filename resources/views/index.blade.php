@@ -118,18 +118,18 @@
     @else
         <!-- авторизация на главной странице -->
         <section class="max-w-6xl w-full mx-auto space-y-12 pb-10">
-            <h2 class="text-center text-2xl font-black">Авторизируйтесь, чтобы заказать ПК своей мечты</h2>
+            <h2 class="text-center text-2xl font-black text-black dark:text-white">Авторизируйтесь, чтобы заказать ПК своей мечты</h2>
             <form class="w-[55%] mx-auto space-y-8" method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="space-y-2">
-                    <label for="email" class="font-semibold dark:text-white/80">Электронная почта</label>
+                    <label for="email" class="font-semibold text-black/80 dark:text-white/80">Электронная почта</label>
                     <input type="email" name="email" :value="old('email')" required autofocus
-                        class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                        class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4">
                 </div>
                 <div class="space-y-2">
-                    <label for="password" class="font-semibold dark:text-white/80">Пароль</label>
+                    <label for="password" class="font-semibold text-black/80 dark:text-white/80">Пароль</label>
                     <input type="password" name="password" required
-                        class="transition-all w-full py-4 bg-white/5 border-0 outline-none focus:ring-0 ring-0 focus:bg-white/10 rounded-xl px-4 pr-12">
+                        class="transition-all w-full py-2 dark:bg-white/5 bg-black/5 text-black dark:text-white dark:focus:bg-white/10 focus:bg-black/10 border-0 outline-none focus:ring-0 ring-0 rounded-xl px-4">
                 </div>
                 <button type="submit"
                     class="w-full py-4 font-semibold bg-green-500 transition-all hover:dark:bg-green-400 rounded-xl dark:text-black">
