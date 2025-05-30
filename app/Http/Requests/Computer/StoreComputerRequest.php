@@ -25,7 +25,7 @@ class StoreComputerRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:500',
             'price' => 'required|numeric|min:0',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
 
             // Правила для компонентов
             'components' => 'required|array',
