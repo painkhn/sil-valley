@@ -60,16 +60,16 @@ Route::prefix('admin')->middleware(IsAdmin::class)->name('admin.')->group(functi
     });
 });
 
-Route::controller(ComputerController::class)->group(function() {
+Route::controller(ComputerController::class)->group(function () {
     Route::get('shop', 'index')->name('shop.index');
     Route::get('/product/{computer}', 'show')->whereNumber('computer')->withTrashed()->name('computer.show');
 });
 
-Route::controller(CartController::class)->group(function() {
+Route::controller(CartController::class)->middleware('auth')->group(function () {
     Route::get('/cart', 'show')->name('cart.show');
     Route::post('/cart/store', 'store')->name('cart.store');
     Route::patch('/cart/quantity/update/{item}/{status}', 'update')->name('cart.update');
     Route::delete('/cart/clear', 'clear')->name('cart.clear');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

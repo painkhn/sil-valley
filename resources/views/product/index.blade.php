@@ -37,50 +37,57 @@
                     </p>
                     <div class="space-y-2">
                         <div class="flex items-center max-[500px]:justify-center gap-2">
-                            <form action="{{ route('cart.store') }}" method="POST">
-                                @csrf
-                                <input type="text" name="computer" id="computer" value="{{ $computer->id }}"
-                                    class="hidden">
-                                <button
-                                    class="px-4 py-2 bg-green-500 font-semibold dark:text-black/90 text-white rounded-md transition-all hover:bg-green-400">
-                                    В корзину
+                            @guest
+                                <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
+                                    class="transition-all px-4 py-2 dark:text-black rounded-md hover:opacity-80 font-semibold bg-green-500">
+                                    Войти
                                 </button>
-                            </form>
-                            <form action="{{ route('comparison.store') }}" method="POST">
-                                @csrf
-                                <input type="text" name="computer" id="computer" value="{{ $computer->id }}"
-                                    class="hidden">
-                                <button
-                                    class="px-4 py-2 bg-green-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-green-400">
-                                    <svg class="w-6 h-6 transition-all dark:text-black text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                        viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
-                                    </svg>
-                                </button>
-                            </form>
-                            <form method="POST" action="{{ route('favorites.store', $computer->id) }}">
-                                @csrf
-                                <button
-                                    class="px-4 py-2 bg-green-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-green-400">
-                                    @if ($isFavorite)
-                                        <svg class="w-6 h-6 transition-all dark:text-black text-white"
-                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
+                            @else
+                                <form action="{{ route('cart.store') }}" method="POST">
+                                    @csrf
+                                    <input type="text" name="computer" id="computer" value="{{ $computer->id }}"
+                                        class="hidden">
+                                    <button
+                                        class="px-4 py-2 bg-green-500 font-semibold dark:text-black/90 text-white rounded-md transition-all hover:bg-green-400">
+                                        В корзину
+                                    </button>
+                                </form>
+                                <form action="{{ route('comparison.store') }}" method="POST">
+                                    @csrf
+                                    <input type="text" name="computer" id="computer" value="{{ $computer->id }}"
+                                        class="hidden">
+                                    <button
+                                        class="px-4 py-2 bg-green-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-green-400">
+                                        <svg class="w-6 h-6 transition-all dark:text-black text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                            viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
                                         </svg>
-                                    @else
-                                        <svg class="w-6 h-6 transition-all dark:text-black text-white"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                        </svg>
-                                    @endif
-                                </button>
-                            </form>
+                                    </button>
+                                </form>
+                                <form method="POST" action="{{ route('favorites.store', $computer->id) }}">
+                                    @csrf
+                                    <button
+                                        class="px-4 py-2 bg-green-500 font-semibold dark:text-black text-white rounded-md transition-all hover:bg-green-400">
+                                        @if ($isFavorite)
+                                            <svg class="w-6 h-6 transition-all dark:text-black text-white"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
+                                            </svg>
+                                        @else
+                                            <svg class="w-6 h-6 transition-all dark:text-black text-white"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                                            </svg>
+                                        @endif
+                                    </button>
+                                </form>
+                            @endguest
                         </div>
                         <div class="max-[400px]:justify-center max-[400px]:flex max-[400px]:w-full">
                             @auth
@@ -131,7 +138,8 @@
                         <li class="font-mono w-full {{ isset($computer->deleted_at) ? 'text-red-300/70' : 'text-white' }}">
                             <div
                                 class="w-full  flex p-4 gap-x-4 border dark:border-white/40 border-black/40 rounded-md transition-all hover:bg-black/10 dark:hover:bg-white/10">
-                                <div class="w-1/5 max-[768px]:w-[40%] text-xl max-[768px]:text-lg text-black dark:text-white line-clamp-1">
+                                <div
+                                    class="w-1/5 max-[768px]:w-[40%] text-xl max-[768px]:text-lg text-black dark:text-white line-clamp-1">
                                     @if ($component->type === 'CPU')
                                         Процессор
                                     @elseif ($component->type === 'RAM')
@@ -148,7 +156,8 @@
                                         Корпус
                                     @endif
                                 </div>
-                                <div class="line-clamp-1 max-[768px]:w-[60%] max-[530px]:text-right text-xl max-[768px]:text-lg dark:text-green-500 text-green-600">
+                                <div
+                                    class="line-clamp-1 max-[768px]:w-[60%] max-[530px]:text-right text-xl max-[768px]:text-lg dark:text-green-500 text-green-600">
                                     {{ $component->name }}
                                 </div>
                             </div>

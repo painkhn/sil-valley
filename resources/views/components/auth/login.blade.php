@@ -21,7 +21,8 @@
             Войти
         </button>
         <div class="text-center">
-            <button type="button" onclick="getRegister()" class="font-semibold transition-all hover:text-green-500 text-black dark:text-white">
+            <button type="button" onclick="getRegister()"
+                class="font-semibold transition-all hover:text-green-500 text-black dark:text-white">
                 Регистрация
             </button>
         </div>

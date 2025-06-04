@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\{
 class AuthenticatedSessionController extends Controller
 {
 
+    public function create()
+    {
+        return view('components.auth.login');
+    }
+
     /**
      * Авторизируем пользователя
      *
@@ -49,7 +54,7 @@ class AuthenticatedSessionController extends Controller
      * Редирект на GitHub
      *
      */
-    public function RedirectGithub() : RedirectResponse
+    public function RedirectGithub(): RedirectResponse
     {
         return Socialite::driver('github')->redirect();
     }
@@ -58,7 +63,7 @@ class AuthenticatedSessionController extends Controller
      * Получение пользователя GitHub
      *
      */
-    public function CallbackGithub() : RedirectResponse
+    public function CallbackGithub(): RedirectResponse
     {
         // Получаем данные о пользователе и проверяем, есть ли такой в бд
         $user = Socialite::driver('github')->user();
