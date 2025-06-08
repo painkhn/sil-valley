@@ -44,11 +44,21 @@
     @else
         <div class="flex justify-center gap-8 mb-10">
             @foreach ($computers as $computer)
-                <div class="text-center">
+                <div class="text-center relative">
                     <img src="{{ asset('storage/' . $computer->image) }}" class="w-[150px] mx-auto rounded-lg shadow">
                     <div class="mt-2 text-lg font-bold text-black dark:text-white">{{ $computer->name }}</div>
-                    <div class="text-gray-600 dark:text-gray-300">{{ number_format($computer->price, 0, ',', ' ') }} ₽
-                    </div>
+                    <div class="text-gray-600 dark:text-gray-300">{{ number_format($computer->price, 0, ',', ' ') }} ₽</div>
+
+                    <!-- Кнопка удаления -->
+                    <form action="{{ route('comparison.destroy', $computer->id) }}" method="POST" class="mt-2">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-sm rounded-lg transition-colors"
+                            onclick="return confirm('Удалить компьютер из сравнения?')">
+                            Удалить
+                        </button>
+                    </form>
                 </div>
             @endforeach
         </div>

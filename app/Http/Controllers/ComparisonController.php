@@ -49,4 +49,24 @@ class ComparisonController extends Controller
 
         return view('comparison.index', compact('computers'));
     }
+
+    /**
+     * Удаление компьютера из сравнения
+     */
+    public function destroy($computerId)
+    {
+        $user = Auth::user();
+
+        // Находим сравнение пользователя
+        $comparison = Comparison::where('user_id', $user->id)->first();
+
+        if ($comparison) {
+            // Удаляем конкретный компьютер из сравнения
+            $comparison->items()
+                ->where('computer_id', $computerId)
+                ->delete();
+        }
+
+        return redirect()->back()->with('success', 'Компьютер удален из сравнения');
+    }
 }

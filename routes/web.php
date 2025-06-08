@@ -32,6 +32,7 @@ Route::controller(FavoriteController::class)->middleware('auth')->group(function
 Route::controller(ComparisonController::class)->middleware('auth')->group(function () {
     Route::get('/comparison', 'show')->name('comparisons.show');
     Route::post('/comparison/store', 'store')->name('comparison.store');
+    Route::delete('/comparison/{computer}/destroy', 'destroy')->name('comparison.destroy')->whereNumber('computer');
 });
 
 Route::controller(ProfileController::class)->middleware('auth')->group(function () {
